@@ -1,0 +1,13 @@
+/Users/igor/Documents/Gradius/build/CMakeFiles/install/local.dir
+/Users/igor/Documents/Gradius/build/CMakeFiles/install/strip.dir
+/Users/igor/Documents/Gradius/build/CMakeFiles/install.dir
+/Users/igor/Documents/Gradius/build/CMakeFiles/list_install_components.dir
+/Users/igor/Documents/Gradius/build/CMakeFiles/rebuild_cache.dir
+/Users/igor/Documents/Gradius/build/CMakeFiles/edit_cache.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/install/local.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/install/strip.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/install.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/Gradius.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/list_install_components.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/rebuild_cache.dir
+/Users/igor/Documents/Gradius/build/src/CMakeFiles/edit_cache.dir
