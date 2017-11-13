@@ -2,23 +2,21 @@
 #define GRADIUS_SHIP_H
 
 #include <SFML/Graphics.hpp>
+#include "Entity.h"
 
 
-class Ship {
+class Ship : public Entity {
 public:
-
-
-    Ship();
+    explicit Ship(int lives);
     Ship(const Ship& rhs) = delete;
     Ship& operator=(const Ship& rhs) = delete;
 
-    void draw(sf::RenderWindow& wnd) const;
+    void draw(sf::RenderWindow& wnd) const override;
     void move(const sf::Vector2f& direction);
 
 private:
-    sf::Texture texture;
     sf::Sprite sprite;
-
+    int lives;
 };
 
 
