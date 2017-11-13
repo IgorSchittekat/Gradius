@@ -1,9 +1,13 @@
 #include "Game.h"
+#include "ConfigParser.hpp"
 
 
 Game::Game() :
     wnd(sf::VideoMode(800, 600), "Gradius", sf::Style::Close | sf::Style::Titlebar) {
-    ship = new Ship();
+    ConfigParser config("../bin/config.txt");
+    int lives;
+    config.get("lives", lives);
+    ship = new Ship(lives);
 }
 
 
