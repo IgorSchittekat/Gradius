@@ -6,8 +6,8 @@
 
 class Enemy : public Entity {
 public:
-
-
+    Enemy();
+    void draw(sf::RenderWindow& wnd) const;
 
 private:
 

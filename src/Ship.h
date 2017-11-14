@@ -15,7 +15,6 @@ public:
     void move(const sf::Vector2f& direction);
 
 private:
-    sf::Sprite sprite;
     int lives;
 };
 

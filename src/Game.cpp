@@ -14,6 +14,10 @@ Game::Game() :
 Game::~Game() {
     delete ship;
     ship = nullptr;
+    for (Enemy* enemy : enemies) {
+        delete enemy;
+        enemy = nullptr;
+    }
 }
 
 
@@ -30,7 +34,11 @@ void Game::play() {
 
         wnd.clear();
         update();
+        for (Enemy* enemy : enemies) {
+            enemy->draw(wnd);
+        }
         ship->draw(wnd);
+
         wnd.display();
     }
 }
@@ -47,6 +55,11 @@ void Game::update() {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
         ship->move(sf::Vector2f(0.5f, 0.0f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F)) {
+        Enemy* e = new Enemy();
+        enemies.push_back(e);
+
     }
 
 }

@@ -10,7 +10,7 @@ public:
 
 protected:
     sf::Texture texture;
-
+    sf::Sprite sprite;
 };
 
 

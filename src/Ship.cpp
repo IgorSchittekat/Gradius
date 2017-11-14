@@ -4,13 +4,12 @@
 Ship::Ship(int lives) :
     Entity(),
     lives(lives) {
-    texture.loadFromFile("../images/Ship.jpg");
-
+    texture.loadFromFile("../images/Ship.png");
     sprite.setTexture(texture);
     sprite.scale(2, 2);
 }
 
-void Ship::draw(sf::RenderWindow &wnd) const {
+void Ship::draw(sf::RenderWindow& wnd) const {
     wnd.draw(sprite);
 }
 

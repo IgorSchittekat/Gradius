@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
+#include "Enemy.h"
+#include <list>
 
 class Game {
 public:
@@ -18,6 +20,7 @@ public:
 private:
     sf::RenderWindow wnd;
     Ship* ship;
+    std::list<Enemy*> enemies;
 };
 
 
