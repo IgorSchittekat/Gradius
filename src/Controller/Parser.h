@@ -3,6 +3,16 @@
 
 
 class Parser {
+public:
+    Parser();
+
+    Parser(const Parser &rhs);
+
+    Parser &operator=(const Parser &rhs);
+
+    ~Parser();
+
+private:
 
 };
 
