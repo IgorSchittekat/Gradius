@@ -4,17 +4,17 @@
 
 #include "Entity.h"
 
-class Bullet : public Entity {
-public:
+namespace model {
+
+    class Bullet : public Entity {
+    public:
 
 
-
-private:
-
+    private:
 
 
+    };
 
-};
-
+}
 
 #endif //GRADIUS_BULLET_H

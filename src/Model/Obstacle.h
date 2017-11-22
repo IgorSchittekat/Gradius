@@ -4,16 +4,17 @@
 
 #include "Entity.h"
 
-class Obstacle : public Entity {
-public:
+namespace model {
+
+    class Obstacle : public Entity {
+    public:
 
 
-
-private:
-
+    private:
 
 
-};
+    };
 
+}
 
 #endif //GRADIUS_OBSTACLE_H

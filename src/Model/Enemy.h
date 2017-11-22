@@ -4,17 +4,18 @@
 
 #include "Entity.h"
 
-class Enemy : public Entity {
-public:
-    Enemy();
-    void draw(sf::RenderWindow& wnd) const;
+namespace model {
 
-private:
+    class Enemy : public Entity {
+    public:
+        Enemy();
 
+        void draw(sf::RenderWindow &wnd) const;
 
+    private:
 
+    };
 
-};
-
+}
 
 #endif //GRADIUS_ENEMY_H

@@ -4,19 +4,22 @@
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 
+namespace model {
 
-class Ship : public Entity {
-public:
-    explicit Ship(int lives);
-    Ship(const Ship& rhs) = delete;
-    Ship& operator=(const Ship& rhs) = delete;
+    class Ship : public Entity {
+    public:
+        explicit Ship(int lives, double speed);
 
-    void draw(sf::RenderWindow& wnd) const override;
-    void move(const sf::Vector2f& direction);
+        Ship(const Ship &rhs) = delete;
 
-private:
-    int lives;
-};
+        Ship &operator=(const Ship &rhs) = delete;
 
+
+    private:
+        int m_lives;
+
+    };
+
+}
 
 #endif //GRADIUS_SHIP_H

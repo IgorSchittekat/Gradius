@@ -4,8 +4,13 @@ namespace view {
 
 
 
-Entity::Entity(model::Entity* entity) :
-    m_entity(entity) {
+Entity::Entity(const std::string& textureFile) {
+    sf::Image i;
+    i.loadFromFile(textureFile);
+    i.createMaskFromColor(i.getPixel(0, 0));
+    m_texture.loadFromImage(i);
+    m_sprite.setTexture(m_texture);
+    m_sprite.scale(2, 2);
 }
 
 Entity::Entity(const Entity &rhs) {
@@ -24,5 +29,9 @@ void Entity::draw(sf::RenderWindow& wnd) const {
     wnd.draw(m_sprite);
 }
 
+
+    void Entity::control() const {
+
+    }
 
 } //namespace view

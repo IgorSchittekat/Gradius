@@ -3,15 +3,22 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace model {
+
+enum Direction {UP, DOWN, LEFT, RIGHT};
+
 class Entity {
 public:
-
-    virtual void draw(sf::RenderWindow &wnd) const = 0;
+    Entity();
+    Entity(double x, double y, double speed);
+    virtual void move(Direction dir);
 
 protected:
-    sf::Texture texture;
-    sf::Sprite sprite;
+    double m_x;
+    double m_y;
+    double m_speed;
 };
 
+} //namespace model
 
 #endif //GRADIUS_ENTITY_H

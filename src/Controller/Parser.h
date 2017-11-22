@@ -1,20 +1,18 @@
 #ifndef GRADIUS_PARSER_H
 #define GRADIUS_PARSER_H
 
+#include <string>
+#include "../View/World.h"
+
+namespace ctrl {
 
 class Parser {
 public:
-    Parser();
 
-    Parser(const Parser &rhs);
-
-    Parser &operator=(const Parser &rhs);
-
-    ~Parser();
-
-private:
+    static view::World* parseWorld();
 
 };
 
+} //namespace ctrl
 
 #endif //GRADIUS_PARSER_H

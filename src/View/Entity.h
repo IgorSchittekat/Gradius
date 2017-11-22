@@ -3,12 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "../Model/Entity.h"
+#include "../Model/Ship.h"
 
 namespace view {
 
 class Entity {
 public:
-    Entity();
+    Entity(const std::string& textureFile);
 
     Entity(const Entity &rhs);
 
@@ -18,8 +19,9 @@ public:
 
     void draw(sf::RenderWindow& wnd) const;
 
+    void control() const;
+
 private:
-    model::Entity* m_entity;
     sf::Texture m_texture;
     sf::Sprite m_sprite;
 };
