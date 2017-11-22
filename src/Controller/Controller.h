@@ -4,8 +4,14 @@
 #include "Stopwatch.h"
 #include "../Model/Ship.h"
 #include "../View/Entity.h"
+#include "../View/World.h"
 #include <memory>
 #include <map>
+
+namespace view {
+    class World;
+    class Entity;
+}
 
 namespace ctrl {
 
@@ -23,7 +29,7 @@ namespace ctrl {
 
         void setShip(std::unique_ptr<model::Ship> modelShip, std::unique_ptr<view::Entity> viewShip);
 
-        void control();
+        void control(view::World& world);
 
         void updateShip(std::unique_ptr<model::Ship>& ship, std::unique_ptr<Stopwatch>& stopwatch);
 

@@ -5,7 +5,13 @@
 #include "Entity.h"
 #include "../Controller/Controller.h"
 
+namespace ctrl {
+    class Controller;
+}
+
 namespace view {
+
+    class Entity;
 
 class World : public sf::RenderWindow {
 public:
@@ -18,10 +24,6 @@ public:
     World &operator=(const World &rhs) = delete;
 
     ~World() {};
-
-    void setShip(std::unique_ptr<Entity> ship);
-
-    void addEntity(Entity* entity);
 
     void update();
 

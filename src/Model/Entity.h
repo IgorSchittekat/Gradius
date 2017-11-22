@@ -13,6 +13,10 @@ public:
     Entity(double x, double y, double speed);
     virtual void move(Direction dir);
 
+    double getX() const;
+
+    double getY() const;
+
 protected:
     double m_x;
     double m_y;

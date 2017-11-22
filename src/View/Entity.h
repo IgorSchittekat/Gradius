@@ -4,8 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include "../Model/Entity.h"
 #include "../Model/Ship.h"
+#include "World.h"
 
 namespace view {
+
+    class World;
 
 class Entity {
 public:
@@ -17,7 +20,7 @@ public:
 
     ~Entity();
 
-    void draw(sf::RenderWindow& wnd) const;
+    void draw(view::World& world, double x, double y);
 
     void control() const;
 

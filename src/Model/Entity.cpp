@@ -17,13 +17,12 @@ namespace model {
     }
 
     void Entity::move(Direction dir) {
-        std::cout << m_y << ' ' << m_x << std::endl;
         switch (dir) {
             case UP:
-                m_y += m_speed;
+                m_y -= m_speed;
                 break;
             case DOWN:
-                m_y -= m_speed;
+                m_y += m_speed;
                 break;
             case LEFT:
                 m_x -= m_speed;
@@ -34,6 +33,14 @@ namespace model {
             default:
                 break;
         }
+    }
+
+    double Entity::getX() const {
+        return m_x;
+    }
+
+    double Entity::getY() const {
+        return m_y;
     }
 
 

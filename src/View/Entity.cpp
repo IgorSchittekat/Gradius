@@ -25,8 +25,9 @@ Entity::~Entity() {
 
 }
 
-void Entity::draw(sf::RenderWindow& wnd) const {
-    wnd.draw(m_sprite);
+void Entity::draw(view::World& world, double x, double y) {
+    m_sprite.setPosition(x, y);
+    world.draw(m_sprite);
 }
 
 

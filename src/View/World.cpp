@@ -21,7 +21,7 @@ namespace view {
 
     void World::update() {
         drawBackground();
-        m_controller->control();
+        m_controller->control(*this);
     }
 
     void World::drawBackground() {

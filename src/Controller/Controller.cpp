@@ -1,4 +1,5 @@
 #include "Controller.h"
+#include "../View/World.h"
 #include <thread>
 
 namespace ctrl {
@@ -27,9 +28,10 @@ namespace ctrl {
         m_ship = std::make_pair(std::move(modelShip), std::move(viewShip));
     }
 
-    void Controller::control() {
+    void Controller::control(view::World& world) {
         std::unique_ptr<Stopwatch> stopwatch (new Stopwatch());
         updateShip(m_ship.first, stopwatch);
+        m_ship.second->draw(world, m_ship.first->getX(), m_ship.first->getY());
         for (auto& entityPair : m_entities) {
 
         }
