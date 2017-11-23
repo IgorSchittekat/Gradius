@@ -2,20 +2,13 @@
 
 namespace ctrl {
 
-    Stopwatch::Stopwatch() {
+    std::shared_ptr<Stopwatch> Stopwatch::m_instance = nullptr;
 
-    }
-
-    Stopwatch::Stopwatch(const Stopwatch &rhs) {
-
-    }
-
-    Stopwatch &Stopwatch::operator=(const Stopwatch &rhs) {
-        return *this;
-    }
-
-    Stopwatch::~Stopwatch() {
-
+    std::shared_ptr<Stopwatch> Stopwatch::getInstance() {
+        if (!m_instance) {
+            m_instance = std::make_shared(Stopwatch());
+        }
+         return m_instance;
     }
 
     void Stopwatch::start() {
@@ -25,5 +18,6 @@ namespace ctrl {
     std::chrono::duration<double> Stopwatch::stop() {
         return std::chrono::system_clock::now() - m_start;
     }
+
 
 }

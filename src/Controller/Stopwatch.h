@@ -3,25 +3,29 @@
 
 
 #include <chrono>
+#include <memory>
 
 namespace  ctrl {
 
     class Stopwatch {
     public:
-        Stopwatch();
 
-        Stopwatch(const Stopwatch &rhs);
+        Stopwatch(const Stopwatch &rhs) = delete;
+        Stopwatch &operator=(const Stopwatch &rhs) = delete;
 
-        Stopwatch &operator=(const Stopwatch &rhs);
-
-        ~Stopwatch();
+        static std::shared_ptr<Stopwatch> getInstance();
 
         void start();
 
         std::chrono::duration<double> stop();
 
     private:
+        static std::shared_ptr<Stopwatch> m_instance;
         std::chrono::time_point<std::chrono::system_clock> m_start;
+
+    private:
+        Stopwatch() = default;
+        ~Stopwatch() = default;
     };
 
 } //namespace ctrl
