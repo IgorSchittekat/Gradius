@@ -9,20 +9,26 @@ namespace  ctrl {
 
     class Stopwatch {
     public:
+        /**
+         * @brief Constructor.
+         */
         Stopwatch();
-        ~Stopwatch() = default;
-        Stopwatch(const Stopwatch &rhs) = delete;
-        Stopwatch &operator=(const Stopwatch &rhs) = delete;
 
-
+        /**
+         * @brief Restarts the Stopwatch
+         */
         void restart();
 
+        /**
+         * @brief Returns time between now and last restart
+         * @return Time between now and last restart
+         */
         std::chrono::duration<double> elapsed();
 
-
-
-
     private:
+        /**
+         * @brief time of last restart
+         */
         std::chrono::steady_clock::time_point m_start;
     };
 
