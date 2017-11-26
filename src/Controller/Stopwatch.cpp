@@ -2,22 +2,20 @@
 
 namespace ctrl {
 
-    std::shared_ptr<Stopwatch> Stopwatch::m_instance = nullptr;
 
-    std::shared_ptr<Stopwatch> Stopwatch::getInstance() {
-        if (!m_instance) {
-            m_instance = std::make_shared(Stopwatch());
-        }
-         return m_instance;
+    Stopwatch::Stopwatch() {
+        m_start = std::chrono::steady_clock::now();
     }
 
-    void Stopwatch::start() {
-        m_start = std::chrono::system_clock::now();
+    void Stopwatch::restart() {
+        m_start = std::chrono::steady_clock::now();
     }
 
-    std::chrono::duration<double> Stopwatch::stop() {
-        return std::chrono::system_clock::now() - m_start;
+    std::chrono::duration<double> Stopwatch::elapsed() {
+        return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - m_start);
     }
+
+
 
 
 }

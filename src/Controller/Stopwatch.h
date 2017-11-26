@@ -9,23 +9,21 @@ namespace  ctrl {
 
     class Stopwatch {
     public:
-
+        Stopwatch();
+        ~Stopwatch() = default;
         Stopwatch(const Stopwatch &rhs) = delete;
         Stopwatch &operator=(const Stopwatch &rhs) = delete;
 
-        static std::shared_ptr<Stopwatch> getInstance();
 
-        void start();
+        void restart();
 
-        std::chrono::duration<double> stop();
+        std::chrono::duration<double> elapsed();
 
-    private:
-        static std::shared_ptr<Stopwatch> m_instance;
-        std::chrono::time_point<std::chrono::system_clock> m_start;
+
+
 
     private:
-        Stopwatch() = default;
-        ~Stopwatch() = default;
+        std::chrono::steady_clock::time_point m_start;
     };
 
 } //namespace ctrl
