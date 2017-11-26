@@ -5,14 +5,16 @@
         "height": 600,
         "background": "../bin/resources/images/background.jpg"
     },
-    "ship": {
-        "texture": "../bin/resources/images/Ship.png",
-        "lives": 5,
-        "speed": 0.1
-    },
-    "enemy": {
-        "texture": "../bin/resources/images/Enemy1.png",
-        "speed": 0.05
+    "level 1" : {
+        "ship": {
+            "texture": "../bin/resources/images/Ship.png",
+            "lives": 5,
+            "speed": 0.1
+        },
+        "enemy": {
+            "texture": "../bin/resources/images/Enemy1.png",
+            "speed": 0.05
+        }
     }
 
 }

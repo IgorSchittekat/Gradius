@@ -1,19 +1,23 @@
 #ifndef GRADIUS_TRANSFORMATION_H
 #define GRADIUS_TRANSFORMATION_H
-
+#pragma once
 
 #include <memory>
 
-class Transformation {
-public:
+namespace ctrl {
 
-    static std::shared_ptr<Transformation> getInstance();
+    class Transformation {
+    public:
+        Transformation() = default;
+        void setSize(unsigned int width, unsigned int height);
 
-private:
-    Transformation() = default;
-    static std::shared_ptr<Transformation> m_instance;
+        std::pair<unsigned int, unsigned int> tramsform(double x, double y) const;
 
-};
+    private:
+        unsigned int m_screenWidth;
+        unsigned int m_screenHeight;
+    };
 
+} // namespace ctrl
 
 #endif //GRADIUS_TRANSFORMATION_H

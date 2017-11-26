@@ -1,6 +1,6 @@
 #ifndef GRADIUS_STOPWATCH_H
 #define GRADIUS_STOPWATCH_H
-
+#pragma once
 
 #include <chrono>
 #include <memory>

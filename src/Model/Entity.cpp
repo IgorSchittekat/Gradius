@@ -33,6 +33,7 @@ namespace model {
             default:
                 break;
         }
+        notify();
     }
 
     double Entity::getX() const {
@@ -43,5 +44,14 @@ namespace model {
         return m_y;
     }
 
+    void Entity::addEntityObserver(view::EntityObserver* observer) {
+        m_observers.push_back(observer);
+    }
+
+    void Entity::notify() const {
+        for (view::EntityObserver* observer : m_observers) {
+            observer->update(this, view::MOVED);
+        }
+    }
 
 }

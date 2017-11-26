@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Ship.h"
 
 namespace model {
@@ -7,5 +6,6 @@ namespace model {
             Entity(0, 0, speed),
             m_lives(lives){
     }
+
 
 }
