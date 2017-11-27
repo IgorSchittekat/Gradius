@@ -11,12 +11,13 @@ namespace model {
 
 namespace view {
 
-    enum Notification {CREATED, MOVED};
+    enum class Notification {CREATED, MOVED};
 
     class Window;
 
     class EntityObserver {
     public:
+
         explicit EntityObserver(const std::string& textureFile);
 
         EntityObserver(const EntityObserver &rhs);

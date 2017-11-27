@@ -9,7 +9,7 @@
         "ship": {
             "texture": "../bin/resources/images/Ship.png",
             "lives": 5,
-            "speed": 0.1
+            "speed": 0.05
         },
         "enemy": {
             "texture": "../bin/resources/images/Enemy1.png",

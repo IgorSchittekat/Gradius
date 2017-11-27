@@ -1,3 +1,4 @@
+#include <iostream>
 #include "EntityObserver.h"
 #include "../Controller/Singleton.h"
 #include "../Controller/Transformation.h"
@@ -11,7 +12,6 @@ namespace view {
         i.createMaskFromColor(i.getPixel(0, 0));
         m_texture.loadFromImage(i);
         m_sprite.setTexture(m_texture);
-        m_sprite.scale(2, 2);
     }
 
     EntityObserver::EntityObserver(const EntityObserver &rhs) {
@@ -32,11 +32,15 @@ namespace view {
     }
 
     void EntityObserver::update(const model::Entity* entity, Notification what) {
-        if (what == CREATED) {
-
+        if (what == Notification::CREATED) {
+            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
+            x = coordinates.first;
+            y = coordinates.second;
+            m_sprite.scale(2, 2);
+            m_sprite.setOrigin(14, 7);
         }
-        else if (what == MOVED) {
-            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getX(), entity->getY());
+        else if (what == Notification::MOVED) {
+            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
             x = coordinates.first;
             y = coordinates.second;
         }

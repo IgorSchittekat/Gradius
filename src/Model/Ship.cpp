@@ -3,7 +3,7 @@
 namespace model {
 
     Ship::Ship(int lives, double speed) :
-            Entity(0, 0, speed),
+            Entity(-3, 0, 0.5, 0.25, speed),
             m_lives(lives){
     }
 

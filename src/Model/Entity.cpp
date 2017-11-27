@@ -10,47 +10,55 @@ namespace model {
     m_y(0) {
     }
 
-    Entity::Entity(double x, double y, double speed) :
+    Entity::Entity(double x, double y, double width, double height, double speed) :
     m_x(x),
     m_y(y),
+    m_width(width),
+    m_height(height),
     m_speed(speed){
+        notify(view::Notification::CREATED);
     }
 
     void Entity::move(Direction dir) {
         switch (dir) {
             case UP:
-                m_y -= m_speed;
+                if (m_y - m_speed - m_height >= -3)
+                    m_y -= m_speed;
                 break;
             case DOWN:
-                m_y += m_speed;
+                if (m_y + m_speed + m_height / 2 <= 3)
+                    m_y += m_speed;
                 break;
             case LEFT:
-                m_x -= m_speed;
+                if (m_x - m_speed - m_width / 2 >= -4)
+                    m_x -= m_speed;
                 break;
             case RIGHT:
-                m_x += m_speed;
+                if (m_x + m_speed + m_width / 2 <= 4)
+                    m_x += m_speed;
                 break;
             default:
                 break;
         }
-        notify();
+        notify(view::Notification::MOVED);
     }
 
-    double Entity::getX() const {
-        return m_x;
+    std::pair<double, double> Entity::getLocation() const {
+        return {m_x, m_y};
     }
 
-    double Entity::getY() const {
-        return m_y;
+    std::pair<double, double> Entity::getSize() const {
+        return {m_width, m_height};
     }
 
     void Entity::addEntityObserver(view::EntityObserver* observer) {
         m_observers.push_back(observer);
+        observer->update(this, view::Notification::CREATED);
     }
 
-    void Entity::notify() const {
+    void Entity::notify(view::Notification what) const {
         for (view::EntityObserver* observer : m_observers) {
-            observer->update(this, view::MOVED);
+            observer->update(this, what);
         }
     }
 

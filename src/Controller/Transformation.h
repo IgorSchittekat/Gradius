@@ -13,6 +13,9 @@ namespace ctrl {
 
         std::pair<unsigned int, unsigned int> tramsform(double x, double y) const;
 
+        std::pair<unsigned int, unsigned int> tramsform(std::pair<double, double> location) const;
+
+
     private:
         unsigned int m_screenWidth;
         unsigned int m_screenHeight;
