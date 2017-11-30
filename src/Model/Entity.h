@@ -7,16 +7,15 @@
 
 namespace view {
     class EntityObserver;
-    enum class Notification;
 }
 
 namespace model {
-
+    enum class Notification {CREATED, MOVED};
     enum Direction {UP, DOWN, LEFT, RIGHT};
 
     class Level;
 
-    class Entity {
+    class Entity : public std::enable_shared_from_this<Entity> {
     public:
         Entity();
 
@@ -28,11 +27,13 @@ namespace model {
 
         std::pair<double, double> getSize() const;
 
-        void addEntityObserver(view::EntityObserver* observer);
+        void addEntityObserver(const std::shared_ptr<view::EntityObserver>& observer);
 
-        virtual void update(const Level* lvl) {}
+        virtual void update(const std::weak_ptr<Level>& lvl) {}
 
-        void notify(view::Notification what) const;
+        void notify(Notification what);
+
+        virtual bool canFire() { return false; }
 
     protected:
         double m_x;
@@ -41,7 +42,7 @@ namespace model {
         double m_height;
         double m_speed;
     private:
-        std::vector<view::EntityObserver*> m_observers;
+        std::vector<std::shared_ptr<view::EntityObserver>> m_observers;
 
     };
 

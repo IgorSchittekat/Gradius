@@ -9,6 +9,7 @@ namespace model {
 
     class Bullet : public Entity {
     public:
+        Bullet(const std::shared_ptr<Entity>& firingEntity, double speed);
 
     private:
 

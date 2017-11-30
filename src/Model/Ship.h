@@ -10,9 +10,12 @@ namespace model {
     public:
         explicit Ship(int lives, double speed);
 
+        void updateShots() {m_timeUntillNextShot--;};
+        bool canFire() override;
 
     private:
         int m_lives;
+        int m_timeUntillNextShot;
 
     };
 

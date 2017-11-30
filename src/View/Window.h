@@ -4,30 +4,40 @@
 
 #include <SFML/Graphics.hpp>
 #include "EntityObserver.h"
+#include <map>
+#include <memory>
 
 
 namespace view {
 
     class EntityObserver;
 
-class Window : public sf::RenderWindow {
-public:
-    Window(unsigned int width, unsigned int height, const std::string &title, const std::string& background);
+    class Window {
+    public:
+        Window(unsigned int width, unsigned int height, const std::string &title, const std::string& background);
+        Window(const Window& rhs) = delete;
+        void drawWindow();
 
-    void drawWindow();
+        bool isOpen();
 
-    void drawBackground();
+        void drawBackground();
 
-    sf::Text getFPS();
+        sf::Text getFPS();
 
-    void addEntityObserver(EntityObserver* entityObserver);
+        void addEntityObserver(const std::shared_ptr<EntityObserver>& entityObserver);
 
-private:
-    sf::Texture m_backgroundTexture;
-    sf::Sprite m_background;
-    sf::Font font;
-    std::vector<EntityObserver*> m_entities;
-};
+        void addTexture(const std::string& name, const std::string& fileName);
+
+        std::shared_ptr<sf::Texture> getTexture(const std::string& name);
+
+    private:
+        std::unique_ptr<sf::RenderWindow> m_wnd;
+        sf::Texture m_backgroundTexture;
+        sf::Sprite m_background;
+        sf::Font font;
+        std::vector<std::shared_ptr<EntityObserver>> m_entities;
+        std::map<std::string, std::shared_ptr<sf::Texture>> m_textures;
+    };
 
 }
 

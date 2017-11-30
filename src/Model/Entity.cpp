@@ -16,7 +16,7 @@ namespace model {
     m_width(width),
     m_height(height),
     m_speed(speed){
-        notify(view::Notification::CREATED);
+        notify(Notification::CREATED);
     }
 
     void Entity::move(Direction dir) {
@@ -40,7 +40,7 @@ namespace model {
             default:
                 break;
         }
-        notify(view::Notification::MOVED);
+        notify(Notification::MOVED);
     }
 
     std::pair<double, double> Entity::getLocation() const {
@@ -51,13 +51,13 @@ namespace model {
         return {m_width, m_height};
     }
 
-    void Entity::addEntityObserver(view::EntityObserver* observer) {
+    void Entity::addEntityObserver(const std::shared_ptr<view::EntityObserver> &observer) {
         m_observers.push_back(observer);
-        observer->update(this, view::Notification::CREATED);
+        observer->update(this, Notification::CREATED);
     }
 
-    void Entity::notify(view::Notification what) const {
-        for (view::EntityObserver* observer : m_observers) {
+    void Entity::notify(Notification what) {
+        for (const std::shared_ptr<view::EntityObserver> &observer : m_observers) {
             observer->update(this, what);
         }
     }

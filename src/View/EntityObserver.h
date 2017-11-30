@@ -7,18 +7,20 @@
 
 namespace model {
     class Entity;
+    enum class Notification;
+
 }
 
 namespace view {
-
-    enum class Notification {CREATED, MOVED};
 
     class Window;
 
     class EntityObserver {
     public:
 
-        explicit EntityObserver(const std::string& textureFile);
+        EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& textureFile, const std::string& type);
+
+        EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& type);
 
         EntityObserver(const EntityObserver &rhs);
 
@@ -26,14 +28,13 @@ namespace view {
 
         ~EntityObserver();
 
-        void draw(Window& wnd);
+        void draw(sf::RenderWindow& wnd);
 
-        void update(const model::Entity* entity, Notification what);
+        void update(const model::Entity* entity, model::Notification what);
 
     private:
         unsigned int x;
         unsigned int y;
-        sf::Texture m_texture;
         sf::Sprite m_sprite;
     };
 

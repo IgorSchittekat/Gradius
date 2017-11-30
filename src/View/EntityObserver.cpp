@@ -6,19 +6,21 @@
 namespace view {
 
 
-    EntityObserver::EntityObserver(const std::string& textureFile) {
-        sf::Image i;
-        i.loadFromFile(textureFile);
-        i.createMaskFromColor(i.getPixel(0, 0));
-        m_texture.loadFromImage(i);
-        m_sprite.setTexture(m_texture);
+    EntityObserver::EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& textureFile, const std::string& type) {
+        wnd->addTexture(type, textureFile);
+        m_sprite.setTexture(*wnd->getTexture(type));
+    }
+
+    EntityObserver::EntityObserver(const std::unique_ptr<Window> &wnd, const std::string &type) {
+        m_sprite.setTexture(*wnd->getTexture(type));
     }
 
     EntityObserver::EntityObserver(const EntityObserver &rhs) {
-
+        m_sprite.setTexture(*rhs.m_sprite.getTexture());
     }
 
     EntityObserver& EntityObserver::operator=(const EntityObserver &rhs) {
+        m_sprite.setTexture(*rhs.m_sprite.getTexture());
         return *this;
     }
 
@@ -26,20 +28,21 @@ namespace view {
 
     }
 
-    void EntityObserver::draw(Window& wnd) {
+    void EntityObserver::draw(sf::RenderWindow& wnd) {
         m_sprite.setPosition(x, y);
+        m_sprite.getTexture()->getSize().x;
         wnd.draw(m_sprite);
     }
 
-    void EntityObserver::update(const model::Entity* entity, Notification what) {
-        if (what == Notification::CREATED) {
+    void EntityObserver::update(const model::Entity* entity, model::Notification what) {
+        if (what == model::Notification::CREATED) {
             auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
             x = coordinates.first;
             y = coordinates.second;
             m_sprite.scale(2, 2);
             m_sprite.setOrigin(14, 7);
         }
-        else if (what == Notification::MOVED) {
+        else if (what == model::Notification::MOVED) {
             auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
             x = coordinates.first;
             y = coordinates.second;

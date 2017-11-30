@@ -3,18 +3,35 @@
         "title": "Gradius",
         "width": 800,
         "height": 600,
-        "background": "../bin/resources/images/background.jpg"
+        "background": "../bin/resources/images/background.jpg",
+        "floor": "../bin/resources/images/floor.png",
+        "heart": "../bin/resources/images/heart.png"
     },
     "level 1" : {
         "ship": {
             "texture": "../bin/resources/images/Ship.png",
             "lives": 5,
-            "speed": 0.05
+            "speed": 0.05,
+            "type": "Ship"
         },
         "enemy": {
             "texture": "../bin/resources/images/Enemy1.png",
-            "speed": 0.05
+            "animations": 4,
+            "speed": 0.05,
+            "count": 10
+        },
+        "bullet": {
+            "speed": 0.2,
+            "playerBullet": {
+                "texture": "../bin/resources/images/BulletLeft.png",
+                "type": "playerBullet"
+            },
+            "enemyBullet": {
+                "texture": "../bin/resources/images/BulletRight.png",
+                "type": "enemyBullet"
+            }
         }
+
     }
 
 }

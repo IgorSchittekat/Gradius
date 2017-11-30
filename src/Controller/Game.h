@@ -4,6 +4,7 @@
 
 #include "../View/Window.h"
 #include "../Model/Level.h"
+#include "json.hpp"
 
 namespace ctrl {
 
@@ -15,8 +16,18 @@ namespace ctrl {
         void play();
 
     private:
-        view::Window* wnd;
-        model::Level* lvl;
+        void loadWindow(nlohmann::json data);
+
+        void loadShip(nlohmann::json data);
+
+        void loadEnemy(nlohmann::json data);
+
+        void loadBulletTexture(nlohmann::json data);
+
+
+    private:
+        std::unique_ptr<view::Window> wnd;
+        std::unique_ptr<model::Level> lvl;
     };
 
 
