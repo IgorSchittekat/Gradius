@@ -23,13 +23,18 @@ namespace model {
     }
 
     void Level::update() {
-        for (const std::shared_ptr<Entity>& entity : m_entities) {
-//            entity->update(shared_from_this());
+        for (auto it = m_entities.begin(); it != m_entities.end();) {
+            Notification n = (*it)->update();
+            if (n == Notification::DELETED) {
+                it = m_entities.erase(it);
+            }
+            else
+                ++it;
         }
     }
 
-    void Level::addEntity(std::shared_ptr<Entity>& entity) {
-        m_entities.push_back(entity);
+    void Level::addEntity(std::unique_ptr<Entity>& entity) {
+        m_entities.push_back(std::move(entity));
     }
 
     void Level::setShip(std::shared_ptr<Ship> ship) {

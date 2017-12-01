@@ -9,10 +9,14 @@ namespace model {
 
     class Bullet : public Entity {
     public:
+        Bullet() = default;
         Bullet(const std::shared_ptr<Entity>& firingEntity, double speed);
 
-    private:
+        virtual ~Bullet() {};
+        void move(Direction dir) override {};
 
+        virtual Notification update(){}
+    private:
 
     };
 

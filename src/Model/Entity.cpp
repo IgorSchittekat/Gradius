@@ -19,6 +19,10 @@ namespace model {
         notify(Notification::CREATED);
     }
 
+    Entity::~Entity() {
+        m_observers.clear();
+    }
+
     void Entity::move(Direction dir) {
         switch (dir) {
             case UP:
@@ -51,7 +55,7 @@ namespace model {
         return {m_width, m_height};
     }
 
-    void Entity::addEntityObserver(const std::shared_ptr<view::EntityObserver> &observer) {
+    void Entity::addEntityObserver(const std::shared_ptr<view::EntityObserver>& observer) {
         m_observers.push_back(observer);
         observer->update(this, Notification::CREATED);
     }

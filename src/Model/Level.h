@@ -14,7 +14,7 @@ namespace model {
     class Ship;
     class Entity;
 
-    class Level : public std::enable_shared_from_this<Level> {
+    class Level {
     public:
         Level();
 
@@ -26,7 +26,7 @@ namespace model {
 
         void update();
 
-        void addEntity(std::shared_ptr<Entity>& entity);
+        void addEntity(std::unique_ptr<Entity>& entity);
 
         void setShip(std::shared_ptr<Ship> ship);
 
@@ -37,7 +37,7 @@ namespace model {
         double getBulletSpeed() const;
 
     private:
-        std::vector<std::shared_ptr<Entity>> m_entities;
+        std::vector<std::unique_ptr<Entity>> m_entities;
         std::shared_ptr<Ship> m_ship;
         double m_bulletSpeed;
     };

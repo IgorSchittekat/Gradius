@@ -24,18 +24,20 @@ namespace view {
 
         sf::Text getFPS();
 
-        void addEntityObserver(const std::shared_ptr<EntityObserver>& entityObserver);
+        void addEntityObserver(const std::weak_ptr<EntityObserver>& entityObserver);
 
         void addTexture(const std::string& name, const std::string& fileName);
 
         std::shared_ptr<sf::Texture> getTexture(const std::string& name);
+
+        void deleteObservers();
 
     private:
         std::unique_ptr<sf::RenderWindow> m_wnd;
         sf::Texture m_backgroundTexture;
         sf::Sprite m_background;
         sf::Font font;
-        std::vector<std::shared_ptr<EntityObserver>> m_entities;
+        std::vector<std::weak_ptr<EntityObserver>> m_entities;
         std::map<std::string, std::shared_ptr<sf::Texture>> m_textures;
     };
 

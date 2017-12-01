@@ -17,6 +17,8 @@ namespace view {
 
     EntityObserver::EntityObserver(const EntityObserver &rhs) {
         m_sprite.setTexture(*rhs.m_sprite.getTexture());
+        x = rhs.x;
+        y = rhs.y;
     }
 
     EntityObserver& EntityObserver::operator=(const EntityObserver &rhs) {
@@ -25,7 +27,6 @@ namespace view {
     }
 
     EntityObserver::~EntityObserver() {
-
     }
 
     void EntityObserver::draw(sf::RenderWindow& wnd) {
@@ -46,6 +47,10 @@ namespace view {
             auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
             x = coordinates.first;
             y = coordinates.second;
+        }
+        else if (what == model::Notification::DELETED) {
+            x = 1000;
+            y = 1000;
         }
     }
 

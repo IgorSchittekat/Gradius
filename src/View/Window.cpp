@@ -43,8 +43,9 @@ namespace view {
         m_wnd->clear();
         drawBackground();
         m_wnd->draw(getFPS());
-        for (const std::shared_ptr<EntityObserver>& entity : m_entities) {
-            entity->draw(*m_wnd);
+        for (const std::weak_ptr<EntityObserver>& entity : m_entities) {
+            if (!entity.expired())
+                entity.lock()->draw(*m_wnd);
         }
         m_wnd->display();
     }
@@ -58,7 +59,7 @@ namespace view {
         }
     }
 
-    void Window::addEntityObserver(const std::shared_ptr<EntityObserver>& entityObserver) {
+    void Window::addEntityObserver(const std::weak_ptr<EntityObserver>& entityObserver) {
         m_entities.push_back(entityObserver);
     }
 
@@ -73,6 +74,17 @@ namespace view {
 
     std::shared_ptr<sf::Texture> Window::getTexture(const std::string &name) {
         return m_textures[name];
+    }
+
+    void Window::deleteObservers() {
+        for (auto it = m_entities.begin(); it != m_entities.end(); ){
+            if (it->expired()) {
+                it = m_entities.erase(it);
+            }
+            else {
+                ++it;
+            }
+        }
     }
 
 

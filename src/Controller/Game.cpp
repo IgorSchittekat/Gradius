@@ -6,7 +6,7 @@
 #include "../Model/Ship.h"
 #include "Transformation.h"
 #include "../Model/Entity.h"
-#include "../Model/Bullet.h"
+#include "../Model/PlayerBullet.h"
 
 using json = nlohmann::json;
 
@@ -48,7 +48,7 @@ namespace ctrl {
         auto ship = std::make_shared<model::Ship>(model::Ship(lives, speed));
         auto shipObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, shipTexture, type));
         ship->addEntityObserver(shipObserver);
-        wnd->addEntityObserver(shipObserver);
+        wnd->addEntityObserver(std::weak_ptr<view::EntityObserver>(shipObserver));
         lvl->setShip(ship);
     }
 
@@ -90,17 +90,17 @@ namespace ctrl {
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
                 if (lvl->getShip()->canFire()) {
-                    std::shared_ptr<model::Entity> bullet = std::make_shared<model::Bullet>(model::Bullet(lvl->getShip(), lvl->getBulletSpeed()));
+                    std::unique_ptr<model::Entity> bullet = std::make_unique<model::PlayerBullet>(model::PlayerBullet(lvl->getShip(), lvl->getBulletSpeed()));
                     auto bulletObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, "playerBullet"));
                     bullet->addEntityObserver(bulletObserver);
-                    wnd->addEntityObserver(bulletObserver);
+                    wnd->addEntityObserver(std::weak_ptr<view::EntityObserver>(bulletObserver));
                     lvl->addEntity(bullet);
                 }
             }
             lvl->getShip()->updateShots();
 
-
             lvl->update();
+            wnd->deleteObservers();
             wnd->drawWindow();
 
             while (stopwatch->elapsed() < std::chrono::microseconds(16666)) {
