@@ -12,7 +12,6 @@
             "texture": "../bin/resources/images/Ship.png",
             "lives": 5,
             "speed": 0.05,
-            "type": "Ship"
         },
         "enemy": {
             "texture": "../bin/resources/images/Enemy1.png",
@@ -22,14 +21,8 @@
         },
         "bullet": {
             "speed": 0.2,
-            "playerBullet": {
-                "texture": "../bin/resources/images/BulletLeft.png",
-                "type": "playerBullet"
-            },
-            "enemyBullet": {
-                "texture": "../bin/resources/images/BulletRight.png",
-                "type": "enemyBullet"
-            }
+            "playerBulletTexture": "../bin/resources/images/BulletLeft.png",
+            "enemyBulletTexture": "../bin/resources/images/BulletRight.png"
         }
 
     }
