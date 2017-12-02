@@ -8,7 +8,7 @@ namespace model {
     }
 
     Notification Bullet::move(Direction dir) {
-        if (m_x + m_speed + m_width / 2 <= 4 || m_x - m_speed - m_width / 2 >= -4) {
+        if (m_x + m_speed + m_width / 2 <= 4 && m_x - m_speed - m_width / 2 >= -4) {
             switch (dir) {
                 case Direction::LEFT:
                     m_x -= m_speed;
