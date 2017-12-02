@@ -33,8 +33,7 @@ namespace view {
         void update(const model::Entity* entity, model::Notification what);
 
     private:
-        unsigned int x;
-        unsigned int y;
+        sf::IntRect m_rect;
         sf::Sprite m_sprite;
     };
 

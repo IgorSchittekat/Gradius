@@ -6,6 +6,10 @@
 #include "../Model/Level.h"
 #include "json.hpp"
 
+namespace model {
+    enum class Direction;
+}
+
 namespace ctrl {
 
 

@@ -23,28 +23,27 @@ namespace model {
         m_observers.clear();
     }
 
-    void Entity::move(Direction dir) {
+    Notification Entity::move(Direction dir) {
         switch (dir) {
-            case UP:
+            case Direction::UP:
                 if (m_y - m_speed - m_height >= -3)
                     m_y -= m_speed;
                 break;
-            case DOWN:
+            case Direction::DOWN:
                 if (m_y + m_speed + m_height / 2 <= 3)
                     m_y += m_speed;
                 break;
-            case LEFT:
+            case Direction::LEFT:
                 if (m_x - m_speed - m_width / 2 >= -4)
                     m_x -= m_speed;
                 break;
-            case RIGHT:
+            case Direction::RIGHT:
                 if (m_x + m_speed + m_width / 2 <= 4)
                     m_x += m_speed;
                 break;
-            default:
-                break;
         }
         notify(Notification::MOVED);
+        return Notification::MOVED;
     }
 
     std::pair<double, double> Entity::getLocation() const {

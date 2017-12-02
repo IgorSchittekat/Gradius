@@ -12,13 +12,6 @@ namespace model {
 
         PlayerBullet(const std::shared_ptr<Entity>& firingEntity, double speed);
 
-
-        PlayerBullet &operator=(const PlayerBullet &rhs);
-
-        ~PlayerBullet();
-
-        Notification move();
-
         Notification update() override;
 
     private:

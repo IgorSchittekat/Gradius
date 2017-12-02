@@ -8,21 +8,21 @@ namespace view {
 
     EntityObserver::EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& textureFile, const std::string& type) {
         wnd->addTexture(type, textureFile);
-        m_sprite.setTexture(*wnd->getTexture(type));
+        m_sprite.setTexture(*wnd->getTexture(type), true);
     }
 
     EntityObserver::EntityObserver(const std::unique_ptr<Window> &wnd, const std::string &type) {
-        m_sprite.setTexture(*wnd->getTexture(type));
+        m_sprite.setTexture(*wnd->getTexture(type), true);
     }
 
     EntityObserver::EntityObserver(const EntityObserver &rhs) {
-        m_sprite.setTexture(*rhs.m_sprite.getTexture());
-        x = rhs.x;
-        y = rhs.y;
+        m_sprite.setTexture(*rhs.m_sprite.getTexture(), true);
+        m_rect = rhs.m_rect;
     }
 
     EntityObserver& EntityObserver::operator=(const EntityObserver &rhs) {
-        m_sprite.setTexture(*rhs.m_sprite.getTexture());
+        m_sprite.setTexture(*rhs.m_sprite.getTexture(), true);
+        m_rect = rhs.m_rect;
         return *this;
     }
 
@@ -30,27 +30,26 @@ namespace view {
     }
 
     void EntityObserver::draw(sf::RenderWindow& wnd) {
-        m_sprite.setPosition(x, y);
-        m_sprite.getTexture()->getSize().x;
+        m_sprite.setPosition(m_rect.left + m_rect.width / 2, m_rect.top + m_rect.height / 2);
         wnd.draw(m_sprite);
     }
 
     void EntityObserver::update(const model::Entity* entity, model::Notification what) {
         if (what == model::Notification::CREATED) {
-            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
-            x = coordinates.first;
-            y = coordinates.second;
-            m_sprite.scale(2, 2);
-            m_sprite.setOrigin(14, 7);
+            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->transformCoordinates(entity->getLocation());
+            auto size = ctrl::Singleton<ctrl::Transformation>::getInstance()->transformSize(entity->getSize());
+            m_rect.width = size.first;
+            m_rect.height = size.second;
+            m_rect.left = coordinates.first - m_rect.width / 2;
+            m_rect.top = coordinates.second - m_rect.height / 2;
+            auto textureSize = m_sprite.getTexture()->getSize();
+            m_sprite.setScale(m_rect.width / (float)textureSize.x, m_rect.height / (float)textureSize.y);
+            m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
         }
         else if (what == model::Notification::MOVED) {
-            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->tramsform(entity->getLocation());
-            x = coordinates.first;
-            y = coordinates.second;
-        }
-        else if (what == model::Notification::DELETED) {
-            x = 1000;
-            y = 1000;
+            auto coordinates = ctrl::Singleton<ctrl::Transformation>::getInstance()->transformCoordinates(entity->getLocation());
+            m_rect.left = coordinates.first - m_rect.width / 2;
+            m_rect.top = coordinates.second - m_rect.height / 2;
         }
     }
 

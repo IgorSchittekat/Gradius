@@ -12,6 +12,7 @@ namespace model {
 
         void updateShots() {m_timeUntillNextShot--;};
         bool canFire() override;
+        Notification update() override;
 
     private:
         int m_lives;

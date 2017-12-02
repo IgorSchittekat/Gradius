@@ -7,6 +7,7 @@
 #include "Transformation.h"
 #include "../Model/Entity.h"
 #include "../Model/PlayerBullet.h"
+#include "../Model/Enemy.h"
 
 using json = nlohmann::json;
 
@@ -53,6 +54,9 @@ namespace ctrl {
 
     void Game::loadEnemy(json data) {
         std::string enemyTexture = data["level 1"]["enemy"]["texture"];
+        unsigned int count = data["level 1"]["enemy"]["count"];
+        double speed = data["level 1"]["enemy"]["speed"];
+        wnd->addTexture("Enemy", enemyTexture);
     }
 
     void Game::loadBulletTexture(json data) {
@@ -74,16 +78,16 @@ namespace ctrl {
             stopwatch->restart();
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
-                lvl->getShip()->move(model::UP);
+                lvl->getShip()->move(model::Direction::UP);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
-                lvl->getShip()->move(model::DOWN);
+                lvl->getShip()->move(model::Direction::DOWN);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
-                lvl->getShip()->move(model::LEFT);
+                lvl->getShip()->move(model::Direction::LEFT);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-                lvl->getShip()->move(model::RIGHT);
+                lvl->getShip()->move(model::Direction::RIGHT);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
                 if (lvl->getShip()->canFire()) {

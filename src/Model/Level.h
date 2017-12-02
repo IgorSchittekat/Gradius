@@ -39,6 +39,7 @@ namespace model {
     private:
         std::vector<std::unique_ptr<Entity>> m_entities;
         std::shared_ptr<Ship> m_ship;
+        int m_enemyCount;
         double m_bulletSpeed;
     };
 

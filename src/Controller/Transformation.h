@@ -3,6 +3,7 @@
 #pragma once
 
 #include <memory>
+#include "Singleton.h"
 
 namespace ctrl {
 
@@ -11,10 +12,11 @@ namespace ctrl {
         Transformation() = default;
         void setSize(unsigned int width, unsigned int height);
 
-        std::pair<unsigned int, unsigned int> tramsform(double x, double y) const;
+        std::pair<unsigned int, unsigned int> transformCoordinates(std::pair<double, double> location) const;
 
-        std::pair<unsigned int, unsigned int> tramsform(std::pair<double, double> location) const;
+        std::pair<double, double> transformSize(std::pair<unsigned int, unsigned int> size) const;
 
+        std::pair<unsigned int, unsigned int> transformSize(std::pair<double, double> size) const;
 
     private:
         unsigned int m_screenWidth;

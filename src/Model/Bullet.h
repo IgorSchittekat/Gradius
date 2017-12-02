@@ -12,10 +12,11 @@ namespace model {
         Bullet() = default;
         Bullet(const std::shared_ptr<Entity>& firingEntity, double speed);
 
-        virtual ~Bullet() {};
-        void move(Direction dir) override {};
+        ~Bullet() override = default;
 
-        virtual Notification update(){}
+        Notification move(Direction Dir) override;
+
+        Notification update() override;
     private:
 
     };

@@ -10,8 +10,8 @@ namespace view {
 }
 
 namespace model {
-    enum class Notification {CREATED, MOVED, DELETED};
-    enum Direction {UP, DOWN, LEFT, RIGHT};
+    enum class Notification {NONE, CREATED, MOVED, DELETED};
+    enum class Direction {UP, DOWN, LEFT, RIGHT};
 
     class Level;
 
@@ -22,7 +22,7 @@ namespace model {
 
         Entity(double x, double y, double width, double height, double speed);
 
-        virtual void move(Direction dir);
+        virtual Notification move(Direction dir);
 
         std::pair<double, double> getLocation() const;
 
@@ -30,7 +30,7 @@ namespace model {
 
         void addEntityObserver(const std::shared_ptr<view::EntityObserver>& observer);
 
-        virtual Notification update() {}
+        virtual Notification update() = 0;
 
         void notify(Notification what);
 

@@ -10,7 +10,7 @@ namespace model {
 
     class Enemy : public Entity {
     public:
-        Enemy();
+        explicit Enemy(double speed);
 
     private:
 

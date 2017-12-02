@@ -14,12 +14,13 @@ namespace view {
         m_background.setTexture(m_backgroundTexture);
 
         font.loadFromFile("../bin/arial.ttf");
+        // TODO: remove frame counter
     }
 
     bool Window::isOpen() {
         sf::Event event {};
         while (m_wnd->pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
                 m_wnd->close();
         }
         return m_wnd->isOpen();
@@ -29,7 +30,7 @@ namespace view {
         static sf::Clock clock;
         float cTime = clock.getElapsedTime().asSeconds();
         clock.restart();
-        int fps = std::round(1 / cTime);
+        auto fps = static_cast<int>(std::round(1 / cTime));
 
         std::string str = "FPS: " + std::to_string(fps);
         sf::Text text;

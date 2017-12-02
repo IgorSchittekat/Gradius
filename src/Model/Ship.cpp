@@ -16,5 +16,9 @@ namespace model {
         return false;
     }
 
+    Notification Ship::update() {
+        return Notification::NONE;
+    }
+
 
 }
