@@ -26,7 +26,7 @@ namespace model {
 
         void update();
 
-        void addEntity(std::unique_ptr<Entity>& entity);
+        void addEntity(std::shared_ptr<Entity>& entity);
 
         void setShip(std::shared_ptr<Ship> ship);
 
@@ -36,10 +36,13 @@ namespace model {
 
         double getBulletSpeed() const;
 
+        std::vector<std::shared_ptr<Entity>> getFiringEntities();
+
+        bool isColliding(const std::shared_ptr<Entity>& entity);
+
     private:
-        std::vector<std::unique_ptr<Entity>> m_entities;
+        std::vector<std::shared_ptr<Entity>> m_entities;
         std::shared_ptr<Ship> m_ship;
-        int m_enemyCount;
         double m_bulletSpeed;
     };
 

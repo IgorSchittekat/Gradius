@@ -18,9 +18,9 @@ namespace view {
     class EntityObserver {
     public:
 
-        EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& textureFile, const std::string& type);
+        EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& textureFile, const std::string& type);
 
-        EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& type);
+        EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& type);
 
         EntityObserver(const EntityObserver &rhs);
 

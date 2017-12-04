@@ -28,12 +28,14 @@ namespace model {
             if (n == Notification::DELETED) {
                 it = m_entities.erase(it);
             }
-            else
+            else {
                 ++it;
+            }
         }
+//        for (const std::shared_ptr<Entity>& )
     }
 
-    void Level::addEntity(std::unique_ptr<Entity>& entity) {
+    void Level::addEntity(std::shared_ptr<Entity>& entity) {
         m_entities.push_back(std::move(entity));
     }
 
@@ -53,6 +55,18 @@ namespace model {
         return m_bulletSpeed;
     }
 
+    std::vector<std::shared_ptr<Entity>> Level::getFiringEntities() {
+        std::vector<std::shared_ptr<Entity>> firingEntities;
+        for (const std::shared_ptr<Entity>& entity : m_entities) {
+            if (entity->canFire())
+                firingEntities.push_back(entity);
+        }
+        return firingEntities;
+    }
+
+    bool Level::isColliding(const std::shared_ptr<Entity> &entity) {
+
+    }
 
 
 } // namespace model

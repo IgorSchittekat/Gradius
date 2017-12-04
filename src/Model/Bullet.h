@@ -9,7 +9,6 @@ namespace model {
 
     class Bullet : public Entity {
     public:
-        Bullet() = default;
         Bullet(const std::shared_ptr<Entity>& firingEntity, double speed);
 
         ~Bullet() override = default;

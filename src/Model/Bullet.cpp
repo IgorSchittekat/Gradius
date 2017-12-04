@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Bullet.h"
 
 
@@ -8,23 +9,30 @@ namespace model {
     }
 
     Notification Bullet::move(Direction dir) {
-        if (m_x + m_speed + m_width / 2 <= 4 && m_x - m_speed - m_width / 2 >= -4) {
-            switch (dir) {
-                case Direction::LEFT:
-                    m_x -= m_speed;
-                    break;
-                case Direction::RIGHT:
-                    m_x += m_speed;
-                    break;
-                default:
-                    break;
+        if (dir == Direction::LEFT) {
+            if (m_x - m_speed - m_width / 2 >= -4) {
+                m_x -= m_speed;
+                notify(Notification::MOVED);
+                return Notification::MOVED;
             }
-            notify(Notification::MOVED);
-            return Notification::MOVED;
+            else {
+                notify(Notification::DELETED);
+                return Notification::DELETED;
+            }
+        }
+        else if (dir == Direction::RIGHT) {
+            if (m_x + m_speed + m_width / 2 <= 4) {
+                m_x += m_speed;
+                notify(Notification::MOVED);
+                return Notification::MOVED;
+            }
+            else {
+                notify(Notification::DELETED);
+                return Notification::DELETED;
+            }
         }
         else {
-            notify(Notification::DELETED);
-            return Notification::DELETED;
+            return Notification::NONE;
         }
     }
 

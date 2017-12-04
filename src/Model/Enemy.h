@@ -10,9 +10,13 @@ namespace model {
 
     class Enemy : public Entity {
     public:
-        explicit Enemy(double speed);
+        Enemy(double x, double y, double speed);
+        Notification update() override;
+        bool canFire() override;
 
     private:
+        Direction m_dir;
+        int m_timeUntillNextShot;
 
     };
 

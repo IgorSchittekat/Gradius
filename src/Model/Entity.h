@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../View/EntityObserver.h"
-#include "Level.h"
 
 namespace view {
     class EntityObserver;
@@ -12,8 +11,6 @@ namespace view {
 namespace model {
     enum class Notification {NONE, CREATED, MOVED, DELETED};
     enum class Direction {UP, DOWN, LEFT, RIGHT};
-
-    class Level;
 
     class Entity {
     public:

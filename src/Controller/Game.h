@@ -30,7 +30,7 @@ namespace ctrl {
 
 
     private:
-        std::unique_ptr<view::Window> wnd;
+        std::shared_ptr<view::Window> wnd;
         std::unique_ptr<model::Level> lvl;
     };
 

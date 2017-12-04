@@ -23,9 +23,12 @@ namespace ctrl {
         else {
             return; //TODO: Exception
         }
-
         loadWindow(data);
+        lvl = std::make_unique<model::Level>(model::Level());
+
+
         loadShip(data);
+        loadEnemy(data);
         loadBulletTexture(data);
     }
 
@@ -44,7 +47,6 @@ namespace ctrl {
         unsigned int lives = data["level 1"]["ship"]["lives"];
         std::string shipTexture = data["level 1"]["ship"]["texture"];
         double speed = data["level 1"]["ship"]["speed"];
-        lvl = std::make_unique<model::Level>(model::Level());
         auto ship = std::make_shared<model::Ship>(model::Ship(lives, speed));
         auto shipObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, shipTexture, "Ship"));
         ship->addEntityObserver(shipObserver);
@@ -53,10 +55,19 @@ namespace ctrl {
     }
 
     void Game::loadEnemy(json data) {
-        std::string enemyTexture = data["level 1"]["enemy"]["texture"];
-        unsigned int count = data["level 1"]["enemy"]["count"];
-        double speed = data["level 1"]["enemy"]["speed"];
-        wnd->addTexture("Enemy", enemyTexture);
+        auto enemies = data["level 1"]["enemy"];
+        for (int i = 0; i < enemies.size(); i++) {
+            std::string enemyTexture = data["level 1"]["enemy"][i]["texture"];
+            wnd->addTexture("Enemy", enemyTexture);
+            double x = enemies[i]["x"];
+            double y = enemies[i]["y"];
+            double speed = enemies[i]["speed"];
+            std::shared_ptr<model::Entity> enemy = std::make_shared<model::Enemy>(model::Enemy(x, y, speed));
+            auto enemyObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, "Enemy"));
+            enemy->addEntityObserver(enemyObserver);
+            wnd->addEntityObserver(std::weak_ptr<view::EntityObserver>(enemyObserver));
+            lvl->addEntity(enemy);
+        }
     }
 
     void Game::loadBulletTexture(json data) {
@@ -91,14 +102,29 @@ namespace ctrl {
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
                 if (lvl->getShip()->canFire()) {
-                    std::unique_ptr<model::Entity> bullet = std::make_unique<model::PlayerBullet>(model::PlayerBullet(lvl->getShip(), lvl->getBulletSpeed()));
+                    std::shared_ptr<model::Entity> bullet = std::make_shared<model::PlayerBullet>(model::PlayerBullet(lvl->getShip(), lvl->getBulletSpeed()));
                     auto bulletObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, "PlayerBullet"));
                     bullet->addEntityObserver(bulletObserver);
                     wnd->addEntityObserver(std::weak_ptr<view::EntityObserver>(bulletObserver));
                     lvl->addEntity(bullet);
                 }
             }
-            lvl->getShip()->updateShots();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P)) {
+                while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::O));
+            }
+
+
+
+            lvl->getShip()->update();
+
+            auto firingEntities = lvl->getFiringEntities();
+            for (const std::shared_ptr<model::Entity>& entity : firingEntities) {
+                std::shared_ptr<model::Entity> bullet = std::make_shared<model::Bullet>(model::Bullet(entity, lvl->getBulletSpeed()));
+                auto bulletObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, "EnemyBullet"));
+                bullet->addEntityObserver(bulletObserver);
+                wnd->addEntityObserver(std::weak_ptr<view::EntityObserver>(bulletObserver));
+                lvl->addEntity(bullet);
+            }
 
             lvl->update();
             wnd->deleteObservers();

@@ -6,12 +6,12 @@
 namespace view {
 
 
-    EntityObserver::EntityObserver(const std::unique_ptr<Window>& wnd, const std::string& textureFile, const std::string& type) {
+    EntityObserver::EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& textureFile, const std::string& type) {
         wnd->addTexture(type, textureFile);
         m_sprite.setTexture(*wnd->getTexture(type), true);
     }
 
-    EntityObserver::EntityObserver(const std::unique_ptr<Window> &wnd, const std::string &type) {
+    EntityObserver::EntityObserver(const std::shared_ptr<Window> &wnd, const std::string &type) {
         m_sprite.setTexture(*wnd->getTexture(type), true);
     }
 

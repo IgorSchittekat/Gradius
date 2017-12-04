@@ -17,6 +17,7 @@ namespace model {
     }
 
     Notification Ship::update() {
+        m_timeUntillNextShot--;
         return Notification::NONE;
     }
 
