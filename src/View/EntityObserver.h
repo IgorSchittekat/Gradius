@@ -22,6 +22,8 @@ namespace view {
 
         EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& type);
 
+        EntityObserver(const sf::Texture& texture);
+
         EntityObserver(const EntityObserver &rhs);
 
         EntityObserver &operator=(const EntityObserver &rhs);

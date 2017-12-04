@@ -4,9 +4,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "EntityObserver.h"
+#include "../Controller/json.hpp"
 #include <map>
 #include <memory>
 
+namespace model {
+    class Entity;
+    enum class Notification;
+}
 
 namespace view {
 
@@ -31,6 +36,10 @@ namespace view {
         std::shared_ptr<sf::Texture> getTexture(const std::string& name);
 
         void deleteObservers();
+
+        void loadTextures(nlohmann::json data);
+
+        std::shared_ptr<EntityObserver> update(const std::shared_ptr<model::Entity>& entity, model::Notification what);
 
     private:
         std::unique_ptr<sf::RenderWindow> m_wnd;

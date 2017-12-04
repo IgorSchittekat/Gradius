@@ -28,10 +28,12 @@ namespace ctrl {
 
         void loadBulletTexture(nlohmann::json data);
 
+        void loadNextLevel();
 
     private:
         std::shared_ptr<view::Window> wnd;
         std::unique_ptr<model::Level> lvl;
+        int m_lvl;
     };
 
 

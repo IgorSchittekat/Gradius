@@ -1,4 +1,8 @@
 #include "Window.h"
+#include "../Model/Enemy.h"
+#include "../Model/Ship.h"
+#include "../Model/Bullet.h"
+#include "../Model/PlayerBullet.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <cmath>
@@ -86,6 +90,31 @@ namespace view {
                 ++it;
             }
         }
+    }
+
+    std::shared_ptr<EntityObserver> Window::update(const std::shared_ptr<model::Entity>& entity, model::Notification what) {
+        if (what == model::Notification::CREATED) {
+            std::string type;
+            if (std::dynamic_pointer_cast<model::Enemy>(entity))
+                type = "enemy";
+            else if (std::dynamic_pointer_cast<model::Ship>(entity))
+                type = "ship";
+            else if (std::dynamic_pointer_cast<model::PlayerBullet>(entity))
+                type = "playerBullet";
+            else if (std::dynamic_pointer_cast<model::Bullet>(entity))
+                type = "enemyBullet";
+            auto entityObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(*m_textures[type]));
+            addEntityObserver(entityObserver);
+            return entityObserver;
+        }
+        return nullptr;
+    }
+
+    void Window::loadTextures(nlohmann::json data) {
+        addTexture("ship", data["ship"]);
+        addTexture("enemy", data["enemy"]);
+        addTexture("playerBullet", data["playerBullet"]);
+        addTexture("enemyBullet", data["enemyBullet"]);
     }
 
 

@@ -9,8 +9,13 @@
         "heart": "../bin/resources/images/heart.png"
     },
     "level 1" : {
+        "textures": {
+            "ship": "../bin/resources/images/Ship.png",
+            "enemy": "../bin/resources/images/Enemy1.png",
+            "playerBullet": "../bin/resources/images/BulletLeft.png",
+            "enemyBullet": "../bin/resources/images/BulletRight.png"
+        },
         "ship": {
-            "texture": "../bin/resources/images/Ship.png",
             "lives": 5,
             "speed": 0.05,
             "x": -3,
@@ -18,16 +23,13 @@
         },
         "enemy": [
             {
-                "texture": "../bin/resources/images/Enemy1.png",
                 "speed": 0.05,
                 "x": 3.75,
                 "y": 0
             }
         ],
         "bullet": {
-            "speed": 0.2,
-            "playerBulletTexture": "../bin/resources/images/BulletLeft.png",
-            "enemyBulletTexture": "../bin/resources/images/BulletRight.png"
+            "speed": 0.2
         }
 
     }

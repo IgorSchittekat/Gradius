@@ -14,6 +14,9 @@ namespace view {
     EntityObserver::EntityObserver(const std::shared_ptr<Window> &wnd, const std::string &type) {
         m_sprite.setTexture(*wnd->getTexture(type), true);
     }
+    EntityObserver::EntityObserver(const sf::Texture& texture) {
+        m_sprite.setTexture(texture, true);
+    }
 
     EntityObserver::EntityObserver(const EntityObserver &rhs) {
         m_sprite.setTexture(*rhs.m_sprite.getTexture(), true);
