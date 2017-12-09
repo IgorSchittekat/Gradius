@@ -5,13 +5,18 @@
 #include "Entity.h"
 
 namespace model {
-    class Level;
 
     class Obstacle : public Entity {
     public:
-        bool isMovable();
+        Obstacle(double x, double y, double speed, bool border);
+        bool isBorder() { return m_border; }
+
+        Notification update() override;
+
+        Notification move(Direction dir) override;
+
     private:
-        bool movable;
+        bool m_border;
 
     };
 

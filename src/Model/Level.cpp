@@ -1,5 +1,4 @@
 #include <iostream>
-#include <utility>
 #include "Level.h"
 #include "Bullet.h"
 #include "Enemy.h"
@@ -35,7 +34,7 @@ namespace model {
             double y = enemy["y"];
             double enemySpeed = enemy["speed"];
             std::string type = enemy["type"];
-            std::shared_ptr<model::Entity> newEnemy = std::make_shared<model::Enemy>(model::Enemy(x, y, enemySpeed, type));
+            std::shared_ptr<Entity> newEnemy = std::make_shared<Enemy>(Enemy(x, y, enemySpeed, type));
             auto enemyObservers = notify(newEnemy, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& enemyObserver : enemyObservers) {
                 newEnemy->addEntityObserver(enemyObserver);
@@ -45,6 +44,22 @@ namespace model {
 
         // setUp Bullet
         m_bulletSpeed = data["bullet"]["speed"];
+
+        // setUp Walls
+        for (int i = 0; i < 22; i++) {
+            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(-3.8 + 0.4 * i, -2.8, 0.01, true));
+            auto obstacleObservers = notify(obstacle, Notification::CREATED);
+            for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
+                obstacle->addEntityObserver(obstacleObserver);
+            }
+            addEntity(obstacle);
+            std::shared_ptr<Entity> obstacle2 = std::make_shared<Obstacle>(Obstacle(-3.8 + 0.4 * i, 2.8, 0.01, true));
+            auto obstacleObservers2 = notify(obstacle2, Notification::CREATED);
+            for (const std::shared_ptr<view::EntityObserver>& obstacleObserver2 : obstacleObservers2) {
+                obstacle2->addEntityObserver(obstacleObserver2);
+            }
+            addEntity(obstacle2);
+        }
     }
 
     void Level::fireShip() {
@@ -69,7 +84,7 @@ namespace model {
             }
             else {
                 if ((*it)->canFire()) {
-                    std::shared_ptr<model::Entity> bullet = std::make_shared<model::Bullet>(model::Bullet(*it, m_bulletSpeed, false));
+                    std::shared_ptr<Entity> bullet = std::make_shared<Bullet>(Bullet(*it, m_bulletSpeed, false));
                     auto bulletObservers = notify(bullet, Notification::CREATED);
                     for (const std::shared_ptr<view::EntityObserver>& bulletObserver : bulletObservers) {
                         bullet->addEntityObserver(bulletObserver);
@@ -95,14 +110,38 @@ namespace model {
                 }
             }
             else if (std::dynamic_pointer_cast<Enemy>(entity)) {
+                m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
                 m_ship->hit(1);
             }
-            else if (std::dynamic_pointer_cast<Obstacle>(entity)) {
-                m_ship->hit(1);
+            else if (std::shared_ptr<Obstacle> obstacle = std::dynamic_pointer_cast<Obstacle>(entity)) {
+                if (obstacle->isBorder())
+                    m_ship->hit(2);
+                else
+                    m_ship->hit(1);
             }
             else if (std::dynamic_pointer_cast<Enemy>(entity)) {
                 m_ship->hit(1);
             }
+        }
+        std::vector<std::shared_ptr<Entity>> toRemove;
+        for (const auto& entity : m_entities) {
+            if (std::dynamic_pointer_cast<Obstacle>(entity)) {
+                continue;
+            }
+            auto collidingWithEntity = isColliding(entity);
+            for (std::shared_ptr<Entity>& otherEntity : collidingWithEntity) {
+                if (std::shared_ptr<Bullet> bullet = std::dynamic_pointer_cast<Bullet>(entity)) {
+                    if (std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(otherEntity)) {
+                        if (bullet->isFriendly()) {
+                            toRemove.push_back(entity);
+                            toRemove.push_back(otherEntity);
+                        }
+                    }
+                }
+            }
+        }
+        for (const auto& entity : toRemove) {
+            m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
         }
     }
 

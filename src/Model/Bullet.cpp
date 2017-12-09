@@ -5,7 +5,7 @@
 namespace model {
 
     Bullet::Bullet(const std::shared_ptr<model::Entity>& firingEntity, double speed, bool friendly) :
-            Entity(firingEntity->getLocation().first, firingEntity->getLocation().second, 0.25, 0.125, speed),
+            Entity(firingEntity->getLocation().first, firingEntity->getLocation().second, 0.5, 0.25, speed),
             m_friendly(friendly) {
     }
 

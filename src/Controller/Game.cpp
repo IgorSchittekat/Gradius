@@ -85,7 +85,7 @@ namespace ctrl {
             wnd->deleteObservers();
             wnd->drawWindow();
 
-            while (ctrl::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(16666)) {
+            while (util::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(16666)) {
                 // Wait time to run at 60 fps at all computers
             }
         }

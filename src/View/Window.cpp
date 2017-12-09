@@ -2,6 +2,7 @@
 #include "../Model/Enemy.h"
 #include "../Model/Ship.h"
 #include "../Model/Bullet.h"
+#include "../Model/Obstacle.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <cmath>
@@ -55,7 +56,7 @@ namespace view {
     }
 
     void Window::drawBackground() {
-        m_background.move(-1, 0);
+        m_background.move(-0.5f, 0.0);
         m_wnd->draw(m_background);
         if (m_background.getPosition().x == -(int)m_wnd->getSize().x) {
             m_background.setPosition(0, 0);
@@ -98,6 +99,8 @@ namespace view {
                 type = enemy->getType() + "Enemy";
             else if (std::dynamic_pointer_cast<model::Ship>(entity))
                 type = "ship";
+            else if (std::dynamic_pointer_cast<model::Obstacle>(entity))
+                type = "obstacle";
             else if (std::shared_ptr<model::Bullet> bullet = std::dynamic_pointer_cast<model::Bullet>(entity)) {
                 if (bullet->isFriendly())
                     type = "playerBullet";
@@ -117,6 +120,7 @@ namespace view {
         addTexture("flyingEnemy", data["flyingEnemy"]);
         addTexture("playerBullet", data["playerBullet"]);
         addTexture("enemyBullet", data["enemyBullet"]);
+        addTexture("obstacle", data["obstacle"]);
     }
 
 

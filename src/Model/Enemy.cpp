@@ -3,7 +3,7 @@
 namespace model {
 
     Enemy::Enemy(double x, double y, double speed, const std::string& type) :
-            Entity(x, y, 0.4, 0.4, speed),
+            Entity(x, y, 0.8, 0.8, speed),
             m_timeUntilNextShot(18),
             m_type(type) {
         m_dir = Direction::UP;
@@ -26,7 +26,7 @@ namespace model {
 
     bool Enemy::canFire() {
         if (m_timeUntilNextShot <= 0) {
-            m_timeUntilNextShot = 42;
+            m_timeUntilNextShot = 80;
             return true;
         }
         return false;

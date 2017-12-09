@@ -14,7 +14,8 @@
             "shootingEnemy": "../bin/resources/images/Enemy1.png",
             "flyingEnemy": "../bin/resources/images/Enemy2.png",
             "playerBullet": "../bin/resources/images/BulletLeft.png",
-            "enemyBullet": "../bin/resources/images/BulletRight.png"
+            "enemyBullet": "../bin/resources/images/BulletRight.png",
+            "obstacle": "../bin/resources/images/Obstacle.png"
         },
         "ship": {
             "lives": 5,
