@@ -2,27 +2,38 @@
 
 namespace model {
 
-    Enemy::Enemy(double x, double y, double speed) :
+    Enemy::Enemy(double x, double y, double speed, const std::string& type) :
             Entity(x, y, 0.4, 0.4, speed),
-            m_timeUntillNextShot(20) {
+            m_timeUntilNextShot(18),
+            m_type(type) {
         m_dir = Direction::UP;
     }
 
     Notification Enemy::update() {
-        m_timeUntillNextShot--;
-        if (m_y <= -2)
-            m_dir = Direction::DOWN;
-        else if (m_y >= 2)
-            m_dir = Direction::UP;
-        return move(m_dir);
+        if (m_type == "shooting") {
+            m_timeUntilNextShot--;
+            if (m_y <= -2)
+                m_dir = Direction::DOWN;
+            else if (m_y >= 2)
+                m_dir = Direction::UP;
+            return move(m_dir);
+        }
+        else if (m_type == "flying") {
+            m_dir = Direction::LEFT;
+            return move(m_dir);
+        }
     }
 
     bool Enemy::canFire() {
-        if (m_timeUntillNextShot <= 0) {
-            m_timeUntillNextShot = 20;
+        if (m_timeUntilNextShot <= 0) {
+            m_timeUntilNextShot = 42;
             return true;
         }
         return false;
+    }
+
+    std::string Enemy::getType() const {
+        return m_type;
     }
 
 

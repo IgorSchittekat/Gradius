@@ -15,13 +15,6 @@ namespace model {
 
     class Level {
     public:
-        Level();
-
-        Level(const Level &rhs);
-
-        Level &operator=(const Level &rhs);
-
-        ~Level();
 
         void update();
 
@@ -33,15 +26,7 @@ namespace model {
 
         void setShip(std::shared_ptr<Ship> ship);
 
-        std::shared_ptr<Ship> getShip() const;
-
-        void setBulletSpeed(double speed);
-
-        double getBulletSpeed() const;
-
-        std::vector<std::shared_ptr<Entity>> getFiringEntities();
-
-        bool isColliding(const std::shared_ptr<Entity>& entity);
+        std::vector<std::shared_ptr<Entity>> isColliding(const std::shared_ptr<Entity>& entity);
 
         void addObserver(const std::shared_ptr<view::Window>& observer);
 
@@ -54,7 +39,8 @@ namespace model {
         auto notify(const std::shared_ptr<Entity>& entity, Notification what);
 
         void setUp(nlohmann::json data);
-
+    private:
+        void removeCollidingEntities();
     private:
         std::vector<std::shared_ptr<Entity>> m_entities;
         std::shared_ptr<Ship> m_ship;

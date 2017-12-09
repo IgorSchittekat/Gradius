@@ -15,19 +15,26 @@ namespace ctrl {
 
     class Game {
     public:
+        /**
+         * @brief constructor, setUps the whole game
+         */
         Game();
 
+        /**
+         * @brief play the game
+         */
         void play();
 
     private:
+        /**
+         * @brief load the window
+         * @param data : data needed to load the window
+         */
         void loadWindow(nlohmann::json data);
 
-        void loadShip(nlohmann::json data);
-
-        void loadEnemy(nlohmann::json data);
-
-        void loadBulletTexture(nlohmann::json data);
-
+        /**
+         * @brief load the next level
+         */
         void loadNextLevel();
 
     private:

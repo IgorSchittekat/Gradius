@@ -6,7 +6,12 @@ namespace ctrl {
     template <typename T>
     class Singleton {
     public:
-
+        Singleton(const Singleton& rhs) = delete;
+        Singleton& operator=(const Singleton& rhs) = delete;
+        /**
+         * @brief get only instance of T
+         * @return only instance of T
+         */
         static T* getInstance() {
             if (!m_instance) {
                 m_instance = new T();
@@ -14,16 +19,14 @@ namespace ctrl {
             return m_instance;
         }
 
-        Singleton(const Singleton &rhs) = delete;
-        Singleton &operator=(const Singleton &rhs) = delete;
-        ~Singleton() = default;
-
     private:
         static T* m_instance;
 
-    private:
+    protected:
+        /**
+         * @brief private constructor
+         */
         Singleton() = default;
-
     };
 
     template <typename T>

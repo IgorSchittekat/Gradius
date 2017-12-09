@@ -4,16 +4,13 @@
 
 #include <chrono>
 #include <memory>
+#include "Singleton.h"
 
 namespace  ctrl {
 
-    class Stopwatch {
+    class Stopwatch : public Singleton<Stopwatch> {
+        friend class Singleton<Stopwatch>;
     public:
-        /**
-         * @brief Constructor.
-         */
-        Stopwatch();
-
         /**
          * @brief Restarts the Stopwatch
          */
@@ -25,11 +22,29 @@ namespace  ctrl {
          */
         std::chrono::duration<double> elapsed();
 
+        /**
+         * @brief Returns time between now and begin of the game
+         * @return Time between now and begin of the game
+         */
+        std::chrono::duration<double> getTime() const;
+
+    private:
+        /**
+         * @brief Constructor.
+         */
+        Stopwatch();
+
     private:
         /**
          * @brief time of last restart
          */
+        std::chrono::steady_clock::time_point m_restart;
+
+        /**
+         * @brief time of begin of the game
+         */
         std::chrono::steady_clock::time_point m_start;
+
     };
 
 } //namespace ctrl

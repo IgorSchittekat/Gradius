@@ -9,9 +9,9 @@ namespace model {
 
     class Obstacle : public Entity {
     public:
-
+        bool isMovable();
     private:
-
+        bool movable;
 
     };
 

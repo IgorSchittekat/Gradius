@@ -12,6 +12,7 @@ namespace model {
 
         bool canFire() override;
         Notification update() override;
+        void hit(int count);
 
     private:
         int m_lives;

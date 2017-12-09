@@ -9,15 +9,31 @@ namespace model {
 
     class Bullet : public Entity {
     public:
-        Bullet(const std::shared_ptr<Entity>& firingEntity, double speed);
+        /**
+         * @brief constructoe
+         * @param firingEntity : entity that fires the bullet
+         * @param speed : speed of the bullet
+         * @param friendly : friendliness of the bullet
+         */
+        Bullet(const std::shared_ptr<Entity>& firingEntity, double speed, bool friendly);
 
-        ~Bullet() override = default;
+        /**
+         * @brief move the bullet
+         * @param Dir : direction to move the bullet
+         * @return notification of what happened exactly
+         */
+        Notification move(Direction dir) override;
 
-        Notification move(Direction Dir) override;
-
+        /**
+         * @brief updates the bullet
+         * @return notification of what happened exactly
+         */
         Notification update() override;
-    private:
 
+        bool isFriendly();
+
+    private:
+        bool m_friendly;
     };
 
 }

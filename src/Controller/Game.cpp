@@ -6,7 +6,6 @@
 #include "../Model/Ship.h"
 #include "Transformation.h"
 #include "../Model/Entity.h"
-#include "../Model/PlayerBullet.h"
 #include "../Model/Enemy.h"
 
 using json = nlohmann::json;
@@ -42,6 +41,8 @@ namespace ctrl {
         lvl->addObserver(wnd);
         wnd->loadTextures(data["level " + std::to_string(m_lvl)]["textures"]);
         lvl->setUp(data["level " + std::to_string(m_lvl)]);
+
+        m_lvl++;
     }
 
     void Game::loadWindow(json data) {
@@ -54,39 +55,10 @@ namespace ctrl {
         std::string heart = data["window"]["heart"];
     }
 
-    void Game::loadEnemy(json data) {
-        auto enemies = data["level 1"]["enemy"];
-        for (int i = 0; i < enemies.size(); i++) {
-            std::string enemyTexture = data["level 1"]["enemy"][i]["texture"];
-            wnd->addTexture("Enemy", enemyTexture);
-            double x = enemies[i]["x"];
-            double y = enemies[i]["y"];
-            double speed = enemies[i]["speed"];
-            std::shared_ptr<model::Entity> enemy = std::make_shared<model::Enemy>(model::Enemy(x, y, speed));
-            auto enemyObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(wnd, "Enemy"));
-            enemy->addEntityObserver(enemyObserver);
-            wnd->addEntityObserver(std::weak_ptr<view::EntityObserver>(enemyObserver));
-            lvl->addEntity(enemy);
-        }
-    }
-
-    void Game::loadBulletTexture(json data) {
-        std::string playerBulletTexture = data["level 1"]["bullet"]["playerBulletTexture"];
-        std::string enemyBulletTexture = data["level 1"]["bullet"]["enemyBulletTexture"];
-        double speed = data["level 1"]["bullet"]["speed"];
-        wnd->addTexture("PlayerBullet", playerBulletTexture);
-        wnd->addTexture("EnemyBullet", enemyBulletTexture);
-        lvl->setBulletSpeed(speed);
-    }
-
-
     void Game::play() {
 
-        ctrl::Stopwatch* stopwatch = ctrl::Singleton<ctrl::Stopwatch>::getInstance();
-
-
         while (wnd->isOpen()) {
-            stopwatch->restart();
+            ctrl::Stopwatch::getInstance()->restart();
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
                 lvl->moveShip(model::Direction::UP);
@@ -109,15 +81,13 @@ namespace ctrl {
                 }
             }
 
-
             lvl->update();
             wnd->deleteObservers();
             wnd->drawWindow();
 
-            while (stopwatch->elapsed() < std::chrono::microseconds(16666)) {
+            while (ctrl::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(16666)) {
                 // Wait time to run at 60 fps at all computers
             }
-
         }
     }
 

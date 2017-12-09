@@ -11,7 +11,8 @@
     "level 1" : {
         "textures": {
             "ship": "../bin/resources/images/Ship.png",
-            "enemy": "../bin/resources/images/Enemy1.png",
+            "shootingEnemy": "../bin/resources/images/Enemy1.png",
+            "flyingEnemy": "../bin/resources/images/Enemy2.png",
             "playerBullet": "../bin/resources/images/BulletLeft.png",
             "enemyBullet": "../bin/resources/images/BulletRight.png"
         },
@@ -23,13 +24,22 @@
         },
         "enemy": [
             {
-                "speed": 0.05,
+                "speed": 0.01,
                 "x": 3.75,
-                "y": 0
+                "y": 0,
+                "type": "shooting",
+                "spawntime": 10
+            },
+            {
+                "speed": 0.1,
+                "x": 3.75,
+                "y": 0,
+                "type": "flying",
+                "spawnrime": 20
             }
         ],
         "bullet": {
-            "speed": 0.2
+            "speed": 0.05
         }
 
     }
