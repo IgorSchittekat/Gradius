@@ -1,7 +1,7 @@
 #ifndef GRADIUS_SINGLETON_H
 #define GRADIUS_SINGLETON_H
 
-namespace ctrl {
+namespace util {
 
     template <typename T>
     class Singleton {
@@ -33,6 +33,6 @@ namespace ctrl {
     T* Singleton<T>::m_instance = nullptr;
 
 
-} //namespace ctrl
+} //namespace util
 
 #endif //GRADIUS_SINGLETON_H

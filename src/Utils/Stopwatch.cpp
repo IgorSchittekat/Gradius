@@ -1,6 +1,6 @@
 #include "Stopwatch.h"
 
-namespace ctrl {
+namespace util {
 
 
     Stopwatch::Stopwatch() {
@@ -20,4 +20,4 @@ namespace ctrl {
         return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - m_start);
     }
 
-}
+} //namespace util

@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "EntityObserver.h"
-#include "../Controller/json.hpp"
+#include "../Utils/json.hpp"
 #include <map>
 #include <memory>
 

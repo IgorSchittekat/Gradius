@@ -6,7 +6,7 @@
 #include <memory>
 #include "Singleton.h"
 
-namespace  ctrl {
+namespace  util {
 
     class Stopwatch : public Singleton<Stopwatch> {
         friend class Singleton<Stopwatch>;
@@ -47,6 +47,6 @@ namespace  ctrl {
 
     };
 
-} //namespace ctrl
+} //namespace util
 
 #endif //GRADIUS_STOPWATCH_H

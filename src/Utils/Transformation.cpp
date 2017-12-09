@@ -1,7 +1,7 @@
 #include <cassert>
 #include "Transformation.h"
 
-namespace ctrl {
+namespace util {
 
     void Transformation::setSize(unsigned int width, unsigned int height) {
         m_screenWidth = width;
@@ -28,4 +28,4 @@ namespace ctrl {
         return {size.first / 8 * m_screenWidth, size.second / 6 * m_screenHeight};
     }
 
-} // namespace ctrl
+} // namespace util

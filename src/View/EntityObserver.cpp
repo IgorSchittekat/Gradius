@@ -1,7 +1,7 @@
 #include <iostream>
 #include "EntityObserver.h"
-#include "../Controller/Singleton.h"
-#include "../Controller/Transformation.h"
+#include "../Utils/Singleton.h"
+#include "../Utils/Transformation.h"
 
 namespace view {
 
@@ -39,8 +39,8 @@ namespace view {
 
     void EntityObserver::update(const model::Entity* entity, model::Notification what) {
         if (what == model::Notification::CREATED) {
-            auto coordinates = ctrl::Transformation::getInstance()->transformCoordinates(entity->getLocation());
-            auto size = ctrl::Transformation::getInstance()->transformSize(entity->getSize());
+            auto coordinates = util::Transformation::getInstance()->transformCoordinates(entity->getLocation());
+            auto size = util::Transformation::getInstance()->transformSize(entity->getSize());
             m_rect.width = size.first;
             m_rect.height = size.second;
             m_rect.left = coordinates.first - m_rect.width / 2;
@@ -50,7 +50,7 @@ namespace view {
             m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
         }
         else if (what == model::Notification::MOVED) {
-            auto coordinates = ctrl::Transformation::getInstance()->transformCoordinates(entity->getLocation());
+            auto coordinates = util::Transformation::getInstance()->transformCoordinates(entity->getLocation());
             m_rect.left = coordinates.first - m_rect.width / 2;
             m_rect.top = coordinates.second - m_rect.height / 2;
         }

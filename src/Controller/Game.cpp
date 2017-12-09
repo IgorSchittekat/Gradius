@@ -1,10 +1,10 @@
 #include "Game.h"
-#include "Singleton.h"
-#include "Stopwatch.h"
+#include "../Utils/Singleton.h"
+#include "../Utils/Stopwatch.h"
 #include <fstream>
 #include <iostream>
 #include "../Model/Ship.h"
-#include "Transformation.h"
+#include "../Utils/Transformation.h"
 #include "../Model/Entity.h"
 #include "../Model/Enemy.h"
 
@@ -48,7 +48,7 @@ namespace ctrl {
     void Game::loadWindow(json data) {
         unsigned int width = data["window"]["width"];
         unsigned int height = data["window"]["height"];
-        Singleton<Transformation>::getInstance()->setSize(width, height);
+        util::Transformation::getInstance()->setSize(width, height);
         std::string title = data["window"]["title"];
         std::string background = data["window"]["background"];
         wnd.reset(new view::Window(width, height, title, background));
@@ -58,7 +58,7 @@ namespace ctrl {
     void Game::play() {
 
         while (wnd->isOpen()) {
-            ctrl::Stopwatch::getInstance()->restart();
+            util::Stopwatch::getInstance()->restart();
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
                 lvl->moveShip(model::Direction::UP);

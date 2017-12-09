@@ -5,7 +5,7 @@
 #include <vector>
 #include "Ship.h"
 #include "../View/Window.h"
-#include "../Controller/json.hpp"
+#include "../Utils/json.hpp"
 
 namespace view {
     class EntityObserver;

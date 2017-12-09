@@ -6,7 +6,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules/
 FIND_PACKAGE(SFML 2 COMPONENTS system window graphics audio)
 
 # The source files to compile
-FILE(GLOB SRC main.cpp Controller/* Model/* View/*)
+FILE(GLOB SRC main.cpp Controller/* Model/* View/* Utils/*)
 
 # Add include dirs for SFML
 # (The SFML_INCLUDE_DIR variable is defined by FindSFML.cmake, if SFML was found)

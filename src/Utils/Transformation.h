@@ -5,7 +5,7 @@
 #include <memory>
 #include "Singleton.h"
 
-namespace ctrl {
+namespace util {
 
     class Transformation : public Singleton<Transformation> {
         friend class Singleton<Transformation>;
@@ -49,6 +49,6 @@ namespace ctrl {
         unsigned int m_screenHeight;
     };
 
-} // namespace ctrl
+} // namespace util
 
 #endif //GRADIUS_TRANSFORMATION_H

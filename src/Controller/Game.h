@@ -4,7 +4,7 @@
 
 #include "../View/Window.h"
 #include "../Model/Level.h"
-#include "json.hpp"
+#include "../Utils/json.hpp"
 
 namespace model {
     enum class Direction;
