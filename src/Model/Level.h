@@ -39,6 +39,9 @@ namespace model {
         auto notify(const std::shared_ptr<Entity>& entity, Notification what);
 
         void setUp(nlohmann::json data);
+
+        bool gameOver();
+
     private:
         void removeCollidingEntities();
     private:

@@ -16,7 +16,7 @@ namespace view {
         m_backgroundTexture.loadFromImage(i);
         m_backgroundTexture.setRepeated(true);
         m_background.setTexture(m_backgroundTexture);
-
+        m_hearts = 0;
         font.loadFromFile("../bin/arial.ttf");
         // TODO: remove frame counter
     }
@@ -47,6 +47,7 @@ namespace view {
     void Window::drawWindow() {
         m_wnd->clear();
         drawBackground();
+        drawHearts();
         m_wnd->draw(getFPS());
         for (const std::weak_ptr<EntityObserver>& entity : m_entities) {
             if (!entity.expired())
@@ -61,6 +62,15 @@ namespace view {
         if (m_background.getPosition().x == -(int)m_wnd->getSize().x) {
             m_background.setPosition(0, 0);
 
+        }
+    }
+
+    void Window::drawHearts() {
+        for ( int i = 0; i < m_hearts; i++) {
+            sf::Sprite heart;
+            heart.setTexture(*m_textures["heart"]);
+            heart.setPosition(0 + m_wnd->getSize().x / 50 * i, m_wnd->getSize().y / 12);
+            m_wnd->draw(heart);
         }
     }
 
@@ -81,24 +91,15 @@ namespace view {
         return m_textures[name];
     }
 
-    void Window::deleteObservers() {
-        for (auto it = m_entities.begin(); it != m_entities.end(); ){
-            if (it->expired()) {
-                it = m_entities.erase(it);
-            }
-            else {
-                ++it;
-            }
-        }
-    }
-
     std::shared_ptr<EntityObserver> Window::update(const std::shared_ptr<model::Entity>& entity, model::Notification what) {
         if (what == model::Notification::CREATED) {
             std::string type;
             if (std::shared_ptr<model::Enemy> enemy = std::dynamic_pointer_cast<model::Enemy>(entity))
                 type = enemy->getType() + "Enemy";
-            else if (std::dynamic_pointer_cast<model::Ship>(entity))
+            else if (std::shared_ptr<model::Ship> ship = std::dynamic_pointer_cast<model::Ship>(entity)) {
                 type = "ship";
+                m_hearts = ship->getLives();
+            }
             else if (std::dynamic_pointer_cast<model::Obstacle>(entity))
                 type = "obstacle";
             else if (std::shared_ptr<model::Bullet> bullet = std::dynamic_pointer_cast<model::Bullet>(entity)) {
@@ -111,6 +112,21 @@ namespace view {
             addEntityObserver(entityObserver);
             return entityObserver;
         }
+        else if (what == model::Notification::DELETED) {
+            for (auto it = m_entities.begin(); it != m_entities.end(); ){
+                if (it->expired()) {
+                    it = m_entities.erase(it);
+                }
+                else {
+                    ++it;
+                }
+            }
+        }
+        else if (what == model::Notification::HIT) {
+            if (std::shared_ptr<model::Ship> ship = std::dynamic_pointer_cast<model::Ship>(entity)) {
+                m_hearts = ship->getLives();
+            }
+        }
         return nullptr;
     }
 
@@ -121,6 +137,7 @@ namespace view {
         addTexture("playerBullet", data["playerBullet"]);
         addTexture("enemyBullet", data["enemyBullet"]);
         addTexture("obstacle", data["obstacle"]);
+        addTexture("heart", data["heart"]);
     }
 
 

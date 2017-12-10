@@ -79,6 +79,7 @@ namespace model {
         for (auto it = m_entities.begin(); it != m_entities.end(); ) {
 
             Notification n = (*it)->update();
+            notify(*it, n);
             if (n == Notification::DELETED) {
                 it = m_entities.erase(it);
             }
@@ -106,21 +107,26 @@ namespace model {
             if (std::shared_ptr<Bullet> bullet = std::dynamic_pointer_cast<Bullet>(entity)) {
                 if (!bullet->isFriendly()) {
                     m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
-                    m_ship->hit(1);
+                    if (m_ship->hit(1))
+                        notify(m_ship, Notification::HIT);
                 }
             }
             else if (std::dynamic_pointer_cast<Enemy>(entity)) {
                 m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
-                m_ship->hit(1);
+                if (m_ship->hit(1))
+                    notify(m_ship, Notification::HIT);
             }
             else if (std::shared_ptr<Obstacle> obstacle = std::dynamic_pointer_cast<Obstacle>(entity)) {
                 if (obstacle->isBorder())
-                    m_ship->hit(2);
+                    if (m_ship->hit(2))
+                        notify(m_ship, Notification::HIT);
                 else
-                    m_ship->hit(1);
+                    if (m_ship->hit(1))
+                        notify(m_ship, Notification::HIT);
             }
             else if (std::dynamic_pointer_cast<Enemy>(entity)) {
-                m_ship->hit(1);
+                if (m_ship->hit(1))
+                    notify(m_ship, Notification::HIT);
             }
         }
         std::vector<std::shared_ptr<Entity>> toRemove;
@@ -183,7 +189,9 @@ namespace model {
         m_ship->move(dir);
     }
 
-
+    bool Level::gameOver() {
+        return !m_ship->isAlive();
+    }
 
 
 } // namespace model

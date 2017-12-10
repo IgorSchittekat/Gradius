@@ -35,11 +35,12 @@ namespace view {
 
         std::shared_ptr<sf::Texture> getTexture(const std::string& name);
 
-        void deleteObservers();
-
         void loadTextures(nlohmann::json data);
 
         std::shared_ptr<EntityObserver> update(const std::shared_ptr<model::Entity>& entity, model::Notification what);
+
+    private:
+        void drawHearts();
 
     private:
         std::unique_ptr<sf::RenderWindow> m_wnd;
@@ -48,6 +49,7 @@ namespace view {
         sf::Font font;
         std::vector<std::weak_ptr<EntityObserver>> m_entities;
         std::map<std::string, std::shared_ptr<sf::Texture>> m_textures;
+        int m_hearts;
     };
 
 }

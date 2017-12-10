@@ -52,7 +52,6 @@ namespace ctrl {
         std::string title = data["window"]["title"];
         std::string background = data["window"]["background"];
         wnd.reset(new view::Window(width, height, title, background));
-        std::string heart = data["window"]["heart"];
     }
 
     void Game::play() {
@@ -82,9 +81,12 @@ namespace ctrl {
             }
 
             lvl->update();
-            wnd->deleteObservers();
             wnd->drawWindow();
 
+            if (lvl->gameOver()) {
+                std::cout << "GAME OVER" << std::endl;
+                break;
+            }
             while (util::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(16666)) {
                 // Wait time to run at 60 fps at all computers
             }

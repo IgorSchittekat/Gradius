@@ -5,8 +5,7 @@
         "height": 600,
         "totalLevels": 1,
         "background": "../bin/resources/images/background.jpg",
-        "floor": "../bin/resources/images/floor.png",
-        "heart": "../bin/resources/images/heart.png"
+        "floor": "../bin/resources/images/floor.png"
     },
     "level 1" : {
         "textures": {
@@ -15,7 +14,8 @@
             "flyingEnemy": "../bin/resources/images/Enemy2.png",
             "playerBullet": "../bin/resources/images/BulletLeft.png",
             "enemyBullet": "../bin/resources/images/BulletRight.png",
-            "obstacle": "../bin/resources/images/Obstacle.png"
+            "obstacle": "../bin/resources/images/Obstacle.png",
+            "heart": "../bin/resources/images/heart.png"
         },
         "ship": {
             "lives": 5,
@@ -36,7 +36,7 @@
                 "x": 3.75,
                 "y": 0,
                 "type": "flying",
-                "spawnrime": 20
+                "spawntime": 20
             }
         ],
         "bullet": {

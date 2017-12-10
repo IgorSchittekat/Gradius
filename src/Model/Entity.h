@@ -9,7 +9,7 @@ namespace view {
 }
 
 namespace model {
-    enum class Notification {NONE, CREATED, MOVED, DELETED};
+    enum class Notification {NONE, CREATED, MOVED, DELETED, HIT};
     enum class Direction {UP, DOWN, LEFT, RIGHT};
 
     class Entity {
