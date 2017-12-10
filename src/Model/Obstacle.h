@@ -9,14 +9,14 @@ namespace model {
     class Obstacle : public Entity {
     public:
         Obstacle(double x, double y, double speed, bool border);
-        bool isBorder() { return m_border; }
+        bool isBorder() { return mBorder; }
 
         Notification update() override;
 
         Notification move(Direction dir) override;
 
     private:
-        bool m_border;
+        bool mBorder;
 
     };
 

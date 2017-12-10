@@ -6,40 +6,40 @@ namespace model {
 
 
     Entity::Entity() :
-    m_x(0),
-    m_y(0) {
+    mX(0),
+    mY(0) {
     }
 
     Entity::Entity(double x, double y, double width, double height, double speed) :
-    m_x(x),
-    m_y(y),
-    m_width(width),
-    m_height(height),
-    m_speed(speed){
+    mX(x),
+    mY(y),
+    mWidth(width),
+    mHeight(height),
+    mSpeed(speed){
         notify(Notification::CREATED);
     }
 
     Entity::~Entity() {
-        m_observers.clear();
+        mObservers.clear();
     }
 
     Notification Entity::move(Direction dir) {
         switch (dir) {
             case Direction::UP:
-                if (m_y - m_speed - m_height >= -3)
-                    m_y -= m_speed;
+                if (mY - mSpeed - mHeight >= -3)
+                    mY -= mSpeed;
                 break;
             case Direction::DOWN:
-                if (m_y + m_speed + m_height / 2 <= 3)
-                    m_y += m_speed;
+                if (mY + mSpeed + mHeight / 2 <= 3)
+                    mY += mSpeed;
                 break;
             case Direction::LEFT:
-                if (m_x - m_speed - m_width / 2 >= -4)
-                    m_x -= m_speed;
+                if (mX - mSpeed - mWidth / 2 >= -4)
+                    mX -= mSpeed;
                 break;
             case Direction::RIGHT:
-                if (m_x + m_speed + m_width / 2 <= 4)
-                    m_x += m_speed;
+                if (mX + mSpeed + mWidth / 2 <= 4)
+                    mX += mSpeed;
                 break;
         }
         notify(Notification::MOVED);
@@ -47,20 +47,20 @@ namespace model {
     }
 
     std::pair<double, double> Entity::getLocation() const {
-        return {m_x, m_y};
+        return {mX, mY};
     }
 
     std::pair<double, double> Entity::getSize() const {
-        return {m_width, m_height};
+        return {mWidth, mHeight};
     }
 
     void Entity::addEntityObserver(const std::shared_ptr<view::EntityObserver>& observer) {
-        m_observers.push_back(observer);
+        mObservers.push_back(observer);
         observer->update(this, Notification::CREATED);
     }
 
     void Entity::notify(Notification what) {
-        for (const std::shared_ptr<view::EntityObserver> &observer : m_observers) {
+        for (const std::shared_ptr<view::EntityObserver> &observer : mObservers) {
             observer->update(this, what);
         }
     }

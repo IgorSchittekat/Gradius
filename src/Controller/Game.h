@@ -38,9 +38,9 @@ namespace ctrl {
         void loadNextLevel();
 
     private:
-        std::shared_ptr<view::Window> wnd;
-        std::unique_ptr<model::Level> lvl;
-        int m_lvl;
+        std::shared_ptr<view::Window> mWnd;
+        std::unique_ptr<model::Level> mLvl;
+        int mCurrentLvl;
     };
 
 

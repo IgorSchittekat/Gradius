@@ -13,14 +13,14 @@ namespace util {
          * @return only instance of T
          */
         static T* getInstance() {
-            if (!m_instance) {
-                m_instance = new T();
+            if (!mInstance) {
+                mInstance = new T();
             }
-            return m_instance;
+            return mInstance;
         }
 
     private:
-        static T* m_instance;
+        static T* mInstance;
 
     protected:
         /**
@@ -30,7 +30,7 @@ namespace util {
     };
 
     template <typename T>
-    T* Singleton<T>::m_instance = nullptr;
+    T* Singleton<T>::mInstance = nullptr;
 
 
 } //namespace util

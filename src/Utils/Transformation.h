@@ -45,8 +45,8 @@ namespace util {
         Transformation() = default;
 
     private:
-        unsigned int m_screenWidth;
-        unsigned int m_screenHeight;
+        unsigned int mScreenWidth;
+        unsigned int mScreenHeight;
     };
 
 } // namespace util

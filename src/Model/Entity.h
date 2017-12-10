@@ -34,13 +34,13 @@ namespace model {
         virtual bool canFire() { return false; }
 
     protected:
-        double m_x;
-        double m_y;
-        double m_width;
-        double m_height;
-        double m_speed;
+        double mX;
+        double mY;
+        double mWidth;
+        double mHeight;
+        double mSpeed;
     private:
-        std::vector<std::shared_ptr<view::EntityObserver>> m_observers;
+        std::vector<std::shared_ptr<view::EntityObserver>> mObservers;
 
     };
 

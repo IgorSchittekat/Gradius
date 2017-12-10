@@ -45,10 +45,10 @@ namespace model {
     private:
         void removeCollidingEntities();
     private:
-        std::vector<std::shared_ptr<Entity>> m_entities;
-        std::shared_ptr<Ship> m_ship;
-        double m_bulletSpeed;
-        std::vector<std::shared_ptr<view::Window>> m_observers;
+        std::vector<std::shared_ptr<Entity>> mEntities;
+        std::shared_ptr<Ship> mShip;
+        double mBulletSpeed;
+        std::vector<std::shared_ptr<view::Window>> mObservers;
     };
 
 } // namespace model

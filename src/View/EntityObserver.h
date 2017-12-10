@@ -35,8 +35,8 @@ namespace view {
         void update(const model::Entity* entity, model::Notification what);
 
     private:
-        sf::IntRect m_rect;
-        sf::Sprite m_sprite;
+        sf::IntRect mRect;
+        sf::Sprite mSprite;
     };
 
 

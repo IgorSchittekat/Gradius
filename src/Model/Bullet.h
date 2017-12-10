@@ -33,7 +33,7 @@ namespace model {
         bool isFriendly();
 
     private:
-        bool m_friendly;
+        bool mFriendly;
     };
 
 }

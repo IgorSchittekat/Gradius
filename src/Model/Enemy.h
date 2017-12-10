@@ -34,9 +34,9 @@ namespace model {
         std::string getType() const;
 
     private:
-        Direction m_dir;
-        int m_timeUntilNextShot;
-        std::string m_type;
+        Direction mDir;
+        int mTimeUntilNextShot;
+        std::string mType;
     };
 
 }

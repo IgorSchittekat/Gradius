@@ -6,13 +6,13 @@ namespace model {
 
     Bullet::Bullet(const std::shared_ptr<model::Entity>& firingEntity, double speed, bool friendly) :
             Entity(firingEntity->getLocation().first, firingEntity->getLocation().second, 0.5, 0.25, speed),
-            m_friendly(friendly) {
+            mFriendly(friendly) {
     }
 
     Notification Bullet::move(Direction dir) {
         if (dir == Direction::LEFT) {
-            if (m_x - m_speed - m_width / 2 >= -4) {
-                m_x -= m_speed;
+            if (mX - mSpeed - mWidth / 2 >= -4) {
+                mX -= mSpeed;
                 notify(Notification::MOVED);
                 return Notification::MOVED;
             }
@@ -22,8 +22,8 @@ namespace model {
             }
         }
         else if (dir == Direction::RIGHT) {
-            if (m_x + m_speed + m_width / 2 <= 4) {
-                m_x += m_speed;
+            if (mX + mSpeed + mWidth / 2 <= 4) {
+                mX += mSpeed;
                 notify(Notification::MOVED);
                 return Notification::MOVED;
             }
@@ -38,14 +38,14 @@ namespace model {
     }
 
     Notification Bullet::update() {
-        if (m_friendly)
+        if (mFriendly)
             return move(Direction::RIGHT);
         else
             return move(Direction::LEFT);
     }
 
     bool Bullet::isFriendly() {
-        return m_friendly;
+        return mFriendly;
     }
 
 } // namespace model

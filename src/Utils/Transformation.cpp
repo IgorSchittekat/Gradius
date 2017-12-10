@@ -4,8 +4,8 @@
 namespace util {
 
     void Transformation::setSize(unsigned int width, unsigned int height) {
-        m_screenWidth = width;
-        m_screenHeight = height;
+        mScreenWidth = width;
+        mScreenHeight = height;
     }
 
     std::pair<unsigned int, unsigned int> Transformation::transformCoordinates(std::pair<double, double> location) const {
@@ -14,18 +14,18 @@ namespace util {
 //        assert (location.second >= -3);
 //        assert (location.second <= 3);
         // TODO: Exception instead of assertion
-        return {(location.first + 4) / 8.0 * m_screenWidth, (location.second + 3) / 6.0 * m_screenHeight};
+        return {(location.first + 4) / 8.0 * mScreenWidth, (location.second + 3) / 6.0 * mScreenHeight};
     }
 
     std::pair<double, double> Transformation::transformSize(std::pair<unsigned int, unsigned int> size) const {
-//        assert (size.first <= m_screenWidth);
-//        assert (size.second <= m_screenHeight);
+//        assert (size.first <= mScreenWidth);
+//        assert (size.second <= mScreenHeight);
         // TODO: Exception
-        return {size.first / (double)m_screenWidth, size.second / (double)m_screenHeight};
+        return {size.first / (double)mScreenWidth, size.second / (double)mScreenHeight};
     }
 
     std::pair<unsigned int, unsigned int> Transformation::transformSize(std::pair<double, double> size) const {
-        return {size.first / 8 * m_screenWidth, size.second / 6 * m_screenHeight};
+        return {size.first / 8 * mScreenWidth, size.second / 6 * mScreenHeight};
     }
 
 } // namespace util

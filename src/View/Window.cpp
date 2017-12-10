@@ -10,24 +10,24 @@
 namespace view {
     
     Window::Window(unsigned int width, unsigned int height, const std::string &title, const std::string& background) {
-        m_wnd.reset(new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar));
+        mWnd.reset(new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar));
         sf::Image i;
         i.loadFromFile(background);
-        m_backgroundTexture.loadFromImage(i);
-        m_backgroundTexture.setRepeated(true);
-        m_background.setTexture(m_backgroundTexture);
-        m_hearts = 0;
-        font.loadFromFile("../bin/arial.ttf");
+        mBackgroundTexture.loadFromImage(i);
+        mBackgroundTexture.setRepeated(true);
+        mBackground.setTexture(mBackgroundTexture);
+        mHearts = 0;
+        mFont.loadFromFile("../bin/arial.ttf");
         // TODO: remove frame counter
     }
 
     bool Window::isOpen() {
         sf::Event event {};
-        while (m_wnd->pollEvent(event)) {
+        while (mWnd->pollEvent(event)) {
             if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
-                m_wnd->close();
+                mWnd->close();
         }
-        return m_wnd->isOpen();
+        return mWnd->isOpen();
     }
 
     sf::Text Window::getFPS() {
@@ -38,44 +38,44 @@ namespace view {
 
         std::string str = "FPS: " + std::to_string(fps);
         sf::Text text;
-        text.setFont(font);
+        text.setFont(mFont);
         text.setCharacterSize(24);
         text.setString(str);
         return text;
     }
 
     void Window::drawWindow() {
-        m_wnd->clear();
+        mWnd->clear();
         drawBackground();
         drawHearts();
-        m_wnd->draw(getFPS());
-        for (const std::weak_ptr<EntityObserver>& entity : m_entities) {
+        mWnd->draw(getFPS());
+        for (const std::weak_ptr<EntityObserver>& entity : mEntities) {
             if (!entity.expired())
-                entity.lock()->draw(*m_wnd);
+                entity.lock()->draw(*mWnd);
         }
-        m_wnd->display();
+        mWnd->display();
     }
 
     void Window::drawBackground() {
-        m_background.move(-0.5f, 0.0);
-        m_wnd->draw(m_background);
-        if (m_background.getPosition().x == -(int)m_wnd->getSize().x) {
-            m_background.setPosition(0, 0);
+        mBackground.move(-0.5f, 0.0);
+        mWnd->draw(mBackground);
+        if (mBackground.getPosition().x == -(int)mWnd->getSize().x) {
+            mBackground.setPosition(0, 0);
 
         }
     }
 
     void Window::drawHearts() {
-        for ( int i = 0; i < m_hearts; i++) {
+        for ( int i = 0; i < mHearts; i++) {
             sf::Sprite heart;
-            heart.setTexture(*m_textures["heart"]);
-            heart.setPosition(0 + m_wnd->getSize().x / 50 * i, m_wnd->getSize().y / 12);
-            m_wnd->draw(heart);
+            heart.setTexture(*mTextures["heart"]);
+            heart.setPosition(0 + mWnd->getSize().x / 50 * i, mWnd->getSize().y / 12);
+            mWnd->draw(heart);
         }
     }
 
     void Window::addEntityObserver(const std::weak_ptr<EntityObserver>& entityObserver) {
-        m_entities.push_back(entityObserver);
+        mEntities.push_back(entityObserver);
     }
 
     void Window::addTexture(const std::string& name, const std::string& fileName) {
@@ -84,11 +84,11 @@ namespace view {
         i.createMaskFromColor(i.getPixel(0, 0));
         auto texture = std::make_shared<sf::Texture>(sf::Texture());
         texture->loadFromImage(i);
-        m_textures[name] = std::move(texture);
+        mTextures[name] = std::move(texture);
     }
 
     std::shared_ptr<sf::Texture> Window::getTexture(const std::string &name) {
-        return m_textures[name];
+        return mTextures[name];
     }
 
     std::shared_ptr<EntityObserver> Window::update(const std::shared_ptr<model::Entity>& entity, model::Notification what) {
@@ -98,7 +98,7 @@ namespace view {
                 type = enemy->getType() + "Enemy";
             else if (std::shared_ptr<model::Ship> ship = std::dynamic_pointer_cast<model::Ship>(entity)) {
                 type = "ship";
-                m_hearts = ship->getLives();
+                mHearts = ship->getLives();
             }
             else if (std::dynamic_pointer_cast<model::Obstacle>(entity))
                 type = "obstacle";
@@ -108,14 +108,14 @@ namespace view {
                 else
                     type = "enemyBullet";
             }
-            auto entityObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(*m_textures[type]));
+            auto entityObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(*mTextures[type]));
             addEntityObserver(entityObserver);
             return entityObserver;
         }
         else if (what == model::Notification::DELETED) {
-            for (auto it = m_entities.begin(); it != m_entities.end(); ){
+            for (auto it = mEntities.begin(); it != mEntities.end(); ){
                 if (it->expired()) {
-                    it = m_entities.erase(it);
+                    it = mEntities.erase(it);
                 }
                 else {
                     ++it;
@@ -124,7 +124,7 @@ namespace view {
         }
         else if (what == model::Notification::HIT) {
             if (std::shared_ptr<model::Ship> ship = std::dynamic_pointer_cast<model::Ship>(entity)) {
-                m_hearts = ship->getLives();
+                mHearts = ship->getLives();
             }
         }
         return nullptr;

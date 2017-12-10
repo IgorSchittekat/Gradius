@@ -38,12 +38,12 @@ namespace  util {
         /**
          * @brief time of last restart
          */
-        std::chrono::steady_clock::time_point m_restart;
+        std::chrono::steady_clock::time_point mRestart;
 
         /**
          * @brief time of begin of the game
          */
-        std::chrono::steady_clock::time_point m_start;
+        std::chrono::steady_clock::time_point mStart;
 
     };
 

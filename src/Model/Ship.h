@@ -13,12 +13,12 @@ namespace model {
         bool canFire() override;
         Notification update() override;
         bool hit(int count);
-        bool isAlive() { return m_lives > 0; }
+        bool isAlive() { return mLives > 0; }
         int getLives() const;
     private:
-        int m_lives;
-        int m_timeUntilNextShot;
-        int m_timeInvincible;
+        int mLives;
+        int mTimeUntilNextShot;
+        int mTimeInvincible;
     };
 
 }

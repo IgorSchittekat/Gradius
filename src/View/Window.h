@@ -43,13 +43,13 @@ namespace view {
         void drawHearts();
 
     private:
-        std::unique_ptr<sf::RenderWindow> m_wnd;
-        sf::Texture m_backgroundTexture;
-        sf::Sprite m_background;
-        sf::Font font;
-        std::vector<std::weak_ptr<EntityObserver>> m_entities;
-        std::map<std::string, std::shared_ptr<sf::Texture>> m_textures;
-        int m_hearts;
+        std::unique_ptr<sf::RenderWindow> mWnd;
+        sf::Texture mBackgroundTexture;
+        sf::Sprite mBackground;
+        sf::Font mFont;
+        std::vector<std::weak_ptr<EntityObserver>> mEntities;
+        std::map<std::string, std::shared_ptr<sf::Texture>> mTextures;
+        int mHearts;
     };
 
 }

@@ -10,7 +10,7 @@ namespace model {
 
     auto Level::notify(const std::shared_ptr<Entity>& entity, Notification what) {
         std::vector<std::shared_ptr<view::EntityObserver>> entityObservers;
-        for (const auto& observer : m_observers) {
+        for (const auto& observer : mObservers) {
             entityObservers.push_back(observer->update(entity, what));
         }
         return entityObservers;
@@ -43,7 +43,7 @@ namespace model {
         }
 
         // setUp Bullet
-        m_bulletSpeed = data["bullet"]["speed"];
+        mBulletSpeed = data["bullet"]["speed"];
 
         // setUp Walls
         for (int i = 0; i < 22; i++) {
@@ -63,8 +63,8 @@ namespace model {
     }
 
     void Level::fireShip() {
-        if (m_ship->canFire()) {
-            std::shared_ptr<model::Entity> bullet = std::make_shared<Bullet>(Bullet(m_ship, m_bulletSpeed, true));
+        if (mShip->canFire()) {
+            std::shared_ptr<model::Entity> bullet = std::make_shared<Bullet>(Bullet(mShip, mBulletSpeed, true));
             auto bulletObservers = notify(bullet, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& bulletObserver : bulletObservers) {
                 bullet->addEntityObserver(bulletObserver);
@@ -74,18 +74,18 @@ namespace model {
     }
 
     void Level::update() {
-        m_ship->update();
+        mShip->update();
         std::vector<std::shared_ptr<Entity>> newEntities;
-        for (auto it = m_entities.begin(); it != m_entities.end(); ) {
+        for (auto it = mEntities.begin(); it != mEntities.end(); ) {
 
             Notification n = (*it)->update();
             notify(*it, n);
             if (n == Notification::DELETED) {
-                it = m_entities.erase(it);
+                it = mEntities.erase(it);
             }
             else {
                 if ((*it)->canFire()) {
-                    std::shared_ptr<Entity> bullet = std::make_shared<Bullet>(Bullet(*it, m_bulletSpeed, false));
+                    std::shared_ptr<Entity> bullet = std::make_shared<Bullet>(Bullet(*it, mBulletSpeed, false));
                     auto bulletObservers = notify(bullet, Notification::CREATED);
                     for (const std::shared_ptr<view::EntityObserver>& bulletObserver : bulletObservers) {
                         bullet->addEntityObserver(bulletObserver);
@@ -102,35 +102,40 @@ namespace model {
     }
 
     void Level::removeCollidingEntities() {
-        auto collidingWithShip = isColliding(m_ship);
+        auto collidingWithShip = isColliding(mShip);
         for (std::shared_ptr<Entity>& entity : collidingWithShip) {
             if (std::shared_ptr<Bullet> bullet = std::dynamic_pointer_cast<Bullet>(entity)) {
                 if (!bullet->isFriendly()) {
-                    m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
-                    if (m_ship->hit(1))
-                        notify(m_ship, Notification::HIT);
+                    mEntities.erase(std::remove(mEntities.begin(), mEntities.end(), entity), mEntities.end());
+                    if (mShip->hit(1))
+                        notify(mShip, Notification::HIT);
                 }
             }
             else if (std::dynamic_pointer_cast<Enemy>(entity)) {
-                m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
-                if (m_ship->hit(1))
-                    notify(m_ship, Notification::HIT);
+                mEntities.erase(std::remove(mEntities.begin(), mEntities.end(), entity), mEntities.end());
+                if (mShip->hit(1))
+                    notify(mShip, Notification::HIT);
             }
             else if (std::shared_ptr<Obstacle> obstacle = std::dynamic_pointer_cast<Obstacle>(entity)) {
-                if (obstacle->isBorder())
-                    if (m_ship->hit(2))
-                        notify(m_ship, Notification::HIT);
-                else
-                    if (m_ship->hit(1))
-                        notify(m_ship, Notification::HIT);
+                if (obstacle->isBorder()) {
+                    if (mShip->hit(2)) {
+                        notify(mShip, Notification::HIT);
+                    }
+                }
+                else {
+                    if (mShip->hit(1)) {
+                        notify(mShip, Notification::HIT);
+                    }
+                }
             }
             else if (std::dynamic_pointer_cast<Enemy>(entity)) {
-                if (m_ship->hit(1))
-                    notify(m_ship, Notification::HIT);
+                if (mShip->hit(1)) {
+                    notify(mShip, Notification::HIT);
+                }
             }
         }
         std::vector<std::shared_ptr<Entity>> toRemove;
-        for (const auto& entity : m_entities) {
+        for (const auto& entity : mEntities) {
             if (std::dynamic_pointer_cast<Obstacle>(entity)) {
                 continue;
             }
@@ -147,21 +152,21 @@ namespace model {
             }
         }
         for (const auto& entity : toRemove) {
-            m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
+            mEntities.erase(std::remove(mEntities.begin(), mEntities.end(), entity), mEntities.end());
         }
     }
 
     void Level::addEntity(std::shared_ptr<Entity>& entity) {
-        m_entities.push_back(std::move(entity));
+        mEntities.push_back(std::move(entity));
     }
 
     void Level::setShip(std::shared_ptr<Ship> ship) {
-        m_ship = std::move(ship);
+        mShip = std::move(ship);
     }
 
     std::vector<std::shared_ptr<Entity>> Level::isColliding(const std::shared_ptr<Entity>& entity) {
         std::vector<std::shared_ptr<Entity>> collidingEntities;
-        for (const auto& otherEntity : m_entities) {
+        for (const auto& otherEntity : mEntities) {
             if (entity != otherEntity) {
                 std::pair<double, double> entitySize = entity->getSize();
                 std::pair<double, double> entityPosition = {entity->getLocation().first - entitySize.first / 2,
@@ -182,15 +187,15 @@ namespace model {
     }
 
     void Level::addObserver(const std::shared_ptr<view::Window>& observer) {
-        m_observers.push_back(observer);
+        mObservers.push_back(observer);
     }
 
     void Level::moveShip(Direction dir) {
-        m_ship->move(dir);
+        mShip->move(dir);
     }
 
     bool Level::gameOver() {
-        return !m_ship->isAlive();
+        return !mShip->isAlive();
     }
 
 

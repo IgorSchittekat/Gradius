@@ -13,7 +13,7 @@ using json = nlohmann::json;
 namespace ctrl {
 
     Game::Game() :
-            m_lvl(1) {
+            mCurrentLvl(1) {
         json data;
         std::ifstream JSON("../bin/resources/Game.json");
         if (JSON.is_open()) {
@@ -37,12 +37,12 @@ namespace ctrl {
         else {
             return; //TODO: Exception
         }
-        lvl = std::make_unique<model::Level>(model::Level());
-        lvl->addObserver(wnd);
-        wnd->loadTextures(data["level " + std::to_string(m_lvl)]["textures"]);
-        lvl->setUp(data["level " + std::to_string(m_lvl)]);
+        mLvl = std::make_unique<model::Level>(model::Level());
+        mLvl->addObserver(mWnd);
+        mWnd->loadTextures(data["level " + std::to_string(mCurrentLvl)]["textures"]);
+        mLvl->setUp(data["level " + std::to_string(mCurrentLvl)]);
 
-        m_lvl++;
+        mCurrentLvl++;
     }
 
     void Game::loadWindow(json data) {
@@ -51,28 +51,28 @@ namespace ctrl {
         util::Transformation::getInstance()->setSize(width, height);
         std::string title = data["window"]["title"];
         std::string background = data["window"]["background"];
-        wnd.reset(new view::Window(width, height, title, background));
+        mWnd.reset(new view::Window(width, height, title, background));
     }
 
     void Game::play() {
 
-        while (wnd->isOpen()) {
+        while (mWnd->isOpen()) {
             util::Stopwatch::getInstance()->restart();
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
-                lvl->moveShip(model::Direction::UP);
+                mLvl->moveShip(model::Direction::UP);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
-                lvl->moveShip(model::Direction::DOWN);
+                mLvl->moveShip(model::Direction::DOWN);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
-                lvl->moveShip(model::Direction::LEFT);
+                mLvl->moveShip(model::Direction::LEFT);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-                lvl->moveShip(model::Direction::RIGHT);
+                mLvl->moveShip(model::Direction::RIGHT);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-                lvl->fireShip();
+                mLvl->fireShip();
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P)) {
                 while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) {
@@ -80,10 +80,10 @@ namespace ctrl {
                 }
             }
 
-            lvl->update();
-            wnd->drawWindow();
+            mLvl->update();
+            mWnd->drawWindow();
 
-            if (lvl->gameOver()) {
+            if (mLvl->gameOver()) {
                 std::cout << "GAME OVER" << std::endl;
                 break;
             }
