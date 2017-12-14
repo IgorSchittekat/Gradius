@@ -19,10 +19,10 @@ namespace model {
     }
 
     Notification Ship::move(util::Vec2d dir) {
-        if ((mPosition + dir * mSpeed).getX() >= -4
-            || (mPosition + dir * mSpeed).getX() <= 4
-            || (mPosition + dir * mSpeed).getY() >= -3
-            || (mPosition + dir * mSpeed).getX() <= 3) {
+        if ((mPosition.getX() - mWidth / 2 + dir.getX() * mSpeed) >= -4
+            && (mPosition.getX() + mWidth / 2 + dir.getX() * mSpeed) <= 4
+            && (mPosition.getY() - mHeight / 2 + dir.getY() * mSpeed) >= -3
+            && (mPosition.getY() + mHeight / 2 + dir.getY() * mSpeed) <= 3) {
             mPosition += dir * mSpeed;
         }
         notify(Notification::MOVED);

@@ -13,7 +13,7 @@ namespace model {
 
     Notification Enemy::move(util::Vec2d dir) {
         mPosition += dir * mSpeed;
-        if (mPosition.getX() < 4.5) {
+        if (mPosition.getX() < -4.5) {
             notify(Notification::DELETED);
             return Notification::DELETED;
         }
