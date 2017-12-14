@@ -4,6 +4,7 @@
 
 #include "../View/EntityObserver.h"
 #include "../Utils/Vec2.h"
+#include <memory>
 
 namespace view {
     class EntityObserver;
