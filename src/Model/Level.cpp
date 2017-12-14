@@ -34,7 +34,7 @@ namespace model {
             double y = enemy["y"];
             double enemySpeed = enemy["speed"];
             std::string type = enemy["type"];
-            std::shared_ptr<Entity> newEnemy = std::make_shared<Enemy>(Enemy(x, y, enemySpeed, type));
+            std::shared_ptr<Entity> newEnemy = std::make_shared<Enemy>(Enemy(util::Vec2d(x, y), enemySpeed, type));
             auto enemyObservers = notify(newEnemy, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& enemyObserver : enemyObservers) {
                 newEnemy->addEntityObserver(enemyObserver);
@@ -47,18 +47,31 @@ namespace model {
 
         // setUp Walls
         for (int i = 0; i < 22; i++) {
-            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(-3.8 + 0.4 * i, -2.8, 0.01, true));
+            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, -2.8), 0.03, true));
             auto obstacleObservers = notify(obstacle, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
                 obstacle->addEntityObserver(obstacleObserver);
             }
             addEntity(obstacle);
-            std::shared_ptr<Entity> obstacle2 = std::make_shared<Obstacle>(Obstacle(-3.8 + 0.4 * i, 2.8, 0.01, true));
+            std::shared_ptr<Entity> obstacle2 = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, 2.8), 0.03, true));
             auto obstacleObservers2 = notify(obstacle2, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& obstacleObserver2 : obstacleObservers2) {
                 obstacle2->addEntityObserver(obstacleObserver2);
             }
             addEntity(obstacle2);
+        }
+
+        //setUp Obstacles
+        auto obstacles = data["obstacle"];
+        for (auto& newObstacle : obstacles) {
+            double x = newObstacle["x"];
+            double y = newObstacle["y"];
+            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(x, y), 0.03, false));
+            auto obstacleObservers = notify(obstacle, Notification::CREATED);
+            for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
+                obstacle->addEntityObserver(obstacleObserver);
+            }
+            addEntity(obstacle);
         }
     }
 
@@ -111,12 +124,12 @@ namespace model {
                         notify(mShip, Notification::HIT);
                 }
             }
-            else if (std::dynamic_pointer_cast<Enemy>(entity)) {
+            if (std::dynamic_pointer_cast<Enemy>(entity)) {
                 mEntities.erase(std::remove(mEntities.begin(), mEntities.end(), entity), mEntities.end());
                 if (mShip->hit(1))
                     notify(mShip, Notification::HIT);
             }
-            else if (std::shared_ptr<Obstacle> obstacle = std::dynamic_pointer_cast<Obstacle>(entity)) {
+            if (std::shared_ptr<Obstacle> obstacle = std::dynamic_pointer_cast<Obstacle>(entity)) {
                 if (obstacle->isBorder()) {
                     if (mShip->hit(2)) {
                         notify(mShip, Notification::HIT);
@@ -128,7 +141,7 @@ namespace model {
                     }
                 }
             }
-            else if (std::dynamic_pointer_cast<Enemy>(entity)) {
+            if (std::dynamic_pointer_cast<Enemy>(entity)) {
                 if (mShip->hit(1)) {
                     notify(mShip, Notification::HIT);
                 }
@@ -169,11 +182,11 @@ namespace model {
         for (const auto& otherEntity : mEntities) {
             if (entity != otherEntity) {
                 std::pair<double, double> entitySize = entity->getSize();
-                std::pair<double, double> entityPosition = {entity->getLocation().first - entitySize.first / 2,
-                                                            entity->getLocation().second - entitySize.second / 2};
+                std::pair<double, double> entityPosition = {entity->getLocation().getX() - entitySize.first / 2,
+                                                            entity->getLocation().getY() - entitySize.second / 2};
                 std::pair<double, double> otherEntitySize = otherEntity->getSize();
-                std::pair<double, double> otherEntityPosition = {otherEntity->getLocation().first - otherEntitySize.first / 2,
-                                                                 otherEntity->getLocation().second - otherEntitySize.second / 2};
+                std::pair<double, double> otherEntityPosition = {otherEntity->getLocation().getX() - otherEntitySize.first / 2,
+                                                                 otherEntity->getLocation().getY() - otherEntitySize.second / 2};
 
                 if(entityPosition.first < otherEntityPosition.first + otherEntitySize.first &&
                         otherEntityPosition.first < entityPosition.first + entitySize.first &&
@@ -190,7 +203,7 @@ namespace model {
         mObservers.push_back(observer);
     }
 
-    void Level::moveShip(Direction dir) {
+    void Level::moveShip(util::Vec2d dir) {
         mShip->move(dir);
     }
 

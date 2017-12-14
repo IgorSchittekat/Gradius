@@ -1,25 +1,39 @@
 #include "Enemy.h"
+#include "../Utils/Vec2.h"
 
 namespace model {
 
-    Enemy::Enemy(double x, double y, double speed, const std::string& type) :
-            Entity(x, y, 0.8, 0.8, speed),
+    Enemy::Enemy(util::Vec2d position, double speed, std::string type) :
+            Entity(position, 0.8, 0.4, speed),
             mTimeUntilNextShot(18),
-            mType(type) {
-        mDir = Direction::UP;
+            mType(std::move(type)),
+            mDir(1, 0) {
+
+    }
+
+    Notification Enemy::move(util::Vec2d dir) {
+        mPosition += dir * mSpeed;
+        if (mPosition.getX() < 4.5) {
+            notify(Notification::DELETED);
+            return Notification::DELETED;
+        }
+        else {
+            notify(Notification::MOVED);
+            return Notification::MOVED;
+        }
     }
 
     Notification Enemy::update() {
         if (mType == "shooting") {
             mTimeUntilNextShot--;
-            if (mY <= -2)
-                mDir = Direction::DOWN;
-            else if (mY >= 2)
-                mDir = Direction::UP;
+            if (mPosition.getY() <= -2)
+                mDir = util::Vec2d(0, -1);
+            else if (mPosition.getY() >= 2)
+                mDir = util::Vec2d(0, 1);
             return move(mDir);
         }
         else if (mType == "flying") {
-            mDir = Direction::LEFT;
+            mDir = util::Vec2d(-1, 0);
             return move(mDir);
         }
         return Notification::NONE;

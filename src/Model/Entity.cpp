@@ -4,18 +4,11 @@
 
 namespace model {
 
-
-    Entity::Entity() :
-    mX(0),
-    mY(0) {
-    }
-
-    Entity::Entity(double x, double y, double width, double height, double speed) :
-    mX(x),
-    mY(y),
-    mWidth(width),
-    mHeight(height),
-    mSpeed(speed){
+    Entity::Entity(util::Vec2d position, double width, double height, double speed) :
+            mPosition(position),
+            mWidth(width),
+            mHeight(height),
+            mSpeed(speed){
         notify(Notification::CREATED);
     }
 
@@ -23,31 +16,8 @@ namespace model {
         mObservers.clear();
     }
 
-    Notification Entity::move(Direction dir) {
-        switch (dir) {
-            case Direction::UP:
-                if (mY - mSpeed - mHeight >= -3)
-                    mY -= mSpeed;
-                break;
-            case Direction::DOWN:
-                if (mY + mSpeed + mHeight / 2 <= 3)
-                    mY += mSpeed;
-                break;
-            case Direction::LEFT:
-                if (mX - mSpeed - mWidth / 2 >= -4)
-                    mX -= mSpeed;
-                break;
-            case Direction::RIGHT:
-                if (mX + mSpeed + mWidth / 2 <= 4)
-                    mX += mSpeed;
-                break;
-        }
-        notify(Notification::MOVED);
-        return Notification::MOVED;
-    }
-
-    std::pair<double, double> Entity::getLocation() const {
-        return {mX, mY};
+    util::Vec2d Entity::getLocation() const {
+        return mPosition;
     }
 
     std::pair<double, double> Entity::getSize() const {

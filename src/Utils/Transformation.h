@@ -4,6 +4,7 @@
 
 #include <memory>
 #include "Singleton.h"
+#include "Vec2.h"
 
 namespace util {
 
@@ -22,7 +23,7 @@ namespace util {
          * @param location : coordinates in [-4, 4], [-3, 3] coordinatesystem
          * @return pixelcoordinates
          */
-        std::pair<unsigned int, unsigned int> transformCoordinates(std::pair<double, double> location) const;
+        std::pair<unsigned int, unsigned int> transformCoordinates(Vec2d location) const;
 
         /**
          * transform the size of an object

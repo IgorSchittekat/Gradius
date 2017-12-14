@@ -22,7 +22,7 @@ namespace model {
          * @param Dir : direction to move the bullet
          * @return notification of what happened exactly
          */
-        Notification move(Direction dir) override;
+        Notification move(util::Vec2d dir) override;
 
         /**
          * @brief updates the bullet

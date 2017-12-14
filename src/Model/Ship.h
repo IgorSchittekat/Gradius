@@ -11,6 +11,7 @@ namespace model {
         explicit Ship(int lives, double speed);
 
         bool canFire() override;
+        Notification move(util::Vec2d dir) override;
         Notification update() override;
         bool hit(int count);
         bool isAlive() { return mLives > 0; }

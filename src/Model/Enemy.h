@@ -6,8 +6,6 @@
 
 namespace model {
 
-    class Level;
-
     class Enemy : public Entity {
     public:
         /**
@@ -17,7 +15,10 @@ namespace model {
          * @param speed : speed of the enemy
          * @param type : type of the enemy
          */
-        Enemy(double x, double y, double speed, const std::string& type);
+        Enemy(util::Vec2d position, double speed, std::string type);
+
+
+        Notification move(util::Vec2d dir) override;
 
         /**
          * @brief updates the enemy
@@ -34,7 +35,7 @@ namespace model {
         std::string getType() const;
 
     private:
-        Direction mDir;
+        util::Vec2d mDir;
         int mTimeUntilNextShot;
         std::string mType;
     };

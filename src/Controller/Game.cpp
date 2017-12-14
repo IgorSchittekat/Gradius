@@ -7,6 +7,7 @@
 #include "../Utils/Transformation.h"
 #include "../Model/Entity.h"
 #include "../Model/Enemy.h"
+#include "../Utils/Vec2.h"
 
 using json = nlohmann::json;
 
@@ -60,16 +61,16 @@ namespace ctrl {
             util::Stopwatch::getInstance()->restart();
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
-                mLvl->moveShip(model::Direction::UP);
+                mLvl->moveShip(util::Vec2d(0, -1));
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
-                mLvl->moveShip(model::Direction::DOWN);
+                mLvl->moveShip(util::Vec2d(0, 1));
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
-                mLvl->moveShip(model::Direction::LEFT);
+                mLvl->moveShip(util::Vec2d(-1, 0));
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-                mLvl->moveShip(model::Direction::RIGHT);
+                mLvl->moveShip(util::Vec2d(1, 0));
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
                 mLvl->fireShip();

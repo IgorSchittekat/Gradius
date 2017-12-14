@@ -3,9 +3,11 @@
 #pragma once
 
 #include <vector>
+#include <set>
 #include "Ship.h"
 #include "../View/Window.h"
 #include "../Utils/json.hpp"
+#include "../Utils/Vec2.h"
 
 namespace view {
     class EntityObserver;
@@ -18,7 +20,7 @@ namespace model {
 
         void update();
 
-        void moveShip(Direction dir);
+        void moveShip(util::Vec2d dir);
 
         void fireShip();
 

@@ -4,9 +4,10 @@
 namespace model {
 
     Ship::Ship(int lives, double speed) :
-            Entity(-3, 0, 1, 0.5, speed),
+            Entity(util::Vec2d(-3, 0), 1, 0.5, speed),
             mLives(lives),
-            mTimeUntilNextShot(0){
+            mTimeUntilNextShot(0),
+            mTimeInvincible(0) {
     }
 
     bool Ship::canFire() {
@@ -15,6 +16,17 @@ namespace model {
             return true;
         }
         return false;
+    }
+
+    Notification Ship::move(util::Vec2d dir) {
+        if ((mPosition + dir * mSpeed).getX() >= -4
+            || (mPosition + dir * mSpeed).getX() <= 4
+            || (mPosition + dir * mSpeed).getY() >= -3
+            || (mPosition + dir * mSpeed).getX() <= 3) {
+            mPosition += dir * mSpeed;
+        }
+        notify(Notification::MOVED);
+        return Notification::MOVED;
     }
 
     Notification Ship::update() {

@@ -8,12 +8,12 @@ namespace model {
 
     class Obstacle : public Entity {
     public:
-        Obstacle(double x, double y, double speed, bool border);
+        Obstacle(util::Vec2d position, double speed, bool border);
         bool isBorder() { return mBorder; }
 
         Notification update() override;
 
-        Notification move(Direction dir) override;
+        Notification move(util::Vec2d dir) override;
 
     private:
         bool mBorder;

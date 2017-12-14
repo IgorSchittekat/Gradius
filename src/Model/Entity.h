@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../View/EntityObserver.h"
+#include "../Utils/Vec2.h"
 
 namespace view {
     class EntityObserver;
@@ -10,18 +11,16 @@ namespace view {
 
 namespace model {
     enum class Notification {NONE, CREATED, MOVED, DELETED, HIT};
-    enum class Direction {UP, DOWN, LEFT, RIGHT};
 
     class Entity {
     public:
-        Entity();
         virtual ~Entity();
 
-        Entity(double x, double y, double width, double height, double speed);
+        Entity(util::Vec2d position, double width, double height, double speed);
 
-        virtual Notification move(Direction dir);
+        virtual Notification move(util::Vec2d dir) = 0;
 
-        std::pair<double, double> getLocation() const;
+        util::Vec2d getLocation() const;
 
         std::pair<double, double> getSize() const;
 
@@ -34,8 +33,7 @@ namespace model {
         virtual bool canFire() { return false; }
 
     protected:
-        double mX;
-        double mY;
+        util::Vec2d mPosition;
         double mWidth;
         double mHeight;
         double mSpeed;
