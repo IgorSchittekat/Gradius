@@ -5,9 +5,9 @@ namespace model {
 
     Enemy::Enemy(util::Vec2d position, double speed, std::string type) :
             Entity(position, 0.8, 0.4, speed),
+            mDir(1, 0),
             mTimeUntilNextShot(18),
-            mType(std::move(type)),
-            mDir(1, 0) {
+            mType(std::move(type)) {
 
     }
 

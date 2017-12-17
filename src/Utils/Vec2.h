@@ -2,6 +2,8 @@
 #define GRADIUS_VEC2_H
 #pragma once
 
+#include <cmath>
+
 namespace util {
 
     template<typename T>
@@ -36,6 +38,22 @@ namespace util {
         T getX() const { return mX; }
 
         T getY() const { return mY; }
+
+        double length() const { return std::sqrt((mX * mX) + (mY * mY)); }
+
+        Vec2& normalise() {
+            double length = this->length();
+            if (length != 0) {
+                mX /= length;
+                mY /= length;
+            }
+            return *this;
+        }
+
+        friend std::ostream& operator<<(std::ostream& os, const Vec2& vec2) {
+            os << vec2.mX << ' ' << vec2.mY;
+            return os;
+        }
 
     private:
         T mX;

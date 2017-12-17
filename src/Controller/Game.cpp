@@ -59,19 +59,22 @@ namespace ctrl {
 
         while (mWnd->isOpen()) {
             util::Stopwatch::getInstance()->restart();
-
+            double x = 0;
+            double y = 0;
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
-                mLvl->moveShip(util::Vec2d(0, -1));
+                y--;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
-                mLvl->moveShip(util::Vec2d(0, 1));
+                y++;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
-                mLvl->moveShip(util::Vec2d(-1, 0));
+                x--;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-                mLvl->moveShip(util::Vec2d(1, 0));
+                x++;
             }
+            mLvl->moveShip(util::Vec2d(x, y).normalise());
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
                 mLvl->fireShip();
             }

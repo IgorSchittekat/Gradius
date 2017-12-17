@@ -23,7 +23,7 @@ namespace util {
          * @param location : coordinates in [-4, 4], [-3, 3] coordinatesystem
          * @return pixelcoordinates
          */
-        std::pair<unsigned int, unsigned int> transformCoordinates(Vec2d location) const;
+        Vec2u transformCoordinates(Vec2d location) const;
 
         /**
          * transform the size of an object

@@ -87,10 +87,6 @@ namespace view {
         mTextures[name] = std::move(texture);
     }
 
-    std::shared_ptr<sf::Texture> Window::getTexture(const std::string &name) {
-        return mTextures[name];
-    }
-
     std::shared_ptr<EntityObserver> Window::update(const std::shared_ptr<model::Entity>& entity, model::Notification what) {
         if (what == model::Notification::CREATED) {
             std::string type;

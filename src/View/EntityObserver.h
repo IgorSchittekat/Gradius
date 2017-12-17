@@ -18,17 +18,13 @@ namespace view {
     class EntityObserver {
     public:
 
-        EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& textureFile, const std::string& type);
-
-        EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& type);
-
-        EntityObserver(const sf::Texture& texture);
+        explicit EntityObserver(const sf::Texture& texture);
 
         EntityObserver(const EntityObserver &rhs);
 
         EntityObserver &operator=(const EntityObserver &rhs);
 
-        ~EntityObserver();
+        ~EntityObserver() = default;
 
         void draw(sf::RenderWindow& wnd);
 

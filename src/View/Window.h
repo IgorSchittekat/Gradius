@@ -33,8 +33,6 @@ namespace view {
 
         void addTexture(const std::string& name, const std::string& fileName);
 
-        std::shared_ptr<sf::Texture> getTexture(const std::string& name);
-
         void loadTextures(nlohmann::json data);
 
         std::shared_ptr<EntityObserver> update(const std::shared_ptr<model::Entity>& entity, model::Notification what);

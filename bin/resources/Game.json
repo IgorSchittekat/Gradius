@@ -18,7 +18,7 @@
             "heart": "../bin/resources/images/heart.png"
         },
         "ship": {
-            "lives": 100,
+            "lives": 5,
             "speed": 0.05,
             "x": -3,
             "y": 0
