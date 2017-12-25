@@ -1,5 +1,5 @@
-#ifndef GRADIUS_VEC2_H
-#define GRADIUS_VEC2_H
+#ifndef VEC2_H
+#define VEC2_H
 #pragma once
 
 #include <cmath>
@@ -11,9 +11,11 @@ namespace util {
     public:
         Vec2(T x, T y) : mX(x), mY(y) {}
 
-        Vec2 operator+(const Vec2& rhs) { return Vec2(mX + rhs.mX, mY + rhs.mY); }
+        Vec2 operator+(const Vec2& rhs) const { return Vec2(mX + rhs.mX, mY + rhs.mY); }
 
-        Vec2 operator-(const Vec2& rhs) { return Vec2(mX - rhs.mX, mY - rhs.mY); }
+        Vec2 operator-(const Vec2& rhs) const { return Vec2(mX - rhs.mX, mY - rhs.mY); }
+
+        Vec2 operator*(const Vec2& rhs) const { return Vec2(mX * rhs.mX, mY * rhs.mY); }
 
         Vec2& operator+=(const Vec2& rhs) {
             mX += rhs.mX;
@@ -27,22 +29,24 @@ namespace util {
             return *this;
         }
 
-        Vec2 operator+(T t) { return Vec2(mX + t, mY + t); }
+        Vec2 operator+(T t) const { return Vec2(mX + t, mY + t); }
 
-        Vec2 operator-(T t) { return Vec2(mX - t, mY - t); }
+        Vec2 operator-(T t) const { return Vec2(mX - t, mY - t); }
 
-        Vec2 operator*(T t) { return Vec2(mX * t, mY * t); }
+        Vec2 operator*(T t) const { return Vec2(mX * t, mY * t); }
 
         bool operator==(const Vec2& rhs) const { return mX == rhs.mX && mY == rhs.mY; }
+
+        bool operator!=(const Vec2& rhs) const { return !(*this == rhs); }
 
         T getX() const { return mX; }
 
         T getY() const { return mY; }
 
-        double length() const { return std::sqrt((mX * mX) + (mY * mY)); }
+        T length() const { return std::sqrt((mX * mX) + (mY * mY)); }
 
         Vec2& normalise() {
-            double length = this->length();
+            const T length = this->length();
             if (length != 0) {
                 mX /= length;
                 mY /= length;
@@ -68,4 +72,4 @@ namespace util {
 } //namespace util
 
 
-#endif //GRADIUS_VEC2_H
+#endif //VEC2_H

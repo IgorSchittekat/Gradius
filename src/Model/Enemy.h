@@ -2,6 +2,7 @@
 #define GRADIUS_ENEMY_H
 #pragma once
 
+#include <random>
 #include "Entity.h"
 
 namespace model {

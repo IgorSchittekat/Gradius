@@ -3,9 +3,95 @@
         "title": "Gradius",
         "width": 800,
         "height": 600,
-        "totalLevels": 1,
-        "background": "../bin/resources/images/background.jpg",
-        "floor": "../bin/resources/images/floor.png"
+        "totalLevels": 2,
+        "background": "../bin/resources/images/background.jpg"
+    },
+    "level 0" : {
+        "textures": {
+            "ship": "../bin/resources/images/Ship.png",
+            "shootingEnemy": "../bin/resources/images/Enemy1.png",
+            "flyingEnemy": "../bin/resources/images/Enemy2.png",
+            "playerBullet": "../bin/resources/images/BulletLeft.png",
+            "enemyBullet": "../bin/resources/images/BulletRight.png",
+            "obstacle": "../bin/resources/images/Obstacle.png",
+            "heart": "../bin/resources/images/heart.png"
+        },
+        "ship": {
+            "lives": 5,
+            "speed": 0.05,
+            "x": -3,
+            "y": 0
+        },
+        "enemy": [
+            {
+                "speed": 0.01,
+                "x": 7,
+                "y": 0,
+                "type": "flying"
+            },
+            {
+                "speed": 0.05,
+                "x": 10,
+                "y": 1.8,
+                "type": "flying"
+            },
+            {
+                "speed": 0.1,
+                "x": 3,
+                "y": 1.8,
+                "type": "shooting"
+            }
+        ],
+        "bullet": {
+            "speed": 0.1
+        },
+        "obstacle": [
+            {
+                "x": 5,
+                "y": -2.4
+            },
+            {
+                "x": 5,
+                "y": -2
+            },
+            {
+                "x": 5,
+                "y": -1.6
+            },
+            {
+                "x": 5,
+                "y": -1.2
+            },
+            {
+                "x": 5,
+                "y": -0.8
+            },
+            {
+                "x": 5,
+                "y": -0.4
+            },
+            {
+                "x": 5,
+                "y": 0
+            },
+            {
+                "x": 5,
+                "y": 0.4
+            },
+            {
+                "x": 5,
+                "y": 0.8
+            },
+            {
+                "x": 5,
+                "y": 1.2
+            },
+            {
+                "x": 5,
+                "y": 2.4
+            }
+        ]
+
     },
     "level 1" : {
         "textures": {
@@ -25,20 +111,26 @@
         },
         "enemy": [
             {
-                "speed": 0.05,
-                "x": 10,
+                "speed": 0.01,
+                "x": 7,
                 "y": 0,
                 "type": "flying"
             },
             {
-                "speed": 0.1,
-                "x": 30,
+                "speed": 0.05,
+                "x": 10,
                 "y": 1.8,
                 "type": "flying"
+            },
+            {
+                "speed": 0.1,
+                "x": 3,
+                "y": 1.8,
+                "type": "shooting"
             }
         ],
         "bullet": {
-            "speed": 0.05
+            "speed": 0.1
         },
         "obstacle": [
             {

@@ -4,8 +4,6 @@
 #include "Enemy.h"
 #include "Obstacle.h"
 
-using json = nlohmann::json;
-
 namespace model {
 
     auto Level::notify(const std::shared_ptr<Entity>& entity, Notification what) {
@@ -16,7 +14,7 @@ namespace model {
         return entityObservers;
     }
 
-    void Level::setUp(json data) {
+    void Level::setUp(nlohmann::json data) {
         // setUp Ship
         unsigned int lives = data["ship"]["lives"];
         double shipSpeed = data["ship"]["speed"];
@@ -47,13 +45,13 @@ namespace model {
 
         // setUp Walls
         for (int i = 0; i < 22; i++) {
-            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, -2.8), 0.03, true));
+            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, -2.8), 0.045, true));
             auto obstacleObservers = notify(obstacle, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
                 obstacle->addEntityObserver(obstacleObserver);
             }
             addEntity(obstacle);
-            std::shared_ptr<Entity> obstacle2 = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, 2.8), 0.03, true));
+            std::shared_ptr<Entity> obstacle2 = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, 2.8), 0.045, true));
             auto obstacleObservers2 = notify(obstacle2, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& obstacleObserver2 : obstacleObservers2) {
                 obstacle2->addEntityObserver(obstacleObserver2);
@@ -66,7 +64,7 @@ namespace model {
         for (auto& newObstacle : obstacles) {
             double x = newObstacle["x"];
             double y = newObstacle["y"];
-            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(x, y), 0.03, false));
+            std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(x, y), 0.045, false));
             auto obstacleObservers = notify(obstacle, Notification::CREATED);
             for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
                 obstacle->addEntityObserver(obstacleObserver);
@@ -125,7 +123,6 @@ namespace model {
                 }
             }
             if (std::dynamic_pointer_cast<Enemy>(entity)) {
-                mEntities.erase(std::remove(mEntities.begin(), mEntities.end(), entity), mEntities.end());
                 if (mShip->hit(1))
                     notify(mShip, Notification::HIT);
             }
@@ -207,8 +204,22 @@ namespace model {
         mShip->move(dir);
     }
 
-    bool Level::gameOver() {
-        return !mShip->isAlive();
+    Levelstatus Level::getStatus() {
+        if (!mShip->isAlive()) {
+            return Levelstatus::GAMEOVER;
+        }
+        for (const std::shared_ptr<Entity>& entity : mEntities) {
+            if (std::shared_ptr<Obstacle> obstacle = std::dynamic_pointer_cast<Obstacle>(entity)) {
+                if (!obstacle->isBorder()) {
+                    return Levelstatus::PLAYING;
+                }
+            }
+            if (std::dynamic_pointer_cast<Enemy>(entity)) {
+                return Levelstatus::PLAYING;
+            }
+
+        }
+        return Levelstatus::VICTORY;
     }
 
 

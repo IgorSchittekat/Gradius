@@ -35,12 +35,13 @@ namespace ctrl {
         /**
          * @brief load the next level
          */
-        void loadNextLevel();
+        bool loadNextLevel();
 
     private:
         std::shared_ptr<view::Window> mWnd;
         std::unique_ptr<model::Level> mLvl;
         int mCurrentLvl;
+        int mTotalLvls;
     };
 
 

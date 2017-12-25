@@ -9,13 +9,11 @@
 #include "../Model/Enemy.h"
 #include "../Utils/Vec2.h"
 
-using json = nlohmann::json;
-
 namespace ctrl {
 
     Game::Game() :
-            mCurrentLvl(1) {
-        json data;
+            mCurrentLvl(0) {
+        nlohmann::json data;
         std::ifstream JSON("../bin/resources/Game.json");
         if (JSON.is_open()) {
             JSON >> data;
@@ -28,15 +26,18 @@ namespace ctrl {
         loadNextLevel();
     }
 
-    void Game::loadNextLevel() {
-        json data;
+    bool Game::loadNextLevel() {
+        if (mTotalLvls == mCurrentLvl) {
+            return false;
+        }
+        nlohmann::json data;
         std::ifstream JSON("../bin/resources/Game.json");
         if (JSON.is_open()) {
             JSON >> data;
             JSON.close();
         }
         else {
-            return; //TODO: Exception
+            return false; //TODO: Exception
         }
         mLvl = std::make_unique<model::Level>(model::Level());
         mLvl->addObserver(mWnd);
@@ -44,15 +45,17 @@ namespace ctrl {
         mLvl->setUp(data["level " + std::to_string(mCurrentLvl)]);
 
         mCurrentLvl++;
+        return true;
     }
 
-    void Game::loadWindow(json data) {
+    void Game::loadWindow(nlohmann::json data) {
         unsigned int width = data["window"]["width"];
         unsigned int height = data["window"]["height"];
         util::Transformation::getInstance()->setSize(width, height);
         std::string title = data["window"]["title"];
         std::string background = data["window"]["background"];
         mWnd.reset(new view::Window(width, height, title, background));
+        mTotalLvls = data["window"]["totalLevels"];
     }
 
     void Game::play() {
@@ -87,9 +90,16 @@ namespace ctrl {
             mLvl->update();
             mWnd->drawWindow();
 
-            if (mLvl->gameOver()) {
+            model::Levelstatus status = mLvl->getStatus();
+            if (status == model::Levelstatus::GAMEOVER) {
                 std::cout << "GAME OVER" << std::endl;
                 break;
+            }
+            else if (status == model::Levelstatus::VICTORY) {
+                std::cout << "VICTORY" << std::endl;
+                if (!loadNextLevel()) {
+                    break;
+                }
             }
             while (util::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(16666)) {
                 // Wait time to run at 60 fps at all computers

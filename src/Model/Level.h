@@ -15,6 +15,8 @@ namespace view {
 
 namespace model {
 
+    enum class Levelstatus { PLAYING, VICTORY, GAMEOVER };
+
     class Level {
     public:
 
@@ -42,7 +44,7 @@ namespace model {
 
         void setUp(nlohmann::json data);
 
-        bool gameOver();
+        Levelstatus getStatus();
 
     private:
         void removeCollidingEntities();
