@@ -8,6 +8,7 @@
 #include "../Model/Entity.h"
 #include "../Model/Enemy.h"
 #include "../Utils/Vec2.h"
+#include "../Utils/GradiusException.h"
 
 namespace ctrl {
 
@@ -20,7 +21,7 @@ namespace ctrl {
             JSON.close();
         }
         else {
-            return; //TODO: Exception
+            throw util::GradiusException("Unable to open file: bin/resources/Game.json");
         }
         loadWindow(data);
         loadNextLevel();
@@ -37,7 +38,7 @@ namespace ctrl {
             JSON.close();
         }
         else {
-            return false; //TODO: Exception
+            throw util::GradiusException("Unable to open file: bin/resources/Game.json");
         }
         mLvl = std::make_unique<model::Level>(model::Level());
         mLvl->addObserver(mWnd);

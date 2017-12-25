@@ -17,8 +17,6 @@ namespace view {
         mBackgroundTexture.setRepeated(true);
         mBackground.setTexture(mBackgroundTexture);
         mHearts = 0;
-        mFont.loadFromFile("../bin/arial.ttf");
-        // TODO: remove frame counter
     }
 
     bool Window::isOpen() {
@@ -30,25 +28,10 @@ namespace view {
         return mWnd->isOpen();
     }
 
-    sf::Text Window::getFPS() {
-        static sf::Clock clock;
-        float cTime = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        auto fps = static_cast<int>(std::round(1 / cTime));
-
-        std::string str = "FPS: " + std::to_string(fps);
-        sf::Text text;
-        text.setFont(mFont);
-        text.setCharacterSize(24);
-        text.setString(str);
-        return text;
-    }
-
     void Window::drawWindow() {
         mWnd->clear();
         drawBackground();
         drawHearts();
-        mWnd->draw(getFPS());
         for (const std::weak_ptr<EntityObserver>& entity : mEntities) {
             if (!entity.expired())
                 entity.lock()->draw(*mWnd);

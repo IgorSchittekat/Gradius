@@ -64,10 +64,10 @@ namespace util {
         T mY;
     };
 
-#define Vec2i Vec2<int>
-#define Vec2f Vec2<float>
-#define Vec2d Vec2<double>
-#define Vec2u Vec2<unsigned int>
+    using Vec2i = Vec2<int>;
+    using Vec2f = Vec2<float>;
+    using Vec2d = Vec2<double>;
+    using Vec2u = Vec2<unsigned int>;
 
 } //namespace util
 
