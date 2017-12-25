@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Enemy.h"
 #include "../Utils/Vec2.h"
-#include "../Utils/Rand.h"
 
 namespace model {
 
