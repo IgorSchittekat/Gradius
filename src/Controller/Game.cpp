@@ -23,7 +23,7 @@ namespace ctrl {
         else {
             throw util::GradiusException("Unable to open file: bin/resources/Game.json");
         }
-        loadWindow(data);
+        loadWindow(data["window"]);
         loadNextLevel();
     }
 
@@ -50,13 +50,14 @@ namespace ctrl {
     }
 
     void Game::loadWindow(nlohmann::json data) {
-        unsigned int width = data["window"]["width"];
-        unsigned int height = data["window"]["height"];
+        unsigned int width = data["width"];
+        unsigned int height = data["height"];
         util::Transformation::getInstance()->setSize(width, height);
-        std::string title = data["window"]["title"];
-        std::string background = data["window"]["background"];
-        mWnd.reset(new view::Window(width, height, title, background));
-        mTotalLvls = data["window"]["totalLevels"];
+        std::string title = data["title"];
+        mWnd.reset(new view::Window(width, height, title, data["background"]));
+        mWnd->addTexture("victory", data["victory"]);
+        mWnd->addTexture("gameOver", data["gameOver"]);
+        mTotalLvls = data["totalLevels"];
     }
 
     void Game::play() {
@@ -93,11 +94,11 @@ namespace ctrl {
 
             model::Levelstatus status = mLvl->getStatus();
             if (status == model::Levelstatus::GAMEOVER) {
-                std::cout << "GAME OVER" << std::endl;
+                mWnd->drawGameOver();
                 break;
             }
             else if (status == model::Levelstatus::VICTORY) {
-                std::cout << "VICTORY" << std::endl;
+                mWnd->drawVictory();
                 if (!loadNextLevel()) {
                     break;
                 }

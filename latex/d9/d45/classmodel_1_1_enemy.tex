@@ -1,0 +1,91 @@
+\hypertarget{classmodel_1_1_enemy}{}\section{model\+:\+:Enemy Class Reference}
+\label{classmodel_1_1_enemy}\index{model\+::\+Enemy@{model\+::\+Enemy}}
+Inheritance diagram for model\+:\+:Enemy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d9/d45/classmodel_1_1_enemy}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmodel_1_1_enemy_a871c65eccf987943a5c79d7f7cce990b}{Enemy}} (\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} position, double speed, std\+::string type)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmodel_1_1_enemy_a4f6fa1e31f46c74e7d531a8ee2211ab7}\label{classmodel_1_1_enemy_a4f6fa1e31f46c74e7d531a8ee2211ab7}} 
+Notification {\bfseries move} (\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} dir) override
+\item 
+Notification \mbox{\hyperlink{classmodel_1_1_enemy_ad94553dfee4e98ca717428d649274055}{update}} () override
+\begin{DoxyCompactList}\small\item\em updates the enemy \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmodel_1_1_enemy_ad6bf0e92f05474a65e6f9f027c5ae3a1}{can\+Fire}} () override
+\begin{DoxyCompactList}\small\item\em check is the enemy can fire \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmodel_1_1_enemy_ae19b693b46f8cf4851c82435f591cdd3}\label{classmodel_1_1_enemy_ae19b693b46f8cf4851c82435f591cdd3}} 
+std\+::string {\bfseries get\+Type} () const
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmodel_1_1_enemy_a871c65eccf987943a5c79d7f7cce990b}\label{classmodel_1_1_enemy_a871c65eccf987943a5c79d7f7cce990b}} 
+\index{model\+::\+Enemy@{model\+::\+Enemy}!Enemy@{Enemy}}
+\index{Enemy@{Enemy}!model\+::\+Enemy@{model\+::\+Enemy}}
+\subsubsection{\texorpdfstring{Enemy()}{Enemy()}}
+{\footnotesize\ttfamily model\+::\+Enemy\+::\+Enemy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}}}]{position,  }\item[{double}]{speed,  }\item[{std\+::string}]{type }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \+: x-\/coordinate of the enemy \\
+\hline
+{\em y} & \+: y-\/coordinate of the enemy \\
+\hline
+{\em speed} & \+: speed of the enemy \\
+\hline
+{\em type} & \+: type of the enemy \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmodel_1_1_enemy_ad6bf0e92f05474a65e6f9f027c5ae3a1}\label{classmodel_1_1_enemy_ad6bf0e92f05474a65e6f9f027c5ae3a1}} 
+\index{model\+::\+Enemy@{model\+::\+Enemy}!can\+Fire@{can\+Fire}}
+\index{can\+Fire@{can\+Fire}!model\+::\+Enemy@{model\+::\+Enemy}}
+\subsubsection{\texorpdfstring{can\+Fire()}{canFire()}}
+{\footnotesize\ttfamily bool model\+::\+Enemy\+::can\+Fire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+check is the enemy can fire 
+
+\begin{DoxyReturn}{Returns}
+if the enemy can fire 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classmodel_1_1_entity}{model\+::\+Entity}}.
+
+\mbox{\Hypertarget{classmodel_1_1_enemy_ad94553dfee4e98ca717428d649274055}\label{classmodel_1_1_enemy_ad94553dfee4e98ca717428d649274055}} 
+\index{model\+::\+Enemy@{model\+::\+Enemy}!update@{update}}
+\index{update@{update}!model\+::\+Enemy@{model\+::\+Enemy}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily Notification model\+::\+Enemy\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+updates the enemy 
+
+\begin{DoxyReturn}{Returns}
+notification of what happened 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmodel_1_1_entity}{model\+::\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/Enemy.\+h\item 
+src/\+Model/Enemy.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+\hypertarget{classmodel_1_1_level}{}\section{model\+:\+:Level Class Reference}
+\label{classmodel_1_1_level}\index{model\+::\+Level@{model\+::\+Level}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a6a25e93b420ff09bcc238d852bbe3828}\label{classmodel_1_1_level_a6a25e93b420ff09bcc238d852bbe3828}} 
+void {\bfseries update} ()
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_adfebcf6485cec8ddacd4f8a730ce20c2}\label{classmodel_1_1_level_adfebcf6485cec8ddacd4f8a730ce20c2}} 
+void {\bfseries move\+Ship} (\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} dir)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a2f5c5b77fcd3b00d1788edd42d10455f}\label{classmodel_1_1_level_a2f5c5b77fcd3b00d1788edd42d10455f}} 
+void {\bfseries fire\+Ship} ()
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a94fe7743c37e6ae7aa17be7d5e3642ca}\label{classmodel_1_1_level_a94fe7743c37e6ae7aa17be7d5e3642ca}} 
+void {\bfseries add\+Entity} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classmodel_1_1_entity}{Entity}} $>$ \&entity)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a68fba62a2e8c9dfbb188df0e35e914e9}\label{classmodel_1_1_level_a68fba62a2e8c9dfbb188df0e35e914e9}} 
+void {\bfseries set\+Ship} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classmodel_1_1_ship}{Ship}} $>$ ship)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a9e0e5f7bc08ad5b707e991e008396cec}\label{classmodel_1_1_level_a9e0e5f7bc08ad5b707e991e008396cec}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classmodel_1_1_entity}{Entity}} $>$ $>$ {\bfseries is\+Colliding} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classmodel_1_1_entity}{Entity}} $>$ \&entity)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a040530d28503315b60025ca5f45341d6}\label{classmodel_1_1_level_a040530d28503315b60025ca5f45341d6}} 
+void {\bfseries add\+Observer} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classview_1_1_window}{view\+::\+Window}} $>$ \&observer)
+\item 
+auto \mbox{\hyperlink{classmodel_1_1_level_a2839ea78a98b86653730e2bb1759efbc}{notify}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classmodel_1_1_entity}{Entity}} $>$ \&entity, Notification what)
+\begin{DoxyCompactList}\small\item\em notifies all observers if something happened with the entity \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a230b4090b85ad3ae56d78c533cd0c20d}\label{classmodel_1_1_level_a230b4090b85ad3ae56d78c533cd0c20d}} 
+void {\bfseries set\+Up} (\mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann\+::json}} data)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_level_a35644e5bdb31bfb9332615538cfe7ea4}\label{classmodel_1_1_level_a35644e5bdb31bfb9332615538cfe7ea4}} 
+Levelstatus {\bfseries get\+Status} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmodel_1_1_level_a2839ea78a98b86653730e2bb1759efbc}\label{classmodel_1_1_level_a2839ea78a98b86653730e2bb1759efbc}} 
+\index{model\+::\+Level@{model\+::\+Level}!notify@{notify}}
+\index{notify@{notify}!model\+::\+Level@{model\+::\+Level}}
+\subsubsection{\texorpdfstring{notify()}{notify()}}
+{\footnotesize\ttfamily auto model\+::\+Level\+::notify (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classmodel_1_1_entity}{Entity}} $>$ \&}]{entity,  }\item[{Notification}]{what }\end{DoxyParamCaption})}
+
+
+
+notifies all observers if something happened with the entity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: entity that gets observed \\
+\hline
+{\em what} & \+: notification of what happened \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of shared\+\_\+ptr to entity\+Observers that observe the given entity 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/Level.\+h\item 
+src/\+Model/Level.\+cpp\end{DoxyCompactItemize}

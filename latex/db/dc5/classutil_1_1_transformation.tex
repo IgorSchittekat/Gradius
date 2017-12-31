@@ -1,0 +1,98 @@
+\hypertarget{classutil_1_1_transformation}{}\section{util\+:\+:Transformation Class Reference}
+\label{classutil_1_1_transformation}\index{util\+::\+Transformation@{util\+::\+Transformation}}
+Inheritance diagram for util\+:\+:Transformation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{db/dc5/classutil_1_1_transformation}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classutil_1_1_transformation_a60ea3879083f58bb7edde16976e9fcc2}{set\+Size}} (unsigned int width, unsigned int height)
+\begin{DoxyCompactList}\small\item\em set the size of the window \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classutil_1_1_vec2}{Vec2u}} \mbox{\hyperlink{classutil_1_1_transformation_ab13ab300ab42b732ea2b1d301bed122a}{transform\+Coordinates}} (\mbox{\hyperlink{classutil_1_1_vec2}{Vec2d}} location) const
+\begin{DoxyCompactList}\small\item\em transform gamecoordinates to the screenpixels \end{DoxyCompactList}\item 
+std\+::pair$<$ double, double $>$ \mbox{\hyperlink{classutil_1_1_transformation_a7d6caddc65a3fa10fa98555dc3f96ea5}{transform\+Size}} (std\+::pair$<$ unsigned int, unsigned int $>$ size) const
+\item 
+std\+::pair$<$ unsigned int, unsigned int $>$ \mbox{\hyperlink{classutil_1_1_transformation_aedd442f8fde937eec692f4f07c2d7861}{transform\+Size}} (std\+::pair$<$ double, double $>$ size) const
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classutil_1_1_transformation_ad02b2174d4bc9cc7404fe0317b80c55d}\label{classutil_1_1_transformation_ad02b2174d4bc9cc7404fe0317b80c55d}} 
+class {\bfseries Singleton$<$ Transformation $>$}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classutil_1_1_transformation_a60ea3879083f58bb7edde16976e9fcc2}\label{classutil_1_1_transformation_a60ea3879083f58bb7edde16976e9fcc2}} 
+\index{util\+::\+Transformation@{util\+::\+Transformation}!set\+Size@{set\+Size}}
+\index{set\+Size@{set\+Size}!util\+::\+Transformation@{util\+::\+Transformation}}
+\subsubsection{\texorpdfstring{set\+Size()}{setSize()}}
+{\footnotesize\ttfamily void util\+::\+Transformation\+::set\+Size (\begin{DoxyParamCaption}\item[{unsigned int}]{width,  }\item[{unsigned int}]{height }\end{DoxyParamCaption})}
+
+
+
+set the size of the window 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & \+: width of the window \\
+\hline
+{\em height} & \+: height of the window \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classutil_1_1_transformation_ab13ab300ab42b732ea2b1d301bed122a}\label{classutil_1_1_transformation_ab13ab300ab42b732ea2b1d301bed122a}} 
+\index{util\+::\+Transformation@{util\+::\+Transformation}!transform\+Coordinates@{transform\+Coordinates}}
+\index{transform\+Coordinates@{transform\+Coordinates}!util\+::\+Transformation@{util\+::\+Transformation}}
+\subsubsection{\texorpdfstring{transform\+Coordinates()}{transformCoordinates()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutil_1_1_vec2}{Vec2u}} util\+::\+Transformation\+::transform\+Coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classutil_1_1_vec2}{Vec2d}}}]{location }\end{DoxyParamCaption}) const}
+
+
+
+transform gamecoordinates to the screenpixels 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & \+: coordinates in \mbox{[}-\/4, 4\mbox{]}, \mbox{[}-\/3, 3\mbox{]} coordinatesystem \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pixelcoordinates 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1_transformation_a7d6caddc65a3fa10fa98555dc3f96ea5}\label{classutil_1_1_transformation_a7d6caddc65a3fa10fa98555dc3f96ea5}} 
+\index{util\+::\+Transformation@{util\+::\+Transformation}!transform\+Size@{transform\+Size}}
+\index{transform\+Size@{transform\+Size}!util\+::\+Transformation@{util\+::\+Transformation}}
+\subsubsection{\texorpdfstring{transform\+Size()}{transformSize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::pair$<$ double, double $>$ util\+::\+Transformation\+::transform\+Size (\begin{DoxyParamCaption}\item[{std\+::pair$<$ unsigned int, unsigned int $>$}]{size }\end{DoxyParamCaption}) const}
+
+transform the size of an object 
+\begin{DoxyParams}{Parameters}
+{\em size} & \+: size in pixelcoordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size in \mbox{[}-\/4, 4\mbox{]}, \mbox{[}-\/3, 3\mbox{]} coordinatesystem 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1_transformation_aedd442f8fde937eec692f4f07c2d7861}\label{classutil_1_1_transformation_aedd442f8fde937eec692f4f07c2d7861}} 
+\index{util\+::\+Transformation@{util\+::\+Transformation}!transform\+Size@{transform\+Size}}
+\index{transform\+Size@{transform\+Size}!util\+::\+Transformation@{util\+::\+Transformation}}
+\subsubsection{\texorpdfstring{transform\+Size()}{transformSize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::pair$<$ unsigned int, unsigned int $>$ util\+::\+Transformation\+::transform\+Size (\begin{DoxyParamCaption}\item[{std\+::pair$<$ double, double $>$}]{size }\end{DoxyParamCaption}) const}
+
+transform the size of an object 
+\begin{DoxyParams}{Parameters}
+{\em size} & \+: size in \mbox{[}-\/4, 4\mbox{]}, \mbox{[}-\/3, 3\mbox{]} coordinatesystem \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size in pixelcoordinates 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Utils/Transformation.\+h\item 
+src/\+Utils/Transformation.\+cpp\end{DoxyCompactItemize}

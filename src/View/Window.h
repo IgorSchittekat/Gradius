@@ -27,6 +27,10 @@ namespace view {
 
         void drawBackground();
 
+        void drawVictory();
+
+        void drawGameOver();
+
         void addEntityObserver(const std::weak_ptr<EntityObserver>& entityObserver);
 
         void addTexture(const std::string& name, const std::string& fileName);
@@ -40,7 +44,6 @@ namespace view {
 
     private:
         std::unique_ptr<sf::RenderWindow> mWnd;
-        sf::Texture mBackgroundTexture;
         sf::Sprite mBackground;
         std::vector<std::weak_ptr<EntityObserver>> mEntities;
         std::map<std::string, std::shared_ptr<sf::Texture>> mTextures;

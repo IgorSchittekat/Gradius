@@ -4,7 +4,9 @@
         "width": 800,
         "height": 600,
         "totalLevels": 2,
-        "background": "../bin/resources/images/background.jpg"
+        "background": "../bin/resources/images/background.jpg",
+        "victory": "../bin/resources/images/Victory.png",
+        "gameOver": "../bin/resources/images/GameOver.png"
     },
     "level 0" : {
         "textures": {

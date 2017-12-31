@@ -1,0 +1,56 @@
+\hypertarget{classmodel_1_1_entity}{}\section{model\+:\+:Entity Class Reference}
+\label{classmodel_1_1_entity}\index{model\+::\+Entity@{model\+::\+Entity}}
+Inheritance diagram for model\+:\+:Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{db/d33/classmodel_1_1_entity}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a8e515ce5ba8babadcf884794aea271eb}\label{classmodel_1_1_entity_a8e515ce5ba8babadcf884794aea271eb}} 
+{\bfseries Entity} (\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} position, double width, double height, double speed)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_adcc5e09753379e4024fd2ccb4519d6f3}\label{classmodel_1_1_entity_adcc5e09753379e4024fd2ccb4519d6f3}} 
+virtual Notification {\bfseries move} (\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} dir)=0
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_af1386085e5f92a3ef79440f15501df0c}\label{classmodel_1_1_entity_af1386085e5f92a3ef79440f15501df0c}} 
+\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} {\bfseries get\+Location} () const
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a0767f1130efdf98b0730e8980f7e9021}\label{classmodel_1_1_entity_a0767f1130efdf98b0730e8980f7e9021}} 
+std\+::pair$<$ double, double $>$ {\bfseries get\+Size} () const
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a478f7f6633bbe6409114012f1d337435}\label{classmodel_1_1_entity_a478f7f6633bbe6409114012f1d337435}} 
+void {\bfseries add\+Entity\+Observer} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classview_1_1_entity_observer}{view\+::\+Entity\+Observer}} $>$ \&observer)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a852feba6aa621b2f8a85f35fe3a77d86}\label{classmodel_1_1_entity_a852feba6aa621b2f8a85f35fe3a77d86}} 
+virtual Notification {\bfseries update} ()=0
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a33886fbf11fcda6b74156b55a6e389a4}\label{classmodel_1_1_entity_a33886fbf11fcda6b74156b55a6e389a4}} 
+void {\bfseries notify} (Notification what)
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a26455dbeac5d258fce6f4efd128814cb}\label{classmodel_1_1_entity_a26455dbeac5d258fce6f4efd128814cb}} 
+virtual bool {\bfseries can\+Fire} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_aae28354327688b126738a43ae79816ae}\label{classmodel_1_1_entity_aae28354327688b126738a43ae79816ae}} 
+\mbox{\hyperlink{classutil_1_1_vec2}{util\+::\+Vec2d}} {\bfseries m\+Position}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a4995a9055051348649e8abc7a4aa5d47}\label{classmodel_1_1_entity_a4995a9055051348649e8abc7a4aa5d47}} 
+double {\bfseries m\+Width}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_a03f04fcf195ba27224b6d9deb4ee45ee}\label{classmodel_1_1_entity_a03f04fcf195ba27224b6d9deb4ee45ee}} 
+double {\bfseries m\+Height}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_entity_af1ac221ec2a1ea5dfdf412902ae7732d}\label{classmodel_1_1_entity_af1ac221ec2a1ea5dfdf412902ae7732d}} 
+double {\bfseries m\+Speed}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/Entity.\+h\item 
+src/\+Model/Entity.\+cpp\end{DoxyCompactItemize}

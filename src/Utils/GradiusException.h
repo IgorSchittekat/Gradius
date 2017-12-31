@@ -8,12 +8,12 @@ namespace util {
 
     class GradiusException : public std::exception {
     public:
-        GradiusException(std::string what) : mWhat(what) {}
+        explicit GradiusException(std::string what) : mWhat(what) {}
 
         const char* what() const noexcept override { return mWhat.c_str(); }
 
     private:
-        std::string mWhat;
+        std::string mWhat{};
     };
 
 } // namespace util

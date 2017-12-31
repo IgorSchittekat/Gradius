@@ -3,6 +3,7 @@
 #include "../Model/Ship.h"
 #include "../Model/Bullet.h"
 #include "../Model/Obstacle.h"
+#include "../Utils/Stopwatch.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <cmath>
@@ -11,11 +12,8 @@ namespace view {
     
     Window::Window(unsigned int width, unsigned int height, const std::string &title, const std::string& background) {
         mWnd.reset(new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar));
-        sf::Image i;
-        i.loadFromFile(background);
-        mBackgroundTexture.loadFromImage(i);
-        mBackgroundTexture.setRepeated(true);
-        mBackground.setTexture(mBackgroundTexture);
+        addTexture("background", background);
+        mBackground.setTexture(*mTextures["background"]);
         mHearts = 0;
     }
 
@@ -117,6 +115,32 @@ namespace view {
         addTexture("enemyBullet", data["enemyBullet"]);
         addTexture("obstacle", data["obstacle"]);
         addTexture("heart", data["heart"]);
+    }
+
+    void Window::drawVictory() {
+        mWnd->clear();
+        sf::Sprite victory;
+        victory.setTexture(*mTextures["victory"]);
+        victory.setPosition(mWnd->getSize().x / 2, mWnd->getSize().y / 2);
+        victory.setOrigin(victory.getTextureRect().width / 2, victory.getTextureRect().height / 2);
+        mWnd->draw(victory);
+        mWnd->display();
+        while (util::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(2000000)) {
+            // Wait 2 seconds
+        }
+    }
+
+    void Window::drawGameOver() {
+        mWnd->clear();
+        sf::Sprite gameOver;
+        gameOver.setTexture(*mTextures["gameOver"]);
+        gameOver.setPosition(mWnd->getSize().x / 2, mWnd->getSize().y / 2);
+        gameOver.setOrigin(gameOver.getTextureRect().width / 2, gameOver.getTextureRect().height / 2);
+        mWnd->draw(gameOver);
+        mWnd->display();
+        while (util::Stopwatch::getInstance()->elapsed() < std::chrono::microseconds(2000000)) {
+            // Wait 2 seconds
+        }
     }
 
 
