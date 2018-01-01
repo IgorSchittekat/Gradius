@@ -88,6 +88,7 @@ namespace view {
             auto entityObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(*mTextures[type]));
             addEntityObserver(entityObserver);
             entity->addEntityObserver(entityObserver);
+            entityObserver->update(entity.get(), model::Notification::CREATED);
         }
         else if (what == model::Notification::DELETED) {
             for (auto it = mEntities.begin(); it != mEntities.end(); ){

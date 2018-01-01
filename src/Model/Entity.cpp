@@ -26,7 +26,6 @@ namespace model {
 
     void Entity::addEntityObserver(const std::shared_ptr<view::EntityObserver>& observer) {
         mObservers.push_back(observer);
-        observer->update(this, Notification::CREATED);
     }
 
     void Entity::notify(Notification what) {
