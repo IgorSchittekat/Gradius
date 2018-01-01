@@ -5,16 +5,6 @@
 
 namespace view {
 
-
-//    EntityObserver::EntityObserver(const std::shared_ptr<Window>& wnd, const std::string& textureFile, const std::string& type) {
-//        wnd->addTexture(type, textureFile);
-//        mSprite.setTexture(*wnd->getTexture(type), true);
-//    }
-//
-//    EntityObserver::EntityObserver(const std::shared_ptr<Window> &wnd, const std::string &type) {
-//        mSprite.setTexture(*wnd->getTexture(type), true);
-//    }
-
     EntityObserver::EntityObserver(const sf::Texture& texture) {
         mSprite.setTexture(texture, true);
     }
@@ -31,7 +21,6 @@ namespace view {
     }
 
     void EntityObserver::draw(sf::RenderWindow& wnd) {
-        mSprite.setPosition(mRect.left + mRect.width / 2, mRect.top + mRect.height / 2);
         wnd.draw(mSprite);
     }
 
@@ -46,11 +35,13 @@ namespace view {
             auto textureSize = mSprite.getTexture()->getSize();
             mSprite.setScale(mRect.width / (float)textureSize.x, mRect.height / (float)textureSize.y);
             mSprite.setOrigin(mSprite.getTextureRect().width / 2, mSprite.getTextureRect().height / 2);
+            mSprite.setPosition(mRect.left + mRect.width / 2, mRect.top + mRect.height / 2);
         }
         else if (what == model::Notification::MOVED) {
             auto coordinates = util::Transformation::getInstance()->transformCoordinates(entity->getLocation());
             mRect.left = coordinates.getX() - mRect.width / 2;
             mRect.top = coordinates.getY() - mRect.height / 2;
+            mSprite.setPosition(mRect.left + mRect.width / 2, mRect.top + mRect.height / 2);
         }
     }
 

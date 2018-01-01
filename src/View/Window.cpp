@@ -50,7 +50,7 @@ namespace view {
         for ( int i = 0; i < mHearts; i++) {
             sf::Sprite heart;
             heart.setTexture(*mTextures["heart"]);
-            heart.setPosition(0 + mWnd->getSize().x / 50 * i, mWnd->getSize().y / 12);
+            heart.setPosition(0 + mWnd->getSize().x / 90 * i, mWnd->getSize().y / 12);
             mWnd->draw(heart);
         }
     }
@@ -68,7 +68,7 @@ namespace view {
         mTextures[name] = std::move(texture);
     }
 
-    std::shared_ptr<EntityObserver> Window::update(const std::shared_ptr<model::Entity>& entity, model::Notification what) {
+    void Window::update(const std::shared_ptr<model::Entity>& entity, model::Notification what) {
         if (what == model::Notification::CREATED) {
             std::string type;
             if (std::shared_ptr<model::Enemy> enemy = std::dynamic_pointer_cast<model::Enemy>(entity))
@@ -87,7 +87,7 @@ namespace view {
             }
             auto entityObserver = std::make_shared<view::EntityObserver>(view::EntityObserver(*mTextures[type]));
             addEntityObserver(entityObserver);
-            return entityObserver;
+            entity->addEntityObserver(entityObserver);
         }
         else if (what == model::Notification::DELETED) {
             for (auto it = mEntities.begin(); it != mEntities.end(); ){
@@ -104,7 +104,6 @@ namespace view {
                 mHearts = ship->getLives();
             }
         }
-        return nullptr;
     }
 
     void Window::loadTextures(nlohmann::json data) {

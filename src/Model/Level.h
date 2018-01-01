@@ -38,9 +38,8 @@ namespace model {
          * @brief notifies all observers if something happened with the entity
          * @param entity : entity that gets observed
          * @param what : notification of what happened
-         * @return vector of shared_ptr to entityObservers that observe the given entity
          */
-        auto notify(const std::shared_ptr<Entity>& entity, Notification what);
+        void notify(const std::shared_ptr<Entity>& entity, Notification what);
 
         void setUp(nlohmann::json data);
 

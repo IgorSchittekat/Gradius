@@ -25,8 +25,6 @@ namespace view {
 
         bool isOpen();
 
-        void drawBackground();
-
         void drawVictory();
 
         void drawGameOver();
@@ -37,10 +35,11 @@ namespace view {
 
         void loadTextures(nlohmann::json data);
 
-        std::shared_ptr<EntityObserver> update(const std::shared_ptr<model::Entity>& entity, model::Notification what);
+        void update(const std::shared_ptr<model::Entity>& entity, model::Notification what);
 
     private:
         void drawHearts();
+        void drawBackground();
 
     private:
         std::unique_ptr<sf::RenderWindow> mWnd;

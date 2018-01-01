@@ -6,12 +6,10 @@
 
 namespace model {
 
-    auto Level::notify(const std::shared_ptr<Entity>& entity, Notification what) {
-        std::vector<std::shared_ptr<view::EntityObserver>> entityObservers;
+    void Level::notify(const std::shared_ptr<Entity>& entity, Notification what) {
         for (const auto& observer : mObservers) {
-            entityObservers.push_back(observer->update(entity, what));
+            observer->update(entity, what);
         }
-        return entityObservers;
     }
 
     void Level::setUp(nlohmann::json data) {
@@ -19,10 +17,7 @@ namespace model {
         unsigned int lives = data["ship"]["lives"];
         double shipSpeed = data["ship"]["speed"];
         auto ship = std::make_shared<Ship>(Ship(lives, shipSpeed));
-        auto shipObservers = notify(ship, Notification::CREATED);
-        for (const std::shared_ptr<view::EntityObserver>& shipObserver : shipObservers) {
-            ship->addEntityObserver(shipObserver);
-        }
+        notify(ship, Notification::CREATED);
         setShip(ship);
 
         // setUp Enemies
@@ -33,10 +28,7 @@ namespace model {
             double enemySpeed = enemy["speed"];
             std::string type = enemy["type"];
             std::shared_ptr<Entity> newEnemy = std::make_shared<Enemy>(Enemy(util::Vec2d(x, y), enemySpeed, type));
-            auto enemyObservers = notify(newEnemy, Notification::CREATED);
-            for (const std::shared_ptr<view::EntityObserver>& enemyObserver : enemyObservers) {
-                newEnemy->addEntityObserver(enemyObserver);
-            }
+            notify(newEnemy, Notification::CREATED);
             addEntity(newEnemy);
         }
 
@@ -46,16 +38,10 @@ namespace model {
         // setUp Walls
         for (int i = 0; i < 22; i++) {
             std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, -2.8), 0.045, true));
-            auto obstacleObservers = notify(obstacle, Notification::CREATED);
-            for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
-                obstacle->addEntityObserver(obstacleObserver);
-            }
+            notify(obstacle, Notification::CREATED);
             addEntity(obstacle);
             std::shared_ptr<Entity> obstacle2 = std::make_shared<Obstacle>(Obstacle(util::Vec2d(-3.8 + 0.4 * i, 2.8), 0.045, true));
-            auto obstacleObservers2 = notify(obstacle2, Notification::CREATED);
-            for (const std::shared_ptr<view::EntityObserver>& obstacleObserver2 : obstacleObservers2) {
-                obstacle2->addEntityObserver(obstacleObserver2);
-            }
+            notify(obstacle2, Notification::CREATED);
             addEntity(obstacle2);
         }
 
@@ -65,10 +51,7 @@ namespace model {
             double x = newObstacle["x"];
             double y = newObstacle["y"];
             std::shared_ptr<Entity> obstacle = std::make_shared<Obstacle>(Obstacle(util::Vec2d(x, y), 0.045, false));
-            auto obstacleObservers = notify(obstacle, Notification::CREATED);
-            for (const std::shared_ptr<view::EntityObserver>& obstacleObserver : obstacleObservers) {
-                obstacle->addEntityObserver(obstacleObserver);
-            }
+            notify(obstacle, Notification::CREATED);
             addEntity(obstacle);
         }
     }
@@ -76,10 +59,7 @@ namespace model {
     void Level::fireShip() {
         if (mShip->canFire()) {
             std::shared_ptr<model::Entity> bullet = std::make_shared<Bullet>(Bullet(mShip, mBulletSpeed, true));
-            auto bulletObservers = notify(bullet, Notification::CREATED);
-            for (const std::shared_ptr<view::EntityObserver>& bulletObserver : bulletObservers) {
-                bullet->addEntityObserver(bulletObserver);
-            }
+            notify(bullet, Notification::CREATED);
             addEntity(bullet);
         }
     }
@@ -97,10 +77,7 @@ namespace model {
             else {
                 if ((*it)->canFire()) {
                     std::shared_ptr<Entity> bullet = std::make_shared<Bullet>(Bullet(*it, mBulletSpeed, false));
-                    auto bulletObservers = notify(bullet, Notification::CREATED);
-                    for (const std::shared_ptr<view::EntityObserver>& bulletObserver : bulletObservers) {
-                        bullet->addEntityObserver(bulletObserver);
-                    }
+                    notify(bullet, Notification::CREATED);
                     newEntities.push_back(bullet);
                 }
                 ++it;
@@ -136,11 +113,6 @@ namespace model {
                     if (mShip->hit(1)) {
                         notify(mShip, Notification::HIT);
                     }
-                }
-            }
-            if (std::dynamic_pointer_cast<Enemy>(entity)) {
-                if (mShip->hit(1)) {
-                    notify(mShip, Notification::HIT);
                 }
             }
         }
