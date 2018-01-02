@@ -9,17 +9,6 @@ namespace view {
         mSprite.setTexture(texture, true);
     }
 
-    EntityObserver::EntityObserver(const EntityObserver &rhs) {
-        mSprite.setTexture(*rhs.mSprite.getTexture(), true);
-        mRect = rhs.mRect;
-    }
-
-    EntityObserver& EntityObserver::operator=(const EntityObserver &rhs) {
-        mSprite.setTexture(*rhs.mSprite.getTexture(), true);
-        mRect = rhs.mRect;
-        return *this;
-    }
-
     void EntityObserver::draw(sf::RenderWindow& wnd) {
         wnd.draw(mSprite);
     }

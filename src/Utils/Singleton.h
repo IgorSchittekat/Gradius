@@ -6,8 +6,16 @@ namespace util {
     template <typename T>
     class Singleton {
     public:
+        /**
+         * Deleted Copy Constructor
+         */
         Singleton(const Singleton& rhs) = delete;
+
+        /**
+         * Deleted Copy Assignment
+         */
         Singleton& operator=(const Singleton& rhs) = delete;
+
         /**
          * @brief get only instance of T
          * @return only instance of T
@@ -19,14 +27,17 @@ namespace util {
             return mInstance;
         }
 
-    private:
-        static T* mInstance;
-
     protected:
         /**
-         * @brief private constructor
+         * @brief Constructor
          */
         Singleton() = default;
+
+    private:
+        /**
+         * @brief Only instance of T
+         */
+        static T* mInstance;
     };
 
     template <typename T>

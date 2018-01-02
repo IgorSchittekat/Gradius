@@ -50,5 +50,4 @@ namespace model {
         return mType;
     }
 
-
-}
+} // namespace model

@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Bullet.h"
 
-
 namespace model {
 
     Bullet::Bullet(const std::shared_ptr<model::Entity>& firingEntity, double speed, bool friendly) :

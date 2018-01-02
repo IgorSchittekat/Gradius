@@ -5,7 +5,6 @@
 #include "Entity.h"
 
 namespace model {
-    class Level;
 
     class Bullet : public Entity {
     public:
@@ -30,9 +29,16 @@ namespace model {
          */
         Notification update() override;
 
+        /**
+         * @brief returns if the bullet is friendly or not
+         * @return if the bullet is friendly or not
+         */
         bool isFriendly();
 
     private:
+        /**
+         * @brief indicator if friendly bullet or not
+         */
         bool mFriendly;
     };
 

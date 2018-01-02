@@ -8,7 +8,6 @@
 namespace model {
     class Entity;
     enum class Notification;
-
 }
 
 namespace view {
@@ -17,21 +16,33 @@ namespace view {
 
     class EntityObserver {
     public:
-
+        /**
+         * @brief Constructor
+         * @param texture : Texture of the sprite
+         */
         explicit EntityObserver(const sf::Texture& texture);
 
-        EntityObserver(const EntityObserver &rhs);
-
-        EntityObserver &operator=(const EntityObserver &rhs);
-
-        ~EntityObserver() = default;
-
+        /**
+         * @brief draw the sprite on the window
+         * @param wnd : Window to draw the sprite on
+         */
         void draw(sf::RenderWindow& wnd);
 
+        /**
+         * @brief update the Observer
+         * @param entity : Entity that has changed
+         * @param what : Notification of what happened
+         */
         void update(const model::Entity* entity, model::Notification what);
 
     private:
+        /**
+         * @brief Rectangle of the sprite
+         */
         sf::IntRect mRect;
+        /**
+         * @brief Sprite
+         */
         sf::Sprite mSprite;
     };
 

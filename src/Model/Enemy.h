@@ -2,7 +2,6 @@
 #define GRADIUS_ENEMY_H
 #pragma once
 
-#include <random>
 #include "Entity.h"
 
 namespace model {
@@ -18,7 +17,11 @@ namespace model {
          */
         Enemy(util::Vec2d position, double speed, std::string type);
 
-
+        /**
+         * @brief Move the Enemy
+         * @param dir : direction to move in
+         * @return Notification that enemy is moved
+         */
         Notification move(util::Vec2d dir) override;
 
         /**
@@ -33,11 +36,24 @@ namespace model {
          */
         bool canFire() override;
 
+        /**
+         * @brief Returns the type of Enemy
+         * @return type of Enemy
+         */
         std::string getType() const;
 
     private:
+        /**
+         * @brief Direction the Enemy is currently moving in
+         */
         util::Vec2d mDir;
+        /**
+         * @brief Delay untill the next shot can be fired
+         */
         int mTimeUntilNextShot;
+        /**
+         * @brief type of the Enemy
+         */
         std::string mType;
     };
 

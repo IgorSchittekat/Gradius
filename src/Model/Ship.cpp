@@ -48,5 +48,4 @@ namespace model {
         return mLives;
     }
 
-
-}
+} // namespace model

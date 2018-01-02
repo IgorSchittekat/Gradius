@@ -50,7 +50,7 @@ namespace view {
         for ( int i = 0; i < mHearts; i++) {
             sf::Sprite heart;
             heart.setTexture(*mTextures["heart"]);
-            heart.setPosition(0 + mWnd->getSize().x / 90 * i, mWnd->getSize().y / 12);
+            heart.setPosition(0 + mWnd->getSize().x / 70 * i, mWnd->getSize().y / 12);
             mWnd->draw(heart);
         }
     }
@@ -142,6 +142,5 @@ namespace view {
             // Wait 2 seconds
         }
     }
-
 
 } //namespace view

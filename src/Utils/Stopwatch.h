@@ -22,12 +22,6 @@ namespace  util {
          */
         std::chrono::duration<double> elapsed();
 
-        /**
-         * @brief Returns time between now and begin of the game
-         * @return Time between now and begin of the game
-         */
-        std::chrono::duration<double> getTime() const;
-
     private:
         /**
          * @brief Constructor.
@@ -39,12 +33,6 @@ namespace  util {
          * @brief time of last restart
          */
         std::chrono::steady_clock::time_point mRestart;
-
-        /**
-         * @brief time of begin of the game
-         */
-        std::chrono::steady_clock::time_point mStart;
-
     };
 
 } //namespace util

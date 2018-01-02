@@ -46,7 +46,13 @@ namespace util {
         Transformation() = default;
 
     private:
+        /**
+         * @brief Width of the screen
+         */
         unsigned int mScreenWidth;
+        /**
+         * @brief Height of the screen
+         */
         unsigned int mScreenHeight;
     };
 

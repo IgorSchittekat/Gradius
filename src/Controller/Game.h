@@ -12,7 +12,6 @@ namespace model {
 
 namespace ctrl {
 
-
     class Game {
     public:
         /**
@@ -34,13 +33,26 @@ namespace ctrl {
 
         /**
          * @brief load the next level
+         * @return success of loading level
          */
         bool loadNextLevel();
 
     private:
+        /**
+         * @brief Window
+         */
         std::shared_ptr<view::Window> mWnd;
+        /**
+         * @brief Level
+         */
         std::unique_ptr<model::Level> mLvl;
+        /**
+         * @brief Current Level
+         */
         int mCurrentLvl;
+        /**
+         * @brief Totalamound of Levels
+         */
         int mTotalLvls;
     };
 

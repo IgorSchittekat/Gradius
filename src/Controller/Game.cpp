@@ -21,7 +21,7 @@ namespace ctrl {
             JSON.close();
         }
         else {
-            throw util::GradiusException("Unable to open file: bin/Game.json");
+            throw util::GradiusException("Unable to open file: bin/Game.json", __FILE__, __LINE__);
         }
         loadWindow(data["window"]);
         loadNextLevel();
@@ -38,7 +38,7 @@ namespace ctrl {
             JSON.close();
         }
         else {
-            throw util::GradiusException("Unable to open file: bin/Game.json");
+            throw util::GradiusException("Unable to open file: bin/Game.json", __FILE__, __LINE__);
         }
         mLvl = std::make_unique<model::Level>(model::Level());
         mLvl->addObserver(mWnd);
@@ -108,8 +108,5 @@ namespace ctrl {
             }
         }
     }
-
-
-
 
 } // namespace ctrl

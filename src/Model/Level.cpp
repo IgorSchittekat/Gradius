@@ -65,7 +65,9 @@ namespace model {
     }
 
     void Level::update() {
+        // update ship
         mShip->update();
+        // update other entities
         std::vector<std::shared_ptr<Entity>> newEntities;
         for (auto it = mEntities.begin(); it != mEntities.end(); ) {
 
@@ -83,14 +85,16 @@ namespace model {
                 ++it;
             }
         }
+        // add new Bullets
         for (auto& newEntity : newEntities) {
             addEntity(newEntity);
         }
+        // Remove Colliding Entities
         removeCollidingEntities();
     }
 
     void Level::removeCollidingEntities() {
-        auto collidingWithShip = isColliding(mShip);
+        auto collidingWithShip = getColliding(mShip);
         for (std::shared_ptr<Entity>& entity : collidingWithShip) {
             if (std::shared_ptr<Bullet> bullet = std::dynamic_pointer_cast<Bullet>(entity)) {
                 if (!bullet->isFriendly()) {
@@ -121,7 +125,7 @@ namespace model {
             if (std::dynamic_pointer_cast<Obstacle>(entity)) {
                 continue;
             }
-            auto collidingWithEntity = isColliding(entity);
+            auto collidingWithEntity = getColliding(entity);
             for (std::shared_ptr<Entity>& otherEntity : collidingWithEntity) {
                 if (std::shared_ptr<Bullet> bullet = std::dynamic_pointer_cast<Bullet>(entity)) {
                     if (std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(otherEntity)) {
@@ -138,15 +142,7 @@ namespace model {
         }
     }
 
-    void Level::addEntity(std::shared_ptr<Entity>& entity) {
-        mEntities.push_back(std::move(entity));
-    }
-
-    void Level::setShip(std::shared_ptr<Ship> ship) {
-        mShip = std::move(ship);
-    }
-
-    std::vector<std::shared_ptr<Entity>> Level::isColliding(const std::shared_ptr<Entity>& entity) {
+    std::vector<std::shared_ptr<Entity>> Level::getColliding(const std::shared_ptr<Entity>& entity) {
         std::vector<std::shared_ptr<Entity>> collidingEntities;
         for (const auto& otherEntity : mEntities) {
             if (entity != otherEntity) {
@@ -158,14 +154,22 @@ namespace model {
                                                                  otherEntity->getLocation().getY() - otherEntitySize.second / 2};
 
                 if(entityPosition.first < otherEntityPosition.first + otherEntitySize.first &&
-                        otherEntityPosition.first < entityPosition.first + entitySize.first &&
-                        entityPosition.second < otherEntityPosition.second + otherEntitySize.second &&
-                        otherEntityPosition.second < entityPosition.second + entitySize.second) {
+                   otherEntityPosition.first < entityPosition.first + entitySize.first &&
+                   entityPosition.second < otherEntityPosition.second + otherEntitySize.second &&
+                   otherEntityPosition.second < entityPosition.second + entitySize.second) {
                     collidingEntities.push_back(otherEntity);
                 }
             }
         }
         return collidingEntities;
+    }
+
+    void Level::addEntity(std::shared_ptr<Entity>& entity) {
+        mEntities.push_back(std::move(entity));
+    }
+
+    void Level::setShip(std::shared_ptr<Ship> ship) {
+        mShip = std::move(ship);
     }
 
     void Level::addObserver(const std::shared_ptr<view::Window>& observer) {
@@ -193,6 +197,5 @@ namespace model {
         }
         return Levelstatus::VICTORY;
     }
-
 
 } // namespace model
