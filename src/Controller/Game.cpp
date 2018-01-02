@@ -15,13 +15,13 @@ namespace ctrl {
     Game::Game() :
             mCurrentLvl(0) {
         nlohmann::json data;
-        std::ifstream JSON("../bin/resources/Game.json");
+        std::ifstream JSON("./Game.json");
         if (JSON.is_open()) {
             JSON >> data;
             JSON.close();
         }
         else {
-            throw util::GradiusException("Unable to open file: bin/resources/Game.json");
+            throw util::GradiusException("Unable to open file: bin/Game.json");
         }
         loadWindow(data["window"]);
         loadNextLevel();
@@ -32,13 +32,13 @@ namespace ctrl {
             return false;
         }
         nlohmann::json data;
-        std::ifstream JSON("../bin/resources/Game.json");
+        std::ifstream JSON("./Game.json");
         if (JSON.is_open()) {
             JSON >> data;
             JSON.close();
         }
         else {
-            throw util::GradiusException("Unable to open file: bin/resources/Game.json");
+            throw util::GradiusException("Unable to open file: bin/Game.json");
         }
         mLvl = std::make_unique<model::Level>(model::Level());
         mLvl->addObserver(mWnd);

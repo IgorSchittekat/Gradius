@@ -4,19 +4,19 @@
         "width": 800,
         "height": 600,
         "totalLevels": 3,
-        "background": "../bin/resources/images/background.jpg",
-        "victory": "../bin/resources/images/Victory.png",
-        "gameOver": "../bin/resources/images/GameOver.png"
+        "background": "./images/background.jpg",
+        "victory": "./images/Victory.png",
+        "gameOver": "./images/GameOver.png"
     },
     "level 0" : {
         "textures": {
-            "ship": "../bin/resources/images/Ship.png",
-            "shootingEnemy": "../bin/resources/images/Enemy1.png",
-            "flyingEnemy": "../bin/resources/images/Enemy2.png",
-            "playerBullet": "../bin/resources/images/BulletLeft.png",
-            "enemyBullet": "../bin/resources/images/BulletRight.png",
-            "obstacle": "../bin/resources/images/Obstacle.png",
-            "heart": "../bin/resources/images/heart.png"
+            "ship": "./images/Ship.png",
+            "shootingEnemy": "./images/Enemy1.png",
+            "flyingEnemy": "./images/Enemy2.png",
+            "playerBullet": "./images/BulletLeft.png",
+            "enemyBullet": "./images/BulletRight.png",
+            "obstacle": "./images/Obstacle.png",
+            "heart": "./images/heart.png"
         },
         "ship": {
             "lives": 3,
@@ -170,13 +170,13 @@
     },
     "level 1" : {
         "textures": {
-            "ship": "../bin/resources/images/Ship.png",
-            "shootingEnemy": "../bin/resources/images/Enemy1.png",
-            "flyingEnemy": "../bin/resources/images/Enemy2.png",
-            "playerBullet": "../bin/resources/images/BulletLeft.png",
-            "enemyBullet": "../bin/resources/images/BulletRight.png",
-            "obstacle": "../bin/resources/images/Obstacle.png",
-            "heart": "../bin/resources/images/heart.png"
+            "ship": "./images/Ship.png",
+            "shootingEnemy": "./images/Enemy1.png",
+            "flyingEnemy": "./images/Enemy2.png",
+            "playerBullet": "./images/BulletLeft.png",
+            "enemyBullet": "./images/BulletRight.png",
+            "obstacle": "./images/Obstacle.png",
+            "heart": "./images/heart.png"
         },
         "ship": {
             "lives": 3,
@@ -270,13 +270,13 @@
     },
     "level 2" : {
         "textures": {
-            "ship": "../bin/resources/images/Ship.png",
-            "shootingEnemy": "../bin/resources/images/Enemy1.png",
-            "flyingEnemy": "../bin/resources/images/Enemy2.png",
-            "playerBullet": "../bin/resources/images/BulletLeft.png",
-            "enemyBullet": "../bin/resources/images/BulletRight.png",
-            "obstacle": "../bin/resources/images/Obstacle.png",
-            "heart": "../bin/resources/images/heart.png"
+            "ship": "./images/Ship.png",
+            "shootingEnemy": "./images/Enemy1.png",
+            "flyingEnemy": "./images/Enemy2.png",
+            "playerBullet": "./images/BulletLeft.png",
+            "enemyBullet": "./images/BulletRight.png",
+            "obstacle": "./images/Obstacle.png",
+            "heart": "./images/heart.png"
         },
         "ship": {
             "lives": 3,
