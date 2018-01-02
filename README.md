@@ -1,3 +1,14 @@
-# Gradius
+# Gradius by Igor Schittekat (s0160651)
 
- ConfigParser by underww: https://github.com/underww/ConfigParser
+How to win:
+
+    Avoid all obstacles and shoot down all enemies.
+    
+
+Controlls:
+
+    move: arrow keys
+    shoot: space bar
+    quit: esc 
+    pause: P
+    resume: R
