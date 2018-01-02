@@ -1,5 +1,9 @@
 # Gradius by Igor Schittekat (s0160651)
 
+How to play:
+    
+    run the file ./run.sh
+
 How to win:
 
     Avoid all obstacles and shoot down all enemies.
