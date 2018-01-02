@@ -3,7 +3,7 @@
         "title": "Gradius",
         "width": 800,
         "height": 600,
-        "totalLevels": 2,
+        "totalLevels": 3,
         "background": "../bin/resources/images/background.jpg",
         "victory": "../bin/resources/images/Victory.png",
         "gameOver": "../bin/resources/images/GameOver.png"
@@ -19,7 +19,7 @@
             "heart": "../bin/resources/images/heart.png"
         },
         "ship": {
-            "lives": 5,
+            "lives": 3,
             "speed": 0.05,
             "x": -3,
             "y": 0
@@ -41,6 +41,12 @@
                 "speed": 0.1,
                 "x": 3,
                 "y": 1.8,
+                "type": "shooting"
+            },
+            {
+                "speed": 0.1,
+                "x": 5,
+                "y": -2,
                 "type": "shooting"
             }
         ],
@@ -91,9 +97,76 @@
             {
                 "x": 5,
                 "y": 2.4
+            },
+            {
+                "x": 8.2,
+                "y": 2.4
+            },
+            {
+                "x": 8.6,
+                "y": 2
+            },
+            {
+                "x": 9,
+                "y": 1.6
+            },
+            {
+                "x": 9.4,
+                "y": 1.2
+            },
+            {
+                "x": 10,
+                "y": 1
+            },
+            {
+                "x": 12,
+                "y": -0.5
+            },
+            {
+                "x": 15,
+                "y": 2
+            },
+            {
+                "x": 16,
+                "y": 1.6
+            },
+            {
+                "x": 16,
+                "y": 1.2
+            },
+            {
+                "x": 16,
+                "y": 0
+            },
+            {
+                "x": 16,
+                "y": 0.4
+            },
+            {
+                "x": 16,
+                "y": -0.4
+            },
+            {
+                "x": 16,
+                "y": -0.8
+            },
+            {
+                "x": 16,
+                "y": -1.2
+            },
+            {
+                "x": 18,
+                "y": 2
+            },
+            {
+                "x": 18.2,
+                "y": -2.1
+            },
+            {
+                "x": 17,
+                "y": 0
             }
         ]
-
     },
     "level 1" : {
         "textures": {
@@ -106,7 +179,107 @@
             "heart": "../bin/resources/images/heart.png"
         },
         "ship": {
-            "lives": 5,
+            "lives": 3,
+            "speed": 0.05,
+            "x": -3,
+            "y": 0
+        },
+        "enemy": [
+            {
+                "speed": 0.01,
+                "x": 7,
+                "y": 0,
+                "type": "flying"
+            },
+            {
+                "speed": 0.05,
+                "x": 10,
+                "y": 1.8,
+                "type": "flying"
+            },
+            {
+                "speed": 0.1,
+                "x": 3,
+                "y": 1.2,
+                "type": "shooting"
+            },
+            {
+                "speed": 0.2,
+                "x": 8,
+                "y": 0.5,
+                "type": "shooting"
+            },
+            {
+                "speed": 0.1,
+                "x": 5,
+                "y": -1,
+                "type": "shooting"
+            },
+            {
+                "speed": 0.1,
+                "x": 7,
+                "y": -2,
+                "type": "shooting"
+            }
+        ],
+        "bullet": {
+            "speed": 0.1
+        },
+        "obstacle": [
+            {
+                "x": 6,
+                "y": -2.4
+            },
+            {
+                "x": 10,
+                "y": -2
+            },
+            {
+                "x": 5,
+                "y": -1
+            },
+            {
+                "x": 9,
+                "y": 1
+            },
+            {
+                "x": 12,
+                "y": 0
+            },
+            {
+                "x": 15,
+                "y": 0.4
+            },
+            {
+                "x": 18,
+                "y": -2
+            },
+            {
+                "x": 15,
+                "y": 1.8
+            },
+            {
+                "x": 16,
+                "y": 1
+            },
+            {
+                "x": 20,
+                "y": 2.3
+            }
+        ]
+    },
+    "level 2" : {
+        "textures": {
+            "ship": "../bin/resources/images/Ship.png",
+            "shootingEnemy": "../bin/resources/images/Enemy1.png",
+            "flyingEnemy": "../bin/resources/images/Enemy2.png",
+            "playerBullet": "../bin/resources/images/BulletLeft.png",
+            "enemyBullet": "../bin/resources/images/BulletRight.png",
+            "obstacle": "../bin/resources/images/Obstacle.png",
+            "heart": "../bin/resources/images/heart.png"
+        },
+        "ship": {
+            "lives": 3,
             "speed": 0.05,
             "x": -3,
             "y": 0
@@ -129,6 +302,18 @@
                 "x": 3,
                 "y": 1.8,
                 "type": "shooting"
+            },
+            {
+                "speed": 0.1,
+                "x": 15,
+                "y": 1.8,
+                "type": "flying"
+            },
+            {
+                "speed": 0.02,
+                "x": 20,
+                "y": 1.8,
+                "type": "flying"
             }
         ],
         "bullet": {
@@ -136,51 +321,78 @@
         },
         "obstacle": [
             {
-                "x": 5,
+                "x": 6,
                 "y": -2.4
             },
             {
-                "x": 5,
+                "x": 7,
                 "y": -2
             },
             {
                 "x": 5,
-                "y": -1.6
+                "y": -1
             },
             {
-                "x": 5,
-                "y": -1.2
+                "x": 8,
+                "y": 1
             },
             {
-                "x": 5,
-                "y": -0.8
+                "x": 9,
+                "y": -0.3
             },
             {
-                "x": 5,
-                "y": -0.4
+                "x": 7,
+                "y": -1.4
             },
             {
-                "x": 5,
+                "x": 6,
                 "y": 0
             },
             {
-                "x": 5,
+                "x": 10,
                 "y": 0.4
             },
             {
-                "x": 5,
-                "y": 0.8
+                "x": 9,
+                "y": -2
             },
             {
-                "x": 5,
-                "y": 1.2
+                "x": 8,
+                "y": 1.8
             },
             {
-                "x": 5,
-                "y": 2.4
+                "x": 11,
+                "y": 1
+            },
+            {
+                "x": 10,
+                "y": 2.3
+            },
+            {
+                "x": 14,
+                "y": 0
+            },
+            {
+                "x": 15,
+                "y": 0.4
+            },
+            {
+                "x": 15,
+                "y": -2
+            },
+            {
+                "x": 18,
+                "y": 1.8
+            },
+            {
+                "x": 16,
+                "y": 1
+            },
+            {
+                "x": 20,
+                "y": 2.3
             }
         ]
 
     }
-
 }
