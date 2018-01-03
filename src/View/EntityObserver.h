@@ -37,10 +37,6 @@ namespace view {
 
     private:
         /**
-         * @brief Rectangle of the sprite
-         */
-        sf::IntRect mRect;
-        /**
          * @brief Sprite
          */
         sf::Sprite mSprite;
