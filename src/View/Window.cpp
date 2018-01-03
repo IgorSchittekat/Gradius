@@ -4,6 +4,7 @@
 #include "../Model/Bullet.h"
 #include "../Model/Obstacle.h"
 #include "../Utils/Stopwatch.h"
+#include "../Utils/GradiusException.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <cmath>
@@ -61,7 +62,9 @@ namespace view {
 
     void Window::addTexture(const std::string& name, const std::string& fileName) {
         sf::Image i;
-        i.loadFromFile(fileName);
+        if (!i.loadFromFile(fileName)) {
+            throw util::GradiusException("Unable to open file", __FILE__, __LINE__);
+        }
         i.createMaskFromColor(i.getPixel(0, 0));
         auto texture = std::make_shared<sf::Texture>(sf::Texture());
         texture->loadFromImage(i);
