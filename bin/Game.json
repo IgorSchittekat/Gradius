@@ -4,7 +4,7 @@
         "width": 800,
         "height": 600,
         "totalLevels": 3,
-        "background": "./images/background.jpg",
+        "background": "./images/background.png",
         "victory": "./images/Victory.png",
         "gameOver": "./images/GameOver.png"
     },

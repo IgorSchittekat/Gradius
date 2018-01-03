@@ -39,10 +39,10 @@ namespace view {
     }
 
     void Window::drawBackground() {
-        mBackground.move(-0.5f, 0.0);
+        mBackground.move(-0.8f, 0.0);
         mWnd->draw(mBackground);
-        if (mBackground.getPosition().x == -(int)mWnd->getSize().x) {
-            mBackground.setPosition(0, 0);
+        if (mBackground.getPosition().x == -(int)mBackground.getTexture()->getSize().x / 2) {
+            mBackground.setPosition(-2, 0);
 
         }
     }
