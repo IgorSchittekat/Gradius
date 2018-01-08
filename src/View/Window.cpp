@@ -41,7 +41,7 @@ namespace view {
     void Window::drawBackground() {
         mBackground.move(-0.8f, 0.0);
         mWnd->draw(mBackground);
-        if (mBackground.getPosition().x == -(int)mBackground.getTexture()->getSize().x / 2) {
+        if (mBackground.getPosition().x < -(int)mBackground.getTexture()->getSize().x / 2) {
             mBackground.setPosition(-2, 0);
 
         }
