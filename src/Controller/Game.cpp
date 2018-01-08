@@ -24,7 +24,9 @@ namespace ctrl {
             throw util::GradiusException("Unable to open file: bin/Game.json", __FILE__, __LINE__);
         }
         loadWindow(data["window"]);
-        loadNextLevel();
+        if (!loadNextLevel()) {
+            throw util::GradiusException("No levels loaded", __FILE__, __LINE__);
+        }
     }
 
     bool Game::loadNextLevel() {
