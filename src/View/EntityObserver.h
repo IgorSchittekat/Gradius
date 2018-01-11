@@ -32,6 +32,9 @@ namespace view {
          * @brief update the Observer
          * @param entity : Entity that has changed
          * @param what : Notification of what happened
+         *
+         * entity is a raw pointer because when the function is called (in model::Entity),
+         * the entity passes a 'this-pointer' to update, and that has to be a raw pointer.
          */
         void update(const model::Entity* entity, model::Notification what);
 
