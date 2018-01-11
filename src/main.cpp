@@ -17,6 +17,5 @@ int main() {
     catch (...) {
         std::cout << "unidentified exception thrown" << std::endl;
     }
-
     return 0;
 }
