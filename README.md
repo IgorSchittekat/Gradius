@@ -16,12 +16,3 @@ Controlls:
     quit: esc 
     pause: P
     resume: R
-    
-Type of entities:
-
-    PlayerShip:
-    
-![alt text](./bin/images/Ship.png)
-
-    ShootingEnemy
-    
